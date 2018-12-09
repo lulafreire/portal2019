@@ -1,0 +1,28 @@
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Navbar bottom -->
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-light" style="background-color: #adc8e6cb">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item dropup">
+            <a class="ml-auto nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user"></i> Luiz Alberto Freire de Oliveira
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#"><i class="far fa-star text-primary"></i> Meus Favoritos</a>
+            <a class="dropdown-item" href="#"><i class="fas fa-user-cog text-primary"></i> Meus Dados</a>
+            <a class="dropdown-item" href="#"><i class="far fa-times-circle text-danger"></i> Sair</a>
+            </div>
+        </li>
+        </ul>
+    </div>
+    <div class="nav-item ml-auto">
+        <a class="nav-item text-muted"><i class="fas fa-desktop"></i></a>
+    </div>
+</nav>
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  </body>
+</html>
