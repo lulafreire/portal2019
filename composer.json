@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "": "vendor\\lula\\php-classes\\src"
+            "Lula\\": "vendor\\lula\\php-classes\\src"
         }
     }
 }
