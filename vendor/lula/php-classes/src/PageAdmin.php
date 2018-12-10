@@ -1,6 +1,6 @@
 <?php 
 
-namespace Hcode;
+namespace Lula;
 
 class PageAdmin extends Page {
 
