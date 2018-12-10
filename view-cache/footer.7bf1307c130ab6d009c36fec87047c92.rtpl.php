@@ -9,7 +9,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="#"><i class="far fa-star text-primary"></i> Meus Favoritos</a>
             <a class="dropdown-item" href="#"><i class="fas fa-user-cog text-primary"></i> Meus Dados</a>
-            <a class="dropdown-item" href="#"><i class="far fa-times-circle text-danger"></i> Sair</a>
+            <a class="dropdown-item" href="logout"><i class="far fa-times-circle text-danger"></i> Sair</a>
             </div>
         </li>
         </ul>

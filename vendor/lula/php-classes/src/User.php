@@ -2,6 +2,8 @@
 namespace Lula;
 use \Lula\DB\Sql;
 use \Lula\Mailer;
+use \Lula\Model;
+
 class User extends Model {
 	const SESSION = "User";
 	const SECRET = "HcodePhp7_Secret";
@@ -16,7 +18,7 @@ class User extends Model {
 		}
 		return $user;
 	}
-	public static function checkLogin($inadmin = true)
+	public static function checkLogin($status = true)
 	{
 		if (
 			!isset($_SESSION[User::SESSION])
@@ -28,30 +30,30 @@ class User extends Model {
 			//Não está logado
 			return false;
 		} else {
-			if ($inadmin === true && (bool)$_SESSION[User::SESSION]['inadmin'] === true) {
+			if ($status === true && (bool)$_SESSION[User::SESSION]['status'] === true) {
 				return true;
-			} else if ($inadmin === false) {
+			} else if ($status === false) {
 				return true;
 			} else {
 				return false;
 			}
 		}
 	}
-	public static function login($login, $password)
+	public static function login($matricula, $password)
 	{
 		$sql = new Sql();
-		$results = $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b ON a.idperson = b.idperson WHERE a.deslogin = :LOGIN", array(
-			":LOGIN"=>$login
+		$results = $sql->select("SELECT * FROM tb_users WHERE matricula = :matricula", array(
+			":matricula"=>$matricula
 		)); 
 		if (count($results) === 0)
 		{
 			throw new \Exception("Usuário inexistente ou senha inválida.");
 		}
 		$data = $results[0];
-		if (password_verify($password, $data["despassword"]) === true)
+		if (password_verify($password, $data["password"]) === true)
 		{
 			$user = new User();
-			$data['desperson'] = utf8_encode($data['desperson']);
+			$data['nome'] = utf8_encode($data['nome']);
 			$user->setData($data);
 			$_SESSION[User::SESSION] = $user->getValues();
 			return $user;
@@ -59,11 +61,11 @@ class User extends Model {
 			throw new \Exception("Usuário inexistente ou senha inválida.");
 		}
 	}
-	public static function verifyLogin($inadmin = true)
+	public static function verifyLogin($status = true)
 	{
-		if (!User::checkLogin($inadmin)) {
-			if ($inadmin) {
-				header("Location: /admin/login");
+		if (!User::checkLogin($status)) {
+			if ($status) {
+				header("Location: /dashboard");
 			} else {
 				header("Location: /login");
 			}
@@ -82,13 +84,13 @@ class User extends Model {
 	public function save()
 	{
 		$sql = new Sql();
-		$results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
+		$results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :status)", array(
 			":desperson"=>utf8_decode($this->getdesperson()),
 			":deslogin"=>$this->getdeslogin(),
 			":despassword"=>User::getPasswordHash($this->getdespassword()),
 			":desemail"=>$this->getdesemail(),
 			":nrphone"=>$this->getnrphone(),
-			":inadmin"=>$this->getinadmin()
+			":status"=>$this->getstatus()
 		));
 		$this->setData($results[0]);
 	}
@@ -105,14 +107,14 @@ class User extends Model {
 	public function update()
 	{
 		$sql = new Sql();
-		$results = $sql->select("CALL sp_usersupdate_save(:iduser, :desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
+		$results = $sql->select("CALL sp_usersupdate_save(:iduser, :desperson, :deslogin, :despassword, :desemail, :nrphone, :status)", array(
 			":iduser"=>$this->getiduser(),
 			":desperson"=>utf8_decode($this->getdesperson()),
 			":deslogin"=>$this->getdeslogin(),
 			":despassword"=>User::getPasswordHash($this->getdespassword()),
 			":desemail"=>$this->getdesemail(),
 			":nrphone"=>$this->getnrphone(),
-			":inadmin"=>$this->getinadmin()
+			":status"=>$this->getstatus()
 		));
 		$this->setData($results[0]);		
 	}
@@ -123,7 +125,7 @@ class User extends Model {
 			":iduser"=>$this->getiduser()
 		));
 	}
-	public static function getForgot($email, $inadmin = true)
+	public static function getForgot($email, $status = true)
 	{
 		$sql = new Sql();
 		$results = $sql->select("
@@ -183,7 +185,7 @@ class User extends Model {
 				$code = my_encrypt($password_plain, $key);
 			
 				
-				if ($inadmin === true) {
+				if ($status === true) {
 					
 					$link = "http://www.hcodecommerce.com.br/admin/forgot/reset?code=$code";
 				} else {

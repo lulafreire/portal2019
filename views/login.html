@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Template de login, usando Bootstrap.</title>
+    <title>PortalAPS:Login</title>
 
     <!-- Principal CSS do Bootstrap -->
     <link href="node_modules/bootstrap/compiler/bootstrap.css" rel="stylesheet">
@@ -22,10 +22,10 @@
     <form class="form-signin col-4 text-light" method="post" action="acesso">
       <img class="mb-4 my-3" src="img/brasao.png">
       <h1 class="h3 mb-3 font-weight-normal text-light">Login <b>PortalAPS</b></h1>
-      <label for="inputEmail" class="sr-only">Endereço de email</label>
-      <input name="inputEmail" type="email" id="inputEmail" class="form-control mb-3" placeholder="Seu email" required autofocus>
-      <label for="inputPassword" class="sr-only">Senha</label>
-      <input type="password" id="inputPassword" class="form-control mb-3" placeholder="Senha" required>
+      <label for="matricula" class="sr-only">Matrícula</label>
+      <input name="matricula" type="text" class="form-control mb-3" placeholder="Sua matrícula" required autofocus>
+      <label for="password" class="sr-only">Senha</label>
+      <input name="password" type="password" class="form-control mb-3" placeholder="Senha" required>
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Lembrar de mim

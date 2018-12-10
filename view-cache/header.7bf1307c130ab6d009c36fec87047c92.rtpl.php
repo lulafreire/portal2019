@@ -48,7 +48,7 @@
     <!-- Navbar Principal -->
     <nav class="navbar fixed navbar-expand-lg navbar-dark" style="background-color: #0f3d5e;">
 
-        <a class="navbar-brand h1 mb-0" href="index.php"><img src="img/logo.png" valign="middle" alt="">PortalAPS</a>
+        <a class="navbar-brand h1 mb-0" href="dashboard"><img src="img/logo.png" valign="middle" alt="">PortalAPS</a>
         
         <!-- Botão para recolher a navbar -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
