@@ -57,6 +57,7 @@ class User extends Model {
 			$user->setData($data);
 			$_SESSION[User::SESSION] = $user->getValues();
 			return $user;
+
 		} else {
 			throw new \Exception("Usuário inexistente ou senha inválida.");
 		}
@@ -79,8 +80,17 @@ class User extends Model {
 	public static function listAll()
 	{
 		$sql = new Sql();
-		return $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) ORDER BY b.desperson");
+		return $sql->select("SELECT * FROM tb_users ORDER BY nome");
 	}
+
+	public static function favoritos()
+	{
+		$sql = new Sql();
+		return $sql->select("SELECT * FROM tb_favoritos WHERE matricula = :matricula", array(
+			":matricula"=>$_SESSION[User::SESSION]['matricula']
+		));
+	}
+
 	public function save()
 	{
 		$sql = new Sql();

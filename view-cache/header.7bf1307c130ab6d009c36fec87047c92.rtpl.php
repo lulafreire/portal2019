@@ -39,7 +39,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <small><a class="nav-link disabled mr-3" href="#"><i class="far fa-calendar-alt"></i> Hoje é <b>sexta-feira</b>, 7 de dezembro de 2018.</a></small>
+                    <small><a class="nav-link disabled mr-3" href="#"><i class="far fa-calendar-alt"></i> Hoje é <b><?php echo date('l'); ?></b>, <?php echo date('d/m/Y'); ?></a></small>
                 </li>
             </ul>
         </div>
@@ -86,6 +86,10 @@
 
                 <li class="nav-item">
                         <a class="nav-link" href="fazendas"><i class="fas fa-tractor"></i> Fazendas</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="conteudo"><i class="fas fa-desktop"></i> Conteúdo</a>
                 </li>
 
             </ul>
