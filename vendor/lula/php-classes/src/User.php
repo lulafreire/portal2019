@@ -10,6 +10,7 @@ class User extends Model {
 	const ERROR = "UserError";
 	const ERROR_REGISTER = "UserErrorRegister";
 	const SUCCESS = "UserSucesss";
+	
 	public static function getFromSession()
 	{
 		$user = new User();
@@ -18,6 +19,7 @@ class User extends Model {
 		}
 		return $user;
 	}
+
 	public static function checkLogin($status = true)
 	{
 		if (
@@ -39,6 +41,7 @@ class User extends Model {
 			}
 		}
 	}
+
 	public static function login($matricula, $password)
 	{
 		$sql = new Sql();
@@ -62,6 +65,95 @@ class User extends Model {
 			throw new \Exception("Usuário inexistente ou senha inválida.");
 		}
 	}
+
+	public static function verificaUnidade($lotacao)
+	{
+		$sql = new Sql();
+		$unidade = $sql->select("SELECT * FROM tb_unidades WHERE codigo = :lotacao", array(
+			":lotacao"=>$lotacao
+		));
+
+		return(int)$unidade;
+	}
+
+	public static function nomeUnidade($userLotacao)
+	{
+		$sql = new Sql();
+		$results = $sql->select("SELECT * FROM tb_unidades WHERE codigo = :userLotacao", array(
+			":userLotacao"=>$userLotacao
+		));
+		
+		return $nomeUnidade = $results[0]['nome'];
+
+	}
+
+	public static function verificaUsuario($dados)
+	{
+		$matricula = $dados['matricula'];
+		$sql = new Sql();
+		$results = $sql->select("SELECT matricula FROM tb_users WHERE matricula = :matricula", array(
+			":matricula"=>$matricula
+		));
+
+		$v = (int)$results;
+	
+		if($v==0)
+		{
+			$matricula = $dados['matricula'];
+			$nome = strtoupper($dados['nome']);
+			$cpf = $dados['cpf'];
+			$foto = $dados['foto'];
+			$cargo = $dados['cargo'];
+			$email = $dados['email'];
+			$lotacao = $dados['lotacao'];
+			$dt_ingresso = $dados['dt_ingresso'];
+			$telefone = $dados['telefone'];
+			$dt_nascimento = $dados['dt_nascimento'];
+			$nit = $dados['nit'];
+			$endereco = strtoupper($dados['endereco']);
+			$senha = $dados['senha'];
+			$status = 1;
+			$publicTelefone = $dados['publicTelefone'];
+			$publicDtNascimento = $dados['publicDtNascimento'];		
+
+			$cadastra = $sql->query("INSERT INTO tb_users 
+				(nome, matricula, cargo, lotacao, dt_ingresso, email, telefone, endereco, cpf, dt_nascimento, nit, password, status, foto, publicTelefone, publicDtNascimento) 
+				VALUES 
+				(:nome, :matricula, :cargo, :lotacao, :dt_ingresso, :email, :telefone, :endereco, :cpf, :dt_nascimento, :nit, :senha, :status, :foto, :publicTelefone, :publicDtNascimento)", array(
+				":nome"=>$nome,
+				":matricula"=>$matricula,
+				":cargo"=>$cargo,
+				":lotacao"=>$lotacao,
+				":dt_ingresso"=>$dt_ingresso,
+				":email"=>$email,
+				":telefone"=>$telefone,
+				":endereco"=>$endereco,
+				":cpf"=>$cpf,
+				":dt_nascimento"=>$dt_nascimento,
+				":nit"=>$nit,
+				":senha"=>$senha,
+				":status"=>$status,
+				":foto"=>$foto,
+				":publicTelefone"=>$publicTelefone,
+				":publicDtNascimento"=>$publicDtNascimento
+			));
+
+			$fav = $sql->query("INSERT INTO tb_favoritos (matricula) VALUES (:matricula)", array(
+				":matricula"=>$matricula
+			));
+
+			return $v;
+
+		}
+		else
+		{
+			// Não cadastra
+			return $v;
+		}		
+
+	}
+
+
 	public static function verifyLogin($status = true)
 	{
 		if (!User::checkLogin($status)) {
@@ -77,10 +169,12 @@ class User extends Model {
 	{
 		$_SESSION[User::SESSION] = NULL;
 	}
-	public static function listAll()
+	public static function listAll($userLotacao)
 	{
 		$sql = new Sql();
-		return $sql->select("SELECT * FROM tb_users ORDER BY nome");
+		return $sql->select("SELECT * FROM tb_users WHERE lotacao = :userLotacao ORDER BY nome", array(
+			":userLotacao"=>$userLotacao
+		));
 	}
 
 	public static function favoritos()
@@ -90,6 +184,33 @@ class User extends Model {
 			":matricula"=>$_SESSION[User::SESSION]['matricula']
 		));
 	}
+
+	public static function selectFavoritos()
+	{
+		$sql = new Sql();
+		return $sql->select("SELECT * FROM tb_sistemas UNION ALL SELECT * FROM tb_formularios UNION ALL SELECT * FROM tb_links ORDER BY nome ASC");
+	}
+
+	public static function defineFavoritos($tb_origem, $idFav, $nFav, $nUrl, $nIcone, $nDesc)
+	{
+		$sql = new Sql();
+		$results = $sql->select("SELECT * from $tb_origem WHERE id = :idFav", array(
+			":idFav"=>$idFav
+		));
+		
+		$con=mysqli_connect("localhost","root","") or die ("Erro conexão".mysqli_error($con));
+		$db=mysqli_select_db($con, "db_portal")or die ("Erro banco de dados".mysqli_error($con));
+		$nomeFav   = utf8_decode($results[0]['nome']);
+		$desc      = utf8_decode($results[0]['descricao']);
+		$url       = $results[0]['url'];
+		$icone     = $results[0]['icone'];
+		$matricula = $_SESSION[User::SESSION]['matricula'];
+
+		$update = mysqli_query($con, "UPDATE tb_favoritos set $nFav = '$nomeFav', $nDesc = '$desc', $nUrl = '$url', $nIcone = '$icone' WHERE matricula = '$matricula'");
+
+	}
+
+	
 
 	public function save()
 	{
@@ -135,17 +256,13 @@ class User extends Model {
 			":iduser"=>$this->getiduser()
 		));
 	}
-	public static function getForgot($email, $status = true)
+	public static function getForgot($matricula)
 	{
 		$sql = new Sql();
-		$results = $sql->select("
-			SELECT *
-			FROM tb_persons a
-			INNER JOIN tb_users b USING(idperson)
-			WHERE a.desemail = :email;
-		", array(
-			":email"=>$email
-		));
+		$results = $sql->select("SELECT * FROM tb_users WHERE matricula = :matricula", array(
+			":matricula"=>$matricula
+		)); 
+		
 		if (count($results) === 0)
 		{
 			throw new \Exception("Não foi possível recuperar a senha.");
@@ -154,127 +271,51 @@ class User extends Model {
 		else
 		{
 			$data = $results[0];
-			$results2 = $sql->select("CALL sp_userspasswordsrecoveries_create(:iduser, :desip)", array(
-				":iduser"=>$data["iduser"],
-				":desip"=>$_SERVER["REMOTE_ADDR"]
-			));
-			if (count($results2) === 0)
-			{
-				throw new \Exception("Não foi possível recuperar a senha");
-			}
-			else
-			{
-				$dataRecovery = $results2[0];
-				
-				$key = 'bRuD5WYw5wd0rdHR9yLlM6wt2vteuiniQBqE70nAuhU=';
-
-				function my_decrypt($data, $key) {
-					// Remove the base64 encoding from our key
-					$encryption_key = base64_decode($key);
-					// To decrypt, split the encrypted data from our IV - our unique separator used was "::"
-					list($encrypted_data, $iv) = explode('::', base64_decode($data), 2);
-					return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
-				}
-
-				function my_encrypt($data, $key) {
-					// Remove the base64 encoding from our key
-					$encryption_key = base64_decode($key);
-					// Generate an initialization vector
-					$iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
-					// Encrypt the data using AES 256 encryption in CBC mode using our encryption key and initialization vector.
-					$encrypted = openssl_encrypt($data, 'aes-256-cbc', $encryption_key, 0, $iv);
-					// The $iv is just as important as the key for decrypting, so save it with our encrypted data using a unique separator (::)
-					return base64_encode($encrypted . '::' . $iv);
-				}
-
-				//our data to be encoded
-				$password_plain = $dataRecovery["idrecovery"];
-				
-				//our data being encrypted. This encrypted data will probably be going into a database
-				//since it's base64 encoded, it can go straight into a varchar or text database field without corruption worry
-				$code = my_encrypt($password_plain, $key);
 			
-				
-				if ($status === true) {
-					
-					$link = "http://www.hcodecommerce.com.br/admin/forgot/reset?code=$code";
-				} else {
-					$link = "http://www.hcodecommerce.com.br/forgot/reset?code=$code";
-				}
-				$mailer = new Mailer($data["desemail"], $data["desperson"], "Redefinir Senha da Hcode Store", "forgot", array(
-					"name"=>$data["desperson"],
-					"link"=>$link
-				));
-				$mailer->send();
-				return $data;
-			}
-		}
-	}
-	public static function validForgotDecrypt($code)
-	{
-		$key = 'bRuD5WYw5wd0rdHR9yLlM6wt2vteuiniQBqE70nAuhU=';
+			// Cria uma senha numérica provisória baseada na matrícula e na data e hora atual
+			$date = date('Ymdhis');
+			$code = $matricula.$date;
+			$s = password_hash($code, PASSWORD_DEFAULT);
+			$senhaProvisoria = substr(preg_replace("/[^0-9]/", "", $s), 3, 6);
 
-		function my_encrypt($data, $key) {
-			// Remove the base64 encoding from our key
-			$encryption_key = base64_decode($key);
-			// Generate an initialization vector
-			$iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
-			// Encrypt the data using AES 256 encryption in CBC mode using our encryption key and initialization vector.
-			$encrypted = openssl_encrypt($data, 'aes-256-cbc', $encryption_key, 0, $iv);
-			// The $iv is just as important as the key for decrypting, so save it with our encrypted data using a unique separator (::)
-			return base64_encode($encrypted . '::' . $iv);
-		}
+			// Grava a senha criptografada no banco de dados
+			$hash = password_hash($senhaProvisoria, PASSWORD_DEFAULT);
 
-		function my_decrypt($data, $key) {
-			// Remove the base64 encoding from our key
-			$encryption_key = base64_decode($key);
-			// To decrypt, split the encrypted data from our IV - our unique separator used was "::"
-			list($encrypted_data, $iv) = explode('::', base64_decode($data), 2);
-			return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
+			$grava = $sql->select("UPDATE tb_users SET password = :hash WHERE matricula = :matricula", array(
+				"hash"=>$hash,
+				"matricula"=>$matricula
+			));
+		
+			$mailer = new Mailer($data["email"], $data["nome"], "Redefinir Senha PortalAPS", "forgot-mail", $senhaProvisoria, array(
+				"name"=>$data["nome"],
+				"senhaProvisoria"=>$senhaProvisoria
+			));
+			$mailer->send();
+		
+			return $data;
+	
 		}
-
-		$idrecovery = my_decrypt($code, $key);
-
-
-	    $sql = new Sql();
-		$results = $sql->select("
-			SELECT * 
-			FROM tb_userspasswordsrecoveries a
-			INNER JOIN tb_users b USING(iduser)
-			INNER JOIN tb_persons c USING(idperson)
-			WHERE 
-				a.idrecovery = :idrecovery
-			    AND
-			    a.dtrecovery IS NULL
-			    AND
-			    DATE_ADD(a.dtregister, INTERVAL 1 HOUR) >= NOW();
-		", array(
-			":idrecovery"=>$idrecovery
-		));
-		if (count($results) === 0)
-		{
-			throw new \Exception("Não foi possível recuperar a senha");
-		}
-		else
-		{
-			return $results[0];
-		}
-	}
-	public static function setFogotUsed($idrecovery)
-	{
-		$sql = new Sql();
-		$sql->query("UPDATE tb_userspasswordsrecoveries SET dtrecovery = NOW() WHERE idrecovery = :idrecovery", array(
-			":idrecovery"=>$idrecovery
-		));
+			
 	}
 	public function setPassword($password)
 	{
 		$sql = new Sql();
-		$sql->query("UPDATE tb_users SET despassword = :password WHERE iduser = :iduser", array(
-			":password"=>$password,
-			":iduser"=>$this->getiduser()
+		$sql->query("UPDATE tb_users SET password = :password WHERE iduser = :iduser", array(
+			":password"=>password_hash($password, PASSWORD_DEFAULT),
+			":iduser"=>$_SESSION[User::SESSION]['iduser']
 		));
+
+		if(!$sql)
+		{
+			return $msg = "Não foi possível alterar a senha, tente novamente";
+		}
+		else
+		{
+			return $msg = "Senha alterada com sucesso!";
+		}
 	}
+	
+	// Mensagens de erro ou sucesso
 	public static function setError($msg)
 	{
 		$_SESSION[User::ERROR] = $msg;

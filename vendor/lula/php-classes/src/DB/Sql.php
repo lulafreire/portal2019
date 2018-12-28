@@ -14,11 +14,8 @@ class Sql {
 	public function __construct()
 	{
 
-		$this->conn = new \PDO(
-			"mysql:dbname=".Sql::DBNAME.";host=".Sql::HOSTNAME, 
-			Sql::USERNAME,
-			Sql::PASSWORD
-		);
+		$this->conn = new \PDO("mysql:host=".Sql::HOSTNAME.";dbname=".Sql::DBNAME.";charset=utf8", Sql::USERNAME, Sql::PASSWORD,
+		array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")); // Permite a consulta a dados com caracteres especiais UTF-8
 
 	}
 

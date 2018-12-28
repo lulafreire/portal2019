@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../node_modules/bootstrap/compiler/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/compiler/style.css">
+
+    <!-- Autocomplete CSS -->
+    <link rel="stylesheet" type="text/css" href="../css/jquery.autocomplete.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/thickbox.css"/>
+
+    <!-- Fonts Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <!-- Charts.js -->
+    <script src="../node_modules/chart.js/dist/Chart.min.js"></script>
+</head>
+<body>
+    
+<!-- BAR CHART IMA-GDASS -->                                            
+<canvas id="myChart" height="180" class="border border-secondary rounded"></canvas>
+<script>
+var ctx = document.getElementById("myChart");
+var chartGraph = new Chart (ctx, {
+    type: 'bar',
+    data: {
+        labels: [{loop="$ima"}"{$value.mes}",{/loop}],
+        datasets:[{
+            label: "IMA-GDASS",
+            data: [{loop="$ima"}{$value.indicador},{/loop}],           
+            backgroundColor: [
+                'rgba(51, 179, 90, 0.6)',
+                'rgba(51, 179, 90, 0.6)',
+                'rgba(51, 179, 90, 0.6)',
+                'rgba(51, 179, 90, 0.6)',
+                'rgba(51, 179, 90, 0.6)',
+                'rgba(51, 179, 90, 0.6)',
+                'rgba(51, 179, 90, 0.6)',
+                'rgba(51, 179, 90, 0.6)',
+                'rgba(51, 179, 90, 0.6)',
+                'rgba(51, 179, 90, 0.6)',
+                'rgba(51, 179, 90, 0.6)',
+                'rgba(51, 179, 90, 0.6)'
+            ],
+            borderColor: [
+                'rgba(51, 179, 90, 1)',
+                'rgba(51, 179, 90, 1)',
+                'rgba(51, 179, 90, 1)',
+                'rgba(51, 179, 90, 1)',
+                'rgba(51, 179, 90, 1)',
+                'rgba(51, 179, 90, 1)',
+                'rgba(51, 179, 90, 1)',
+                'rgba(51, 179, 90, 1)',
+                'rgba(51, 179, 90, 1)',
+                'rgba(51, 179, 90, 1)',
+                'rgba(51, 179, 90, 1)',
+                'rgba(51, 179, 90, 1)'
+            ],
+            borderWidth: 1,
+            }
+            
+        ]
+    }
+    
+});
+</script>
+
+<!-- JavaScript (Opcional) -->
+<!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../node_modules/popper.js/dist/umd/popper.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+    </body>
+</html>

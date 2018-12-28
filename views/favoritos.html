@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="text-secondary">
+            <h1>Alterar Favoritos</h1>
+            <form action="test" method="POST">
+                <select name="fav">
+                    {loop="$s"}
+                    <option value="01|{$value.origem}|{$value.id}">{$value.origem}: {$value.nome}</option>
+                    {/loop}
+                </select>
+                <input type="submit" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#modalMeusFavoritos").modal('show');
+    });
+</script>

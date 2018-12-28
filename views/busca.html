@@ -1,0 +1,98 @@
+<div class="container-fluid">
+       
+    <h5 class="mt-2"><i class="fas fa-search"></i> Resultado da busca por <strong><font class="text-primary">{$q}</font></strong></h5>        
+
+    <div class="row">
+        <div class="col-6 mx-0">
+           
+                <div class="card border-warning mb-3" style="height: 390px;">
+                    <div class="card-header bg-warning text-light"> <i class="fas fa-folder-open"></i> Processos Administrativos</div>
+                        <div class="card-body text-dark">
+                            {if="!$qProcessos"}
+                                <p class="text-muted text-center">Nenhum processo administrativo localizado com o termo <strong>{$q}</strong></p>                    
+                            {else}  
+                                <table class="table">
+                                <thead>
+                                    <tr>                        
+                                    <th scope="col">Número</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Origem</th>
+                                    <th scope="col">Caixa</th>
+                                    <th scope="col"><i class="fas fa-file-download"></i></th>
+                                    <th scope="col"><i class="fas fa-file-alt"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>                                    
+                                    {loop="$qProcessos"}
+                                        <tr>
+                                        <td><small>{function="formataNumero($value.numero, $value.origem)"}</small></td>
+                                        <td><small>{$value.nome}</small></td>
+                                        <td><small>{$value.origem}</small></td>
+                                        <td><small>{$value.caixa}</small></td>
+                                        <td><a class="fas fa-file-download text-secondary text-center" title="Download" href="download/{$value.url}"></a></td>
+                                        <td><a class="fas fa-file-alt text-secondary text-center" title="Detalhar" href="detalhar-arquivo/{$value.id}"></td>
+                                        </tr>
+                                    {/loop}                                                                
+                                </tbody>
+                                </table>
+                            {/if}
+                        </div>
+                </div>
+                
+        </div>
+        <div class="col-2 mx-0">
+           
+            <div class="card border-primary mb-3" style="height: 390px;">
+                <div class="card-header bg-primary text-light"> 
+                    <i class="fas fa-desktop"></i> Sistemas
+                </div>
+                <div class="card-body text-dark">                       
+                    {if="!$qSistemas"}
+                        <p class="text-muted text-center">Nenhum sistema localizado com o termo <strong>{$q}</strong></p>                    
+                    {else}    
+                    {loop="$qSistemas"}
+                        <small><i class="fas fa-desktop text-primary"></i>&nbsp;&nbsp;<a class="text-primary link" title="{$value.descricao}" href="{$value.url}">{$value.nome}</a></small>
+                        <hr class="my-1 text-secondary">
+                    {/loop}
+                    {/if}            
+                        
+                </div>
+            </div>
+
+        </div>
+        <div class="col-2 mx-0">
+
+            <div class="card border-success mb-3" style="height: 390px;">
+                <div class="card-header bg-success text-light"> <i class="fas fa-mouse-pointer"></i> Links</div>
+                    <div class="card-body text-dark">
+                        {if="!$qLinks"}
+                            <p class="text-muted text-center">Nenhum link localizado com o termo <strong>{$q}</strong></p>                    
+                        {else}    
+                        {loop="$qLinks"}
+                            <small><i class="fas fa-mouse-pointer text-success"></i>&nbsp;&nbsp;<a class="text-success link" title="{$value.descricao}" href="{$value.url}">{$value.nome}</a></small>
+                            <hr class="my-1 text-secondary">
+                        {/loop} 
+                        {/if}
+                    </div>
+            </div>
+
+        </div>
+        <div class="col-2 mx-0">
+           
+            <div class="card border-info mb-3" style="height: 390px;">
+                <div class="card-header bg-info text-light"> <i class="far fa-file-alt"></i> Formulários</div>
+                    <div class="card-body text-dark">
+                        {if="!$qFormularios"}
+                            <p class="text-muted text-center">Nenhum formulário localizado com o termo <strong>{$q}</strong></p>                    
+                        {else}  
+                        {loop="$qFormularios"}
+                            <small><i class="far fa-file-alt text-info"></i>&nbsp;&nbsp;<a class="text-info link" title="{$value.descricao}" href="{$value.url}">{$value.nome}</a></small>
+                            <hr class="my-1 text-secondary">
+                        {/loop}
+                        {/if}
+                    </div>
+            </div>
+
+        </div>
+    </div>
+</div>

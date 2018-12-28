@@ -1,3 +1,13 @@
+<!-- Autocomplete Script -->
+<script>
+    $( function() {
+      var availableTags = [{loop="$q"}{if="$value.numero!=''"}"{$value.numero} - {$value.nome}"{else}"{$value.nome}"{/if},{/loop}];
+      $( "#tags" ).autocomplete({
+        source: availableTags
+      });
+    } );
+    </script>
+
 <div class="container-fluid">
 
     <div class="row">
@@ -13,22 +23,22 @@
 
                 <div class="row">
                     <div class="col mt-2 align-middle" align="center">
-                        <a href="{$fav.url01}" title="{$fav.desc01}"><img src="img/{$fav.icone01}" height="64" width="64" alt="{$fav.desc01}"></a>
+                        <a href="{$fav.url01}" title="{$fav.desc01}"><h1 class="text-secondary"><i class="{$fav.icone01}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav01}</p>
                     </div>
 
                     <div class="col mt-2 align-middle" align="center">
-                        <a href="{$fav.url02}" title="{$fav.desc02}"><img src="img/{$fav.icone02}" height="64" width="64" alt="{$fav.desc02}"></a>
+                        <a href="{$fav.url02}" title="{$fav.desc02}"><h1 class="text-secondary"><i class="{$fav.icone02}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav02}</p>
                     </div>
 
                     <div class="col mt-2 align-middle" align="center">
-                        <a href="{$fav.url03}" title="{$fav.desc03}"><img src="img/{$fav.icone03}" height="64" width="64" alt="{$fav.desc03}"></a>
+                        <a href="{$fav.url03}" title="{$fav.desc03}"><h1 class="text-secondary"><i class="{$fav.icone03}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav03}</p>
                     </div>
 
                     <div class="col mt-2 align-middle" align="center">
-                        <a href="{$fav.url04}" title="{$fav.desc04}"><img src="img/{$fav.icone04}" height="64" width="64" alt="{$fav.desc04}"></a>
+                        <a href="{$fav.url04}" title="{$fav.desc04}"><h1 class="text-secondary"><i class="{$fav.icone04}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav04}</p>
                     </div>
 
@@ -37,22 +47,22 @@
                 <div class="row">
                     
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url05}" title="{$fav.desc05}"><img src="img/{$fav.icone05}" height="64" width="64" alt="{$fav.desc05}"></a>
+                        <a href="{$fav.url05}" title="{$fav.desc05}"><h1 class="text-secondary"><i class="{$fav.icone05}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav05}</p>
                     </div>
 
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url06}" title="{$fav.desc06}"><img src="img/{$fav.icone06}" height="64" width="64" alt="{$fav.desc06}"></a>
+                        <a href="{$fav.url06}" title="{$fav.desc06}"><h1 class="text-secondary"><i class="{$fav.icone06}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav06}</p>
                     </div>
 
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url07}" title="{$fav.desc07}"><img src="img/{$fav.icone07}" height="64" width="64" alt="{$fav.desc07}"></a>
+                        <a href="{$fav.url07}" title="{$fav.desc07}"><h1 class="text-secondary"><i class="{$fav.icone07}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav07}</p>
                     </div>
 
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url08}" title="{$fav.desc08}"><img src="img/{$fav.icone08}" height="64" width="64" alt="{$fav.desc08}"></a>
+                        <a href="{$fav.url08}" title="{$fav.desc08}"><h1 class="text-secondary"><i class="{$fav.icone08}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav08}</p>
                     </div>
 
@@ -61,28 +71,28 @@
                 <div class="row">
                     
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url09}" title="{$fav.desc09}"><img src="img/{$fav.icone09}" height="64" width="64" alt="{$fav.desc09}"></a>
+                        <a href="{$fav.url09}" title="{$fav.desc09}"><h1 class="text-secondary"><i class="{$fav.icone09}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav09}</p>
                     </div>
 
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url10}" title="{$fav.desc10}"><img src="img/{$fav.icone10}" height="64" width="64" alt="{$fav.desc10}"></a>
+                        <a href="{$fav.url10}" title="{$fav.desc10}"><h1 class="text-secondary"><i class="{$fav.icone10}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav10}</p>
                     </div>
 
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url11}" title="{$fav.desc11}"><img src="img/{$fav.icone11}" height="64" width="64" alt="{$fav.desc11}"></a>
+                        <a href="{$fav.url11}" title="{$fav.desc11}"><h1 class="text-secondary"><i class="{$fav.icone11}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav11}</p>
                     </div>
 
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url12}" title="{$fav.desc12}"><img src="img/{$fav.icone12}" height="64" width="64" alt="{$fav.desc12}"></a>
+                        <a href="{$fav.url12}" title="{$fav.desc12}"><h1 class="text-secondary"><i class="{$fav.icone12}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav12}</p>
                     </div>
 
                 </div>
 
-                <p class='text-center' style="font-size: 12px; color: #748396">Altere os seus links favoritos editando seu perfil.</p>
+                <p class='text-center' style="font-size: 12px; color: #748396">Escolha os seus links favoritos editando seus dados. <i class="fas fa-arrow-down"></i></p>
                 
             </div> 
 
@@ -93,12 +103,31 @@
             
             <!-- Cards informativos -->
             <div class="row">
-                <div class="col bg-danger rounded text-light text-center my-2 mr-3">
-                    <H1 class="display-5 mb-1"><b>250</b></H1>
-                    <p style="font-size: 12px;"><b>REPRESADOS</b></p>
+                
+                <div class="col bg-danger rounded text-light text-center my-2 mr-2">
+                    <div class="row">
+                        <div class="col-8">
+                            <H1 class="display-5 mb-1"><b>{$represados}</b> </H1>
+                        </div>
+                        <div class="col-4 mx-0 mt-2">
+                                <h3><a title="{$dtRepresadosAnt}: {$represadosAnt}"><i class="{$iconeRepresados}"></i></a></h3>
+                        </div>                    
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <hr class="my-1">
+                            <p class="my-1" style="font-size: 12px;"><b>REPRESADOS</b></p>
+                        </div>  
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <hr class="my-1">
+                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {$dtRepresados} </p>
+                        </div>  
+                    </div>
                 </div>
-
-                <div class="col bg-success rounded text-light text-center my-2 mr-3">
+                
+                <div class="col bg-success rounded text-light text-center my-2 mr-2">
                     <div class="row">
                         <div class="col-8">
                             <H1 class="display-5 mb-1"><b>{$tarefasConcluidas}</b> </H1>
@@ -110,12 +139,18 @@
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p style="font-size: 12px;"><b>TAREFAS CONCLUÍDAS</b></p>
+                            <p class="my-1" style="font-size: 12px;"><b>TAREFAS CONCLUÍDAS</b></p>
+                        </div>  
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <hr class="my-1">
+                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {$mesImaGdass} </p>
                         </div>  
                     </div>
                 </div>
 
-                <div class="col bg-primary rounded text-light text-center my-2 mr-3">
+                <div class="col bg-primary rounded text-light text-center my-2 mr-2">
                     <div class="row">
                         <div class="col-8">
                             <H1 class="display-5 mb-1"><b>{$tarefasPendentes}</b> </H1>
@@ -127,29 +162,41 @@
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p style="font-size: 12px;"><b>TAREFAS PENDENTES</b></p>
+                            <p class="my-1" style="font-size: 12px;"><b>TAREFAS PENDENTES</b></p>
+                        </div>  
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <hr class="my-1">
+                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {$mesImaGdass} </p>
                         </div>  
                     </div>
                 </div>
                 
-                <div class="col rounded text-light text-center my-2 mr-3" style="background: orange">
+                <div class="col rounded text-light text-center my-2 mr-2" style="background: orange">
                     <div class="row">
                         <div class="col-8">
-                            <H1 class="display-5 mb-1"><b>{$imaGdass}</b> </H1>
+                            <H1 class="display-5 mb-1"><b>{$imaGdass}</b></H1>
                         </div>
                         <div class="col-4 mx-0 mt-2">
-                                <h3><a title="Resultado anterior {$imaGdassAnt}"><i class="{$iconeImaGdass}"></i></a></h3>
+                                <h3><a title="{$mesImaGdassAnt}: {$imaGdassAnt}"><i class="{$iconeImaGdass}"></i></a></h3>
                         </div>                    
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p style="font-size: 12px;"><b>IMA-GDASS</b></p>
+                            <p class="my-1" style="font-size: 12px;"><b>IMA-GDASS</b></p>
+                        </div>  
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <hr class="my-1">
+                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {$mesImaGdass} </p>
                         </div>  
                     </div>
                 </div>
 
-                <div class="col rounded text-light text-center my-2 mr-3" style="background: rgb(88, 88, 88">
+                <div class="col rounded text-light text-center my-2 mr-2" style="background: rgb(88, 88, 88">
                     <div class="row">
                         <div class="col-8">
                             <H1 class="display-5 mb-1"><b>{$iib}</b> </H1>
@@ -161,7 +208,13 @@
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p style="font-size: 12px;"><b>INDEFERIMENTO</b></p>
+                            <p class="my-1" style="font-size: 12px;"><b>INDEFERIMENTO</b></p>
+                        </div>  
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <hr class="my-1">
+                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {$mesImaGdass} </p>
                         </div>  
                     </div>
                 </div>
@@ -169,67 +222,108 @@
             </div>
         
             <!-- Gráfico e Calendário -->    
-            <div class="row mt-2">
-                <div class="col-7">
+            <div class="row mt-1">
+                <div class="col-7 p-0">
                   
-                    <div id="carouselGraph" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselGraph" data-slide-to="0" class="ative"></li>
-                            <li data-target="#carouselGraph" data-slide-to="1"></li>
-                            <li data-target="#carouselGraph" data-slide-to="2"></li>
-                        </ol>
+                    <div id="carouselGraph" class="carousel slide align-itens-left" data-ride="carousel">
+                        
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                
-                                <!-- BAR CHART -->
-                                <div class="box box-success">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title">Bar Chart</h3>
-
-                                        <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            
+                            <div class="carousel-item active">                                
+                                <!-- BAR CHART REPRESADOS -->
+                                <div class="col">
+                                    <div class="card bar-chart-represados border-secondary">
+                                      <div class="card-header d-flex align-items-center border-secondary">
+                                        <h4>Represamento</h4><small class="text-muted">&nbsp;&nbsp;Última atualização em 10/12/2018</small>
+                                      </div>
+                                      <div class="card-body ">
+                                        <canvas id="barChartExample" height="175"></canvas>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                            
+                            <div class="carousel-item">
+                                <div class="col">
+                                    <div class="card border-secondary my-0">
+                                        
+                                        <div class="card-body">                                
+                                            <!-- BAR CHART IMA-GDASS -->                                            
+                                            <canvas id="myChart" height="166"></canvas>
+                                            <script>
+                                            var ctx = document.getElementById("myChart");
+                                            var chartGraph = new Chart (ctx, {
+                                                type: 'bar',
+                                                data: {
+                                                    labels: [{loop="$ima"}"{$value.mes}",{/loop}],
+                                                    datasets:[{
+                                                        label: "IMA-GDASS",
+                                                        data: [{loop="$ima"}{$value.indicador},{/loop}],           
+                                                        backgroundColor: [
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)'
+                                                        ],
+                                                        borderColor: [
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)'
+                                                        ],
+                                                        borderWidth: 1,
+                                                        }
+                                                        
+                                                    ]
+                                                }
+                                                
+                                            });
+                                            </script>
                                         </div>
                                     </div>
-                                    <div class="box-body">
-                                        <div class="chart">
-                                        <canvas id="barChart" style="height:230px"></canvas>
-                                        </div>
+                                </div>
+                            </div>
+                            
+                            <div class="carousel-item">                                
+                                <!-- BAR CHART TAREFAS -->
+                                <div class="col">
+                                    <div class="card bar-chart-tarefas border-secondary">
+                                      <div class="card-header d-flex align-items-center border-secondary">
+                                        <h4>TAREFAS</h4><small class="text-muted">&nbsp;&nbsp;Última atualização em 10/12/2018</small>
+                                      </div>
+                                      <div class="card-body">
+                                        <canvas id="barChartTarefas" height="150"></canvas>
+                                      </div>
                                     </div>
-                                </div>
+                                  </div>
+                            </div>
+                            <a class="carousel-control-prev text-secondary" href="#carouselGraph" role="button" data-slide="prev" style="background: none;">
+                            <span class="carousel-control-prev-icon"><h1><i class="fas fa-angle-left"></i></h1></span>
+                            <span class="sr-only">Anterior</span>
+                            </a>
+                            <a class="carousel-control-next text-secondary" href="#carouselGraph" role="button" data-slide="next" style="background: none;">
+                            <span class="carousel-control-next-icon"><h1><i class="fas fa-angle-right"></i></h1></span>
+                            <span class="sr-only">Próximo</span>
+                            </a>
 
-                                <div class="carousel-caption text-dark">
-                                    <h4>Represamento</h4>
-                                    <p>Última atualização em 10/12/2018</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="border rounded border-secondary mx-3 my-2"style="height: 280px;"></div>
-                                <div class="carousel-caption text-dark">
-                                    <h4>IMA-GDASS</h4>
-                                    <p>Últimos 12 meses</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="border rounded border-secondary mx-3 my-2"style="height: 280px;"></div>
-                                <div class="carousel-caption text-dark">
-                                    <h4>Tarefas</h4>
-                                    <p>Última atualização em 01/12/2018</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
-
-                    <a class="carousel-control-prev" href="#carouselGraph" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                        <span class="sr-only">Anterior</span>
-                    </a>
-
-                    <a class="carousel-control-next" href="#carouselGraph" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                        <span class="sr-only">Avançar</span>
-                    </a>
 
                 </div>
                 <div class="col">

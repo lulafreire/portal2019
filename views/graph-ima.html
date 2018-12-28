@@ -1,0 +1,54 @@
+<div class="col-6 card border-secondary my-0">
+        <div class="card-header d-flex align-items-center border-secondary">
+        <h4>IMA GDASS</h4><small class="text-muted">&nbsp;&nbsp;Última atualização em 10/12/2018</small>
+        </div>
+        <div class="card-body">                                
+            <!-- BAR CHART IMA-GDASS -->                                            
+            <canvas id="myChart" height="138"></canvas>
+            <script>
+            var ctx = document.getElementById("myChart");
+            var chartGraph = new Chart (ctx, {
+                type: 'bar',
+                data: {
+                    labels: [{loop="$ima"}"{$value.mes}",{/loop}],
+                    datasets:[{
+                        label: "IMA-GDASS",
+                        data: [{loop="$ima"}{$value.indicador},{/loop}],           
+                        backgroundColor: [
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)'
+                        ],
+                        borderWidth: 1,
+                        }
+                        
+                    ]
+                }
+                
+            });
+            </script>
+        </div>
+    </div>

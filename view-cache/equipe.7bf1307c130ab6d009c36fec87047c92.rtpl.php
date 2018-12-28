@@ -40,7 +40,7 @@
                     <td><?php echo htmlspecialchars( $value1["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["cpf"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td class="text-center">
-                      <a href="users/details/<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="text-link text-dark"><i class="fas fa-asterisk"></i> Detalhar </a>&nbsp;|&nbsp;
+                      <a href="#" data-toggle="modal" data-target="#modalDetalhaUsuario-<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="text-link text-dark"><i class="fas fa-asterisk"></i> Detalhar </a>&nbsp;|&nbsp;
                       <a href="users/update/<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="text-link text-dark"><i class="fa fa-edit"></i> Editar </a>&nbsp;|&nbsp;
                       <a href="users/<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" class="text-link text-dark" onclick="return confirm('Deseja realmente excluir este registro?')"><i class="fa fa-trash"></i> Excluir</a>
                     </td>

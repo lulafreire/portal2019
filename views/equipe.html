@@ -40,7 +40,7 @@
                     <td>{$value.telefone}</td>
                     <td>{$value.cpf}</td>
                     <td class="text-center">
-                      <a href="users/details/{$value.iduser}" class="text-link text-dark"><i class="fas fa-asterisk"></i> Detalhar </a>&nbsp;|&nbsp;
+                      <a href="#" data-toggle="modal" data-target="#modalDetalhaUsuario-{$value.iduser}" class="text-link text-dark"><i class="fas fa-asterisk"></i> Detalhar </a>&nbsp;|&nbsp;
                       <a href="users/update/{$value.iduser}" class="text-link text-dark"><i class="fa fa-edit"></i> Editar </a>&nbsp;|&nbsp;
                       <a href="users/{$value.iduser}/delete" class="text-link text-dark" onclick="return confirm('Deseja realmente excluir este registro?')"><i class="fa fa-trash"></i> Excluir</a>
                     </td>

@@ -1,5 +1,5 @@
 <?php 
-namespace Hcode;
+namespace Lula;
 use Rain\Tpl;
 class Mailer {
 	
@@ -7,11 +7,12 @@ class Mailer {
 	const PASSWORD = "BetinhO";
 	const NAME_FROM = "PortalAPS";
 	private $mail;
-	public function __construct($toAddress, $toName, $subject, $tplName, $data = array())
+	public function __construct($toAddress, $toName, $subject, $tplName, $senhaProvisoria, $data = array())
 	{
+		/*
 		$config = array(
-			"tpl_dir"       => $_SERVER["DOCUMENT_ROOT"]."/views/email/",
-			"cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/views-cache/",
+			"tpl_dir"       => "views/email/",
+			"cache_dir"     => "views-cache/",
 			"debug"         => false
 	    );
 		Tpl::configure( $config );
@@ -19,7 +20,19 @@ class Mailer {
 		foreach ($data as $key => $value) {
 			$tpl->assign($key, $value);
 		}
-		$html = $tpl->draw($tplName, true);
+		$html = $tpl->draw($tplName, $data = array(), $returnHTML = true);
+		*/
+
+		$html = "
+		<body topMargin='30'>
+			<center>
+			<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Coat_of_arms_of_the_United_States_of_Brazil.svg/766px-Coat_of_arms_of_the_United_States_of_Brazil.svg.png' height='100'><br>
+			<strong><h2>PortalAPS</h2></strong><br>
+			Olá, ".$toName. ",<br>
+			utilize a senha provisória <strong>".$senhaProvisoria. "</strong> para acessar o PortalAPS.
+			<p>Após acessar a página, altere sua senha pessoal.<p>
+			</center>
+		</body>";
 		$this->mail = new \PHPMailer;
 		//Tell PHPMailer to use SMTP
 		$this->mail->isSMTP();

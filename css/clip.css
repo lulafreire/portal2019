@@ -1,0 +1,9 @@
+.caixa_corte {
+    width: 150px;
+    height: 150px;
+    overflow:hidden;
+}
+     
+.caixa_corte img {
+    width: auto;
+}
