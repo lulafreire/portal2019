@@ -1,0 +1,459 @@
+<div class="container-fluid">
+    {loop="$ind"}
+    <div class="row my-2 mx-2">
+        
+        {if="$value.indicador=='represados'"}
+        <div class="col-8 mx-2">
+         
+            <canvas id="myChartRep" height="150"></canvas>
+            <script>
+            var ctx = document.getElementById("myChartRep");
+            var chartGraph = new Chart (ctx, {
+                type: 'bar',
+                data: {
+                    labels: [{loop="$ind12"}"{function="reduzData(converteData($value.data))"}",{/loop}],
+                    datasets:[{
+                        label: "{$value.titulo} TOTAL",
+                        data: [{loop="$ind12"}{$value.indicador},{/loop}],           
+                        backgroundColor: [
+                            'rgba(212, 0, 0, 0.6)',
+                            'rgba(212, 0, 0, 0.6)',
+                            'rgba(212, 0, 0, 0.6)',
+                            'rgba(212, 0, 0, 0.6)',
+                            'rgba(212, 0, 0, 0.6)',
+                            'rgba(212, 0, 0, 0.6)',
+                            'rgba(212, 0, 0, 0.6)',
+                            'rgba(212, 0, 0, 0.6)',
+                            'rgba(212, 0, 0, 0.6)',
+                            'rgba(212, 0, 0, 0.6)',
+                            'rgba(212, 0, 0, 0.6)',
+                            'rgba(212, 0, 0, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(143, 0, 0, 1)',
+                            'rgba(143, 0, 0, 1)',
+                            'rgba(143, 0, 0, 1)',
+                            'rgba(143, 0, 0, 1)',
+                            'rgba(143, 0, 0, 1)',
+                            'rgba(143, 0, 0, 1)',
+                            'rgba(143, 0, 0, 1)',
+                            'rgba(143, 0, 0, 1)',
+                            'rgba(143, 0, 0, 1)',
+                            'rgba(143, 0, 0, 1)',
+                            'rgba(143, 0, 0, 1)',
+                            'rgba(143, 0, 0, 1)'
+                        ],
+                        borderWidth: 1,
+                        },
+                        {
+                        label: "ADM",
+                        data: [{loop="$ind12"}{$value.adm},{/loop}],           
+                        backgroundColor: [
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)'
+                        ],
+                        borderWidth: 1,
+                        },
+                        {
+                        label: "PM/AS",
+                        data: [{loop="$ind12"}{$value.pm_as},{/loop}],           
+                        backgroundColor: [
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)'
+                        ],
+                        borderWidth: 1,
+                        }                                                    
+                    ]
+                },
+                "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
+                
+            });
+            </script>
+
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col-12 text-center">
+                        <a href="represados" class="btn btn-danger btn-sm">Represados</a>&nbsp;&nbsp;<a href="tarefas" class="btn btn-success btn-sm">Tarefas</a>&nbsp;&nbsp;<a href="imaGdass" class="btn btn-warning btn-sm text-light">IMA-GDASS</a>&nbsp;&nbsp;<a href="iib" class="btn btn-secondary btn-sm">Indeferimento</a>
+                </div>               
+            </div>
+            {if="$user.status==1 OR $user.status==3"}
+            <div class="row">
+                <div class="col-12 my-3">
+                    <div class="card border-secondary mb-3" style="height: 360px;">
+                    <div class="card-header bg-secondary border-secondary text-light">Atualizar dados do indicador <strong>{$value.titulo}</strong></div>
+                    <div class="card-body">
+                        <form method="POST" action="represados">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="data">Data da carga do SUIBE</label>
+                                        <input type="data" class="form-control" id="data" name="data" maxlength='10' onkeypress="formatar_mascara(this, '##/##/####')" placeholder="Data" required>
+                                        <p class="text-muted"><small>Para alterar os dados existentes, informe a data.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 mb-0">
+                                    <div class="form-group mb-0">
+                                        <label for="adm">ADM</label>
+                                        <input type="text" name="adm" class="form-control" id="adm" placeholder="Qtde." required>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-0">
+                                    <div class="form-group mb-0">
+                                        <label for="pm_as">PM/AS</label>
+                                        <input type="text" name="pm_as" class="form-control" id="pm_as" placeholder="Qtde." required>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row my-0">
+                                <div class="col-12">
+                                        <span class="text-muted my-0"><small>Para excluir o registro, informe zero nas quantidades.</small></span>
+                                </div>                               
+                            </div>                        
+                        </div>
+                    <div class="card-footer bg-muted border-secondary text-muted text-light">
+                        <input type="hidden" name="indicador" value="{$value.indicador}"><button type="submit" class="btn btn-primary">Enviar</button>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {else}
+            <div class="row">
+                <div class="col-12 my-3">
+                    <div class="card border-secondary mb-3" style="height: 360px;">
+                    <div class="card-header bg-secondary border-secondary text-light"><strong>{$value.titulo}</strong></div>
+                    <div class="card-body">
+                        <p class="card-text">Quantidade de processos aguardando conclusão, sob responsabilidade da unidade.</p>
+                        <p class="card-text"><strong>ADM:</strong> processos aguardando ação da APS sob responsabilidade dos servidores administrativos.</p>
+                        <p class="card-text"><strong>PM/AS:</strong> processos aguardando agendamento ou conclusão de perícia médica ou avaliação social.</small></p>
+                        <p class="card-text"><strong>Avaliação:</strong> quanto menor, melhor.</small></p>
+                    </div>
+                    <div class="card-footer bg-muted border-secondary text-muted text-light">
+                        <p class="card-text text-muted"><strong>Fonte: </strong> SUIBE</p>
+                    </div>                         
+                </div>
+            </div>
+            {/if}
+        </div>
+
+        {elseif="$value.indicador=='tarefas'"}
+        <div class="col-8 mx-2">
+        
+            <canvas id="myChartTar" height="150"></canvas>
+            <script>
+            var ctx = document.getElementById("myChartTar");
+            var chartGraph = new Chart (ctx, {
+                type: 'bar',
+                data: {
+                    labels: [{loop="$ind12"}"{function="converteComp($value.competencia)"}",{/loop}],
+                    datasets:[
+                        {
+                        label: "{$value.titulo} CONCLUÍDAS",
+                        data: [{loop="$ind12"}{$value.concluidas},{/loop}],           
+                        backgroundColor: [
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)',
+                            'rgba(51, 179, 90, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)',
+                            'rgba(51, 179, 90, 1)'
+                        ],
+                        borderWidth: 1,
+                        },
+                        {
+                        label: "{$value.titulo} PENDENTES",
+                        data: [{loop="$ind12"}{$value.pendentes},{/loop}],           
+                        backgroundColor: [
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)',
+                            'rgba(0, 120, 255, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)',
+                            'rgba(0, 58, 166, 1)'
+                        ],
+                        borderWidth: 1,
+                        }                                                    
+                    ]
+                },
+                "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
+                
+            });
+            </script>            
+
+        </div>
+        <div class="col mx-2">
+           <div class="row">
+               <div class="col-12 text-center">
+                    <a href="represados" class="btn btn-danger btn-sm">Represados</a>&nbsp;&nbsp;<a href="tarefas" class="btn btn-success btn-sm">Tarefas</a>&nbsp;&nbsp;<a href="imaGdass" class="btn btn-warning btn-sm text-light">IMA-GDASS</a>&nbsp;&nbsp;<a href="iib" class="btn btn-secondary btn-sm">Indeferimento</a>
+               </div>               
+           </div>
+           {if="$user.status==1 OR $user.status==3"}
+           <div class="row">
+                <div class="col-12 my-3">
+                    <div class="card border-secondary mb-3" style="height: 360px;">
+                    <div class="card-header bg-secondary border-secondary text-light">Atualizar dados do indicador <strong>{$value.titulo}</strong></div>
+                    <div class="card-body">
+                        <form method="POST" action="represados">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="data">Competência</label>
+                                        <input type="text" class="form-control" id="competencia" name="competencia" maxlength='7' onkeypress="formatar_mascara(this, '##/####')" placeholder="Competência" required>
+                                        <p class="text-muted"><small>Para alterar os dados existentes, informe a data.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 mb-0">
+                                    <div class="form-group mb-0">
+                                        <label for="adm">Concluídas</label>
+                                        <input type="text" name="concluidas" class="form-control" id="concluidas" placeholder="Qtde." required>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-0">
+                                    <div class="form-group mb-0">
+                                        <label for="pm_as">Pendentes</label>
+                                        <input type="text" name="pendentes" class="form-control" id="pendentes" placeholder="Qtde." required>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row my-0">
+                                <div class="col-12">
+                                        <span class="text-muted my-0"><small>Para excluir o registro, informe zero nas quantidades.</small></span>
+                                </div>                               
+                            </div>                        
+                        </div>
+                        <div class="card-footer bg-muted border-secondary text-muted text-light">
+                            <input type="hidden" name="indicador" value="{$value.indicador}"><button type="submit" class="btn btn-primary">Enviar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {else}
+            <div class="row">
+                <div class="col-12 my-3">
+                    <div class="card border-secondary mb-3" style="height: 360px;">
+                    <div class="card-header bg-secondary border-secondary text-light"><strong>{$value.titulo}</strong></div>
+                    <div class="card-body">
+                        <p class="card-text">Quantidade de tarefas concluídas e pendentes por mês, sob responsabilidade dos servidores da Unidade.</p>
+                        <p class="card-text"><strong>Avaliação:</strong> para CONCLUÍDAS, quanto menor, melhor; para PENDENTES, quanto menor, melhor.</small></p>
+                    </div>
+                    <div class="card-footer bg-muted border-secondary text-muted text-light">
+                        <p class="card-text text-muted"><strong>Fonte: </strong> GET - Gerenciador de Tarefas</p>
+                    </div>                        
+                </div>
+            </div>
+            {/if}
+        </div>        
+        {else}
+        <div class="col-8 mx-2">
+        
+            <canvas id="myChart" height="150"></canvas>
+        <script>
+        var ctx = document.getElementById("myChart");
+        var chartGraph = new Chart (ctx, {
+            type: 'bar',
+            data: {
+                labels: [{loop="$ind12"}"{function="converteComp($value.competencia)"}",{/loop}],
+                datasets:[
+                    {
+                    label: "{$value.titulo}",
+                    data: [{loop="$ind12"}{$value.indicador},{/loop}],           
+                    backgroundColor: [
+                        'rgba(51, 179, 90, 0.6)',
+                        'rgba(51, 179, 90, 0.6)',
+                        'rgba(51, 179, 90, 0.6)',
+                        'rgba(51, 179, 90, 0.6)',
+                        'rgba(51, 179, 90, 0.6)',
+                        'rgba(51, 179, 90, 0.6)',
+                        'rgba(51, 179, 90, 0.6)',
+                        'rgba(51, 179, 90, 0.6)',
+                        'rgba(51, 179, 90, 0.6)',
+                        'rgba(51, 179, 90, 0.6)',
+                        'rgba(51, 179, 90, 0.6)',
+                        'rgba(51, 179, 90, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(51, 179, 90, 1)',
+                        'rgba(51, 179, 90, 1)',
+                        'rgba(51, 179, 90, 1)',
+                        'rgba(51, 179, 90, 1)',
+                        'rgba(51, 179, 90, 1)',
+                        'rgba(51, 179, 90, 1)',
+                        'rgba(51, 179, 90, 1)',
+                        'rgba(51, 179, 90, 1)',
+                        'rgba(51, 179, 90, 1)',
+                        'rgba(51, 179, 90, 1)',
+                        'rgba(51, 179, 90, 1)',
+                        'rgba(51, 179, 90, 1)'
+                    ],
+                    borderWidth: 1,
+                    }
+                ]
+            },
+            "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
+            
+        });
+        </script>
+
+        </div>
+        <div class="col mx-2">
+            <div class="row">
+                <div class="col-12 text-center">
+                        <a href="represados" class="btn btn-danger btn-sm">Represados</a>&nbsp;&nbsp;<a href="tarefas" class="btn btn-success btn-sm">Tarefas</a>&nbsp;&nbsp;<a href="imaGdass" class="btn btn-warning btn-sm text-light">IMA-GDASS</a>&nbsp;&nbsp;<a href="iib" class="btn btn-secondary btn-sm">Indeferimento</a>
+                </div>               
+            </div>
+            {if="$user.status==1 OR $user.status==3"}
+            <div class="row">
+                <div class="col-12 my-3">
+                    <div class="card border-secondary mb-3" style="height: 360px;">
+                    <div class="card-header bg-secondary border-secondary text-light">Atualizar dados do indicador <strong>{$value.titulo}</strong></div>
+                    <div class="card-body">
+                        <form method="POST" action="represados">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="competencia">Competência</label>
+                                        <input type="text" class="form-control" id="competencia" name="competencia" maxlength='7' onkeypress="formatar_mascara(this, '##/####')" placeholder="Competência" required>
+                                        <p class="text-muted"><small>Para alterar os dados existentes, informe a data.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mb-0">
+                                    <div class="form-group mb-0">
+                                        <label for="indicador">Índice</label>
+                                        <input type="text" name="indice" class="form-control" id="indice" placeholder="Índice" required>
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="row my-0">
+                                <div class="col-12">
+                                        <span class="text-muted my-0"><small>Para excluir o registro, informe zero na quantidade.</small></span>
+                                </div>                               
+                            </div>                        
+                        </div>
+                    <div class="card-footer bg-muted border-secondary text-muted text-light">
+                        <input type="hidden" name="indicador" value="{$value.indicador}"><button type="submit" class="btn btn-primary">Enviar</button>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {else}
+            <div class="row">
+                <div class="col-12 my-3">
+                    <div class="card border-secondary mb-3" style="height: 360px;">
+                    <div class="card-header bg-secondary border-secondary text-light"><strong>{$value.titulo}</strong></div>
+                    <div class="card-body">
+                        {if="$value.titulo=='IIB'"}
+                        <p class="card-text">Percentual de requerimentos indeferidos, em relação ao total de benefícios despachados no mês.</p>
+                        <p class="card-text"><strong>Avaliação:</strong> quanto menor, melhor. É tido como aceitável uma média em torno de 30%</small></p>
+                        {else}
+                        <p class="card-text">Somatório dos dias de represamento dividido pela quantidade de processos aguardando análise, sob responsabilidade dos servidores administrativos. Indicador utilizado para definir a parte variável dos servidores do INSS.</p>
+                        <p class="card-text"><strong>Avaliação:</strong> quanto menor, melhor.</small></p>
+                        {/if}
+                    </div>
+                    <div class="card-footer bg-muted border-secondary text-muted text-light">
+                        <p class="card-text text-muted"><strong>Fonte: </strong> SUIBE</p>
+                    </div>                         
+                </div>
+            </div>
+            {/if}
+        </div>
+        {/if}
+    </div>
+    {/loop}
+</div>

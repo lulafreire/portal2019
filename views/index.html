@@ -1,13 +1,3 @@
-<!-- Autocomplete Script -->
-<script>
-    $( function() {
-      var availableTags = [{loop="$q"}{if="$value.numero!=''"}"{$value.numero} - {$value.nome}"{else}"{$value.nome}"{/if},{/loop}];
-      $( "#tags" ).autocomplete({
-        source: availableTags
-      });
-    } );
-    </script>
-
 <div class="container-fluid">
 
     <div class="row">
@@ -23,22 +13,22 @@
 
                 <div class="row">
                     <div class="col mt-2 align-middle" align="center">
-                        <a href="{$fav.url01}" title="{$fav.desc01}"><h1 class="text-secondary"><i class="{$fav.icone01}"></i></h1></a>
+                        <a href="{$fav.origem01}/{$fav.idFav01}" title="{$fav.desc01}"><h1 class="text-secondary"><i class="{$fav.icone01}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav01}</p>
                     </div>
 
                     <div class="col mt-2 align-middle" align="center">
-                        <a href="{$fav.url02}" title="{$fav.desc02}"><h1 class="text-secondary"><i class="{$fav.icone02}"></i></h1></a>
+                        <a href="{$fav.origem02}/{$fav.idFav02}" title="{$fav.desc02}"><h1 class="text-secondary"><i class="{$fav.icone02}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav02}</p>
                     </div>
 
                     <div class="col mt-2 align-middle" align="center">
-                        <a href="{$fav.url03}" title="{$fav.desc03}"><h1 class="text-secondary"><i class="{$fav.icone03}"></i></h1></a>
+                        <a href="{$fav.origem03}/{$fav.idFav03}" title="{$fav.desc03}"><h1 class="text-secondary"><i class="{$fav.icone03}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav03}</p>
                     </div>
 
                     <div class="col mt-2 align-middle" align="center">
-                        <a href="{$fav.url04}" title="{$fav.desc04}"><h1 class="text-secondary"><i class="{$fav.icone04}"></i></h1></a>
+                        <a href="{$fav.origem04}/{$fav.idFav04}" title="{$fav.desc04}"><h1 class="text-secondary"><i class="{$fav.icone04}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav04}</p>
                     </div>
 
@@ -47,22 +37,22 @@
                 <div class="row">
                     
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url05}" title="{$fav.desc05}"><h1 class="text-secondary"><i class="{$fav.icone05}"></i></h1></a>
+                        <a href="{$fav.origem05}/{$fav.idFav05}" title="{$fav.desc05}"><h1 class="text-secondary"><i class="{$fav.icone05}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav05}</p>
                     </div>
 
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url06}" title="{$fav.desc06}"><h1 class="text-secondary"><i class="{$fav.icone06}"></i></h1></a>
+                        <a href="{$fav.origem06}/{$fav.idFav06}" title="{$fav.desc06}"><h1 class="text-secondary"><i class="{$fav.icone06}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav06}</p>
                     </div>
 
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url07}" title="{$fav.desc07}"><h1 class="text-secondary"><i class="{$fav.icone07}"></i></h1></a>
+                        <a href="{$fav.origem07}/{$fav.idFav07}" title="{$fav.desc07}"><h1 class="text-secondary"><i class="{$fav.icone07}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav07}</p>
                     </div>
 
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url08}" title="{$fav.desc08}"><h1 class="text-secondary"><i class="{$fav.icone08}"></i></h1></a>
+                        <a href="{$fav.origem08}/{$fav.idFav08}" title="{$fav.desc08}"><h1 class="text-secondary"><i class="{$fav.icone08}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav08}</p>
                     </div>
 
@@ -71,28 +61,29 @@
                 <div class="row">
                     
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url09}" title="{$fav.desc09}"><h1 class="text-secondary"><i class="{$fav.icone09}"></i></h1></a>
+                        <a href="{$fav.origem09}/{$fav.idFav09}" title="{$fav.desc09}"><h1 class="text-secondary"><i class="{$fav.icone09}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav09}</p>
                     </div>
 
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url10}" title="{$fav.desc10}"><h1 class="text-secondary"><i class="{$fav.icone10}"></i></h1></a>
+                        <a href="{$fav.origem10}/{$fav.idFav10}" title="{$fav.desc10}"><h1 class="text-secondary"><i class="{$fav.icone10}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav10}</p>
                     </div>
 
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url11}" title="{$fav.desc11}"><h1 class="text-secondary"><i class="{$fav.icone11}"></i></h1></a>
+                        <a href="{$fav.origem11}/{$fav.idFav11}" title="{$fav.desc11}"><h1 class="text-secondary"><i class="{$fav.icone11}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav11}</p>
                     </div>
 
                     <div class="col align-middle" align="center">
-                        <a href="{$fav.url12}" title="{$fav.desc12}"><h1 class="text-secondary"><i class="{$fav.icone12}"></i></h1></a>
+                        <a href="{$fav.origem12}/{$fav.idFav12}" title="{$fav.desc12}"><h1 class="text-secondary"><i class="{$fav.icone12}"></i></h1></a>
                         <p style="font-size: 12px;">{$fav.fav12}</p>
                     </div>
 
                 </div>
 
                 <p class='text-center' style="font-size: 12px; color: #748396">Escolha os seus links favoritos editando seus dados. <i class="fas fa-arrow-down"></i></p>
+                
                 
             </div> 
 
@@ -107,22 +98,26 @@
                 <div class="col bg-danger rounded text-light text-center my-2 mr-2">
                     <div class="row">
                         <div class="col-8">
-                            <H1 class="display-5 mb-1"><b>{$represados}</b> </H1>
+                            {loop="$represados.represadosAtual"}
+                            <H1 class="display-5 mb-1"><b>{$value.indicador}</b> </H1>
+                            {/loop}
                         </div>
                         <div class="col-4 mx-0 mt-2">
-                                <h3><a title="{$dtRepresadosAnt}: {$represadosAnt}"><i class="{$iconeRepresados}"></i></a></h3>
+                            {loop="$represados.represadosAnt"}
+                            <h3><a title="{function="converteData($value.data)"}: {$value.indicador}"><i class="{$represados.iconerepresados}"></i></a></h3>
+                            {/loop}
                         </div>                    
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p class="my-1" style="font-size: 12px;"><b>REPRESADOS</b></p>
+                            <p class="my-1" style="font-size: 12px;"><b><a title="Detalhar Indicador" href="represados" class="text-light">REPRESADOS</a></b></p>
                         </div>  
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {$dtRepresados} </p>
+                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {loop="$represados.represadosAtual"}{function="converteData($value.data)"}{/loop} </p>
                         </div>  
                     </div>
                 </div>
@@ -130,22 +125,26 @@
                 <div class="col bg-success rounded text-light text-center my-2 mr-2">
                     <div class="row">
                         <div class="col-8">
-                            <H1 class="display-5 mb-1"><b>{$tarefasConcluidas}</b> </H1>
+                            {loop="$tarefas.tarefasAtual"}
+                            <H1 class="display-5 mb-1"><b>{$value.concluidas}</b> </H1>
+                            {/loop}
                         </div>
                         <div class="col-4 mx-0 mt-2">
-                                <h3><a title="Resultado anterior {$tarefasConcluidasAnt}"><i class="{$iconeTarefasConcluidas}"></i></a></h3>
+                            {loop="$tarefas.tarefasAnt"}
+                            <h3><a title="{function="converteComp($value.competencia)"}: {$value.concluidas}"><i class="{$tarefas.iconetarefasconcluidas}"></i></a></h3>
+                            {/loop}
                         </div>                    
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p class="my-1" style="font-size: 12px;"><b>TAREFAS CONCLUÍDAS</b></p>
+                            <p class="my-1" style="font-size: 12px;"><b><a title="Detalhar Indicador" href="tarefas" class="text-light">TAREFAS CONCLUÍDAS</a></b></p>
                         </div>  
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {$mesImaGdass} </p>
+                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {loop="$tarefas.tarefasAtual"}{function="converteComp($value.competencia)"}{/loop}</p>
                         </div>  
                     </div>
                 </div>
@@ -153,22 +152,26 @@
                 <div class="col bg-primary rounded text-light text-center my-2 mr-2">
                     <div class="row">
                         <div class="col-8">
-                            <H1 class="display-5 mb-1"><b>{$tarefasPendentes}</b> </H1>
+                            {loop="$tarefas.tarefasAtual"}
+                            <H1 class="display-5 mb-1"><b>{$value.pendentes}</b> </H1>
+                            {/loop}
                         </div>
                         <div class="col-4 mx-0 mt-2">
-                                <h3><a title="Resultado anterior {$tarefasPendentesAnt}"><i class="{$iconeTarefasPendentes}"></i></a></h3>
+                            {loop="$tarefas.tarefasAnt"}
+                            <h3><a title="{function="converteComp($value.competencia)"}: {$value.pendentes}"><i class="{$tarefas.iconetarefaspendentes}"></i></a></h3>
+                            {/loop}
                         </div>                    
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p class="my-1" style="font-size: 12px;"><b>TAREFAS PENDENTES</b></p>
+                            <p class="my-1" style="font-size: 12px;"><a title="Detalhar Indicador" href="tarefas" class="text-light"><b>TAREFAS PENDENTES</b></a></p>
                         </div>  
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {$mesImaGdass} </p>
+                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {loop="$tarefas.tarefasAtual"}{function="converteComp($value.competencia)"}{/loop}</p>
                         </div>  
                     </div>
                 </div>
@@ -176,22 +179,26 @@
                 <div class="col rounded text-light text-center my-2 mr-2" style="background: orange">
                     <div class="row">
                         <div class="col-8">
-                            <H1 class="display-5 mb-1"><b>{$imaGdass}</b></H1>
+                            {loop="$imaGdass.imaGdassAtual"}
+                            <H1 class="display-5 mb-1"><b>{$value.indicador}</b></H1>
+                            {/loop}
                         </div>
                         <div class="col-4 mx-0 mt-2">
-                                <h3><a title="{$mesImaGdassAnt}: {$imaGdassAnt}"><i class="{$iconeImaGdass}"></i></a></h3>
+                            {loop="$imaGdass.imaGdassAnt"}
+                            <h3><a title="{function="converteComp($value.competencia)"}: {$value.indicador}"><i class="{$imaGdass.iconeImaGdass}"></i></a></h3>
+                            {/loop}
                         </div>                    
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p class="my-1" style="font-size: 12px;"><b>IMA-GDASS</b></p>
+                            <p class="my-1" style="font-size: 12px;"><a title="Detalhar Indicador" href="imaGdass" class="text-light"><b>IMA-GDASS</b></a></p>
                         </div>  
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {$mesImaGdass} </p>
+                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {loop="$imaGdass.imaGdassAtual"}{function="converteComp($value.competencia)"}{/loop} </p>
                         </div>  
                     </div>
                 </div>
@@ -199,22 +206,26 @@
                 <div class="col rounded text-light text-center my-2 mr-2" style="background: rgb(88, 88, 88">
                     <div class="row">
                         <div class="col-8">
-                            <H1 class="display-5 mb-1"><b>{$iib}</b> </H1>
+                            {loop="$iib.iibAtual"}
+                            <H1 class="display-5 mb-1"><b>{$value.indicador}</b> </H1>
+                            {/loop}
                         </div>
                         <div class="col-4 mx-0 mt-2">
-                                <h3><a title="Resultado anterior {$iibAnt}"><i class="{$iconeiib}"></i></a></h3>
+                            {loop="$iib.iibAnt"}
+                            <h3><a title="{function="converteComp($value.competencia)"}: {$value.indicador}"><i class="{$iib.iconeiib}"></i></a></h3>
+                            {/loop}
                         </div>                    
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p class="my-1" style="font-size: 12px;"><b>INDEFERIMENTO</b></p>
+                            <p class="my-1" style="font-size: 12px;"><a title="Detalhar Indicador" href="iib" class="text-light"><b>INDEFERIMENTO</b></a></p>
                         </div>  
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <hr class="my-1">
-                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {$mesImaGdass} </p>
+                            <p class="my-1" style="font-size: 12px;"><i class="far fa-calendar-alt"></i> {loop="$iib.iibAtual"}{function="converteComp($value.competencia)"}{/loop} </p>
                         </div>  
                     </div>
                 </div>
@@ -225,40 +236,87 @@
             <div class="row mt-1">
                 <div class="col-7 p-0">
                   
-                    <div id="carouselGraph" class="carousel slide align-itens-left" data-ride="carousel">
+                    <div id="carouselGraph" class="carousel slide align-itens-left" data-ride="carousel" style="width: 100%;">
                         
                         <div class="carousel-inner">
                             
                             <div class="carousel-item active">                                
                                 <!-- BAR CHART REPRESADOS -->
                                 <div class="col">
-                                    <div class="card bar-chart-represados border-secondary">
-                                      <div class="card-header d-flex align-items-center border-secondary">
-                                        <h4>Represamento</h4><small class="text-muted">&nbsp;&nbsp;Última atualização em 10/12/2018</small>
-                                      </div>
+                                    <div class="card bar-chart-represados">                        
                                       <div class="card-body ">
-                                        <canvas id="barChartExample" height="175"></canvas>
+                                        
+                                        <!-- BAR CHART REPRESADOS -->                                            
+                                        <canvas id="myChartRep" height="166"></canvas>
+                                        <script>
+                                        var ctx = document.getElementById("myChartRep");
+                                        var chartGraph = new Chart (ctx, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: [{loop="$represados.represados12"}"{function="reduzData(converteData($value.data))"}",{/loop}],
+                                                datasets:[{
+                                                    label: "REPRESADOS",
+                                                    data: [{loop="$represados.represados12"}{$value.indicador},{/loop}],           
+                                                    backgroundColor: [
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)'
+                                                    ],
+                                                    borderColor: [
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)'
+                                                    ],
+                                                    borderWidth: 1,
+                                                    }                                                    
+                                                ]
+                                            },
+                                            "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
+                                            
+                                        });
+                                        </script>
+
                                       </div>
                                     </div>
                                   </div>
                             </div>
-                            
-                            <div class="carousel-item">
-                                <div class="col">
-                                    <div class="card border-secondary my-0">
-                                        
-                                        <div class="card-body">                                
-                                            <!-- BAR CHART IMA-GDASS -->                                            
-                                            <canvas id="myChart" height="166"></canvas>
+
+                            <div class="carousel-item">                                
+                                    <!-- BAR CHART TAREFAS -->
+                                    <div class="col">
+                                        <div class="card bar-chart-tarefas">
+                                          
+                                          <div class="card-body">
+                                           
+                                            <!-- BAR CHART TAREFAS CONCLUÍDAS -->                                            
+                                            <canvas id="myChartTarefasConcluidas" height="166"></canvas>
                                             <script>
-                                            var ctx = document.getElementById("myChart");
+                                            var ctx = document.getElementById("myChartTarefasConcluidas");
                                             var chartGraph = new Chart (ctx, {
                                                 type: 'bar',
                                                 data: {
-                                                    labels: [{loop="$ima"}"{$value.mes}",{/loop}],
+                                                    labels: [{loop="$tarefas.tarefas12"}"{$value.mes}",{/loop}],
                                                     datasets:[{
-                                                        label: "IMA-GDASS",
-                                                        data: [{loop="$ima"}{$value.indicador},{/loop}],           
+                                                        label: "TAREFAS CONCLUÍDAS",
+                                                        data: [{loop="$tarefas.tarefas12"}{$value.concluidas},{/loop}],           
                                                         backgroundColor: [
                                                             'rgba(51, 179, 90, 0.6)',
                                                             'rgba(51, 179, 90, 0.6)',
@@ -288,31 +346,200 @@
                                                             'rgba(51, 179, 90, 1)'
                                                         ],
                                                         borderWidth: 1,
+                                                        }   
+                                                        
+                                                    ]
+                                                },
+                                                "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
+                                                
+                                            });
+                                            </script>
+    
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+
+                                <div class="carousel-item">                                
+                                <!-- BAR CHART TAREFAS PENDENTES -->
+                                <div class="col">
+                                    <div class="card bar-chart-tarefas">
+                                        
+                                        <div class="card-body">
+                                        
+                                        <!-- BAR CHART TAREFAS PENDENTES -->                                            
+                                        <canvas id="myChartTarefasPendentes" height="166"></canvas>
+                                        <script>
+                                        var ctx = document.getElementById("myChartTarefasPendentes");
+                                        var chartGraph = new Chart (ctx, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: [{loop="$tarefas.tarefas12"}"{$value.mes}",{/loop}],
+                                                datasets:[{
+                                                    label: "TAREFAS PENDENTES",
+                                                    data: [{loop="$tarefas.tarefas12"}{$value.pendentes},{/loop}],           
+                                                    backgroundColor: [
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)'
+                                                    ],
+                                                    borderColor: [
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)'
+                                                    ],
+                                                    borderWidth: 1,
+                                                    }
+                                                    
+                                                ]
+                                            },
+                                            "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
+                                            
+                                        });
+                                        </script>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="carousel-item">
+                                <div class="col">
+                                    <div class="card my-0">
+                                        
+                                        <div class="card-body">                                
+                                            <!-- BAR CHART IMA-GDASS -->                                            
+                                            <canvas id="myChart" height="166"></canvas>
+                                            <script>
+                                            var ctx = document.getElementById("myChart");
+                                            var chartGraph = new Chart (ctx, {
+                                                type: 'bar',
+                                                data: {
+                                                    labels: [{loop="$imaGdass.imaGdass12"}"{$value.mes}",{/loop}],
+                                                    datasets:[{
+                                                        label: "IMA-GDASS",
+                                                        data: [{loop="$imaGdass.imaGdass12"}{$value.indicador},{/loop}],           
+                                                        backgroundColor: [
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)'
+                                                        ],
+                                                        borderColor: [
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)'
+                                                        ],
+                                                        borderWidth: 1,
                                                         }
                                                         
                                                     ]
-                                                }
-                                                
+                                                },
+                                                "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}                                                
                                             });
                                             </script>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="carousel-item">                                
-                                <!-- BAR CHART TAREFAS -->
-                                <div class="col">
-                                    <div class="card bar-chart-tarefas border-secondary">
-                                      <div class="card-header d-flex align-items-center border-secondary">
-                                        <h4>TAREFAS</h4><small class="text-muted">&nbsp;&nbsp;Última atualização em 10/12/2018</small>
-                                      </div>
-                                      <div class="card-body">
-                                        <canvas id="barChartTarefas" height="150"></canvas>
-                                      </div>
+                                    <!-- BAR CHART INDEFERIMENTO -->
+                                    <div class="col">
+                                        <div class="card bar-chart-tarefas">
+                                            
+                                            <div class="card-body">
+                                            
+                                            <!-- BAR CHART TAREFAS INDEFERIMENTO -->                                            
+                                            <canvas id="myChartIndeferidos" height="166"></canvas>
+                                            <script>
+                                            var ctx = document.getElementById("myChartIndeferidos");
+                                            var chartGraph = new Chart (ctx, {
+                                                type: 'bar',
+                                                data: {
+                                                    labels: [{loop="$iib.iib12"}"{$value.mes}",{/loop}],
+                                                    datasets:[{
+                                                        label: "ÍNDICE DE INDEFERIMENTO",
+                                                        data: [{loop="$iib.iib12"}{$value.indicador},{/loop}],           
+                                                        backgroundColor: [
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)'
+                                                        ],
+                                                        borderColor: [
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)'
+                                                        ],
+                                                        borderWidth: 1,
+                                                        }
+                                                        
+                                                    ]
+                                                },
+                                                "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
+                                                
+                                            });
+                                            </script>
+    
+                                            </div>
+                                        </div>
                                     </div>
-                                  </div>
-                            </div>
+                                </div>
+                            
+                            
                             <a class="carousel-control-prev text-secondary" href="#carouselGraph" role="button" data-slide="prev" style="background: none;">
                             <span class="carousel-control-prev-icon"><h1><i class="fas fa-angle-left"></i></h1></span>
                             <span class="sr-only">Anterior</span>
@@ -326,8 +553,15 @@
                     </div>
 
                 </div>
-                <div class="col">
-                   <div class="border rounded border-secondary mx-3 my-2"style="height: 280px;"></div>
+                <div class="col">                   
+                    <!-- Calendário -->
+                    <div class="container">
+                        <div class="row"> 
+                            <div class="col-12"> 
+                                <div id="my-calendar"></div>                    
+                            </div><!--(./col-lg-12 col-md-12 col-sm-12 col-xs-12"BELOW ROW:)-->
+                        </div><!--(./row)-->
+                    </div><!--(./COntainer")-->
                 </div>
             </div>
             

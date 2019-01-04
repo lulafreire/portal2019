@@ -42,6 +42,71 @@ class User extends Model {
 		}
 	}
 
+	public function trocaSenha($newPassword, $iduser)
+	{	
+		$password = password_hash($newPassword, PASSWORD_DEFAULT);
+		
+		$sql = new Sql();
+		$sql->query("UPDATE tb_users SET password = :password WHERE iduser = :iduser", array(
+			":password"=>$password,
+			":iduser"=>$iduser
+		));
+
+		if(!$sql)
+		{
+			return $msg = "Não foi possível alterar a senha, tente novamente";
+		}
+		else
+		{
+			return $msg = "Senha alterada com sucesso!";
+		}
+	}
+
+	public static function updateUser($iduser, $dados)
+	{
+		$sql = new Sql();
+		$sql->query("UPDATE tb_users SET 
+			nome = :nome,
+			matricula = :matricula,
+			lotacao = :lotacao,
+			cargo = :cargo,
+			cpf = :cpf,
+			email = :email,
+			foto = :foto,
+			telefone = :telefone,
+			dt_nascimento = :dt_nascimento,
+			dt_ingresso = :dt_ingresso,
+			endereco = :endereco,
+			publicTelefone = :publicTelefone,
+			publicDtNascimento = :publicDtNascimento WHERE iduser = :iduser", array(
+				":iduser"=>$iduser,
+				":nome" => strtoupper($dados['nome']),
+				":matricula" => $dados['matricula'],
+				":lotacao" => $dados['lotacao'],
+				":cargo" => $dados['cargo'],
+				":cpf" => $dados['cpf'],
+				":email" => $dados['email'],
+				":foto" => $dados['foto'],
+				":telefone" => $dados['telefone'],
+				":dt_nascimento" => $dados['dt_nascimento'],
+				":dt_ingresso" => $dados['dt_ingresso'],
+				":endereco" => $dados['endereco'],
+				":publicTelefone" => $dados['publicTelefone'],
+				":publicDtNascimento" => $dados['publicDtNascimento']
+			));
+		// Altera os dados na SESSION
+		$_SESSION[User::SESSION] = NULL;
+		$results = $sql->select("SELECT * FROM tb_users WHERE iduser = :iduser", array(
+			":iduser"=>$iduser
+		)); 
+		$data = $results[0];
+		$user = new User();
+		$data['nome'] = utf8_encode($data['nome']);
+		$user->setData($data);
+		$_SESSION[User::SESSION] = $user->getValues();
+				
+	}
+
 	public static function login($matricula, $password)
 	{
 		$sql = new Sql();
@@ -66,6 +131,16 @@ class User extends Model {
 		}
 	}
 
+	public static function verificaStatus($iduser)
+	{
+		$sql = new Sql();
+		$results = $sql->select("SELECT status FROM tb_users WHERE iduser = :iduser", array(
+			":iduser"=>$iduser
+		));
+
+		return $results[0]['status'];
+	}
+
 	public static function verificaUnidade($lotacao)
 	{
 		$sql = new Sql();
@@ -86,6 +161,23 @@ class User extends Model {
 		return $nomeUnidade = $results[0]['nome'];
 
 	}
+
+	public static function getUsers($lotacao, $page = 1, $itensPerPage = 1)
+    {
+        $start = ($page - 1) * $itensPerPage;
+        $sql = new Sql();
+        $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * FROM tb_users WHERE lotacao = :lotacao ORDER BY nome ASC LIMIT $start, $itensPerPage", array(
+            ":lotacao"=>$lotacao
+        ));
+        $total = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
+
+        return [
+            "data"=>$results,
+            "total"=>(int)$total[0]['nrtotal'],
+            "pages"=>ceil($total[0]['nrtotal'] / $itensPerPage),
+            "actual"=>$page
+		];
+    }
 
 	public static function verificaUsuario($dados)
 	{
@@ -110,16 +202,17 @@ class User extends Model {
 			$telefone = $dados['telefone'];
 			$dt_nascimento = $dados['dt_nascimento'];
 			$nit = $dados['nit'];
+			$equipe = $dados['equipe'];
 			$endereco = strtoupper($dados['endereco']);
 			$senha = $dados['senha'];
-			$status = 1;
+			$status = 2;
 			$publicTelefone = $dados['publicTelefone'];
 			$publicDtNascimento = $dados['publicDtNascimento'];		
 
 			$cadastra = $sql->query("INSERT INTO tb_users 
-				(nome, matricula, cargo, lotacao, dt_ingresso, email, telefone, endereco, cpf, dt_nascimento, nit, password, status, foto, publicTelefone, publicDtNascimento) 
+				(nome, matricula, cargo, lotacao, dt_ingresso, email, telefone, endereco, cpf, dt_nascimento, nit, equipe, password, status, foto, publicTelefone, publicDtNascimento) 
 				VALUES 
-				(:nome, :matricula, :cargo, :lotacao, :dt_ingresso, :email, :telefone, :endereco, :cpf, :dt_nascimento, :nit, :senha, :status, :foto, :publicTelefone, :publicDtNascimento)", array(
+				(:nome, :matricula, :cargo, :lotacao, :dt_ingresso, :email, :telefone, :endereco, :cpf, :dt_nascimento, :nit, :equipe, :senha, :status, :foto, :publicTelefone, :publicDtNascimento)", array(
 				":nome"=>$nome,
 				":matricula"=>$matricula,
 				":cargo"=>$cargo,
@@ -131,6 +224,7 @@ class User extends Model {
 				":cpf"=>$cpf,
 				":dt_nascimento"=>$dt_nascimento,
 				":nit"=>$nit,
+				":equipe"=>$equipe,
 				":senha"=>$senha,
 				":status"=>$status,
 				":foto"=>$foto,
@@ -191,7 +285,7 @@ class User extends Model {
 		return $sql->select("SELECT * FROM tb_sistemas UNION ALL SELECT * FROM tb_formularios UNION ALL SELECT * FROM tb_links ORDER BY nome ASC");
 	}
 
-	public static function defineFavoritos($tb_origem, $idFav, $nFav, $nUrl, $nIcone, $nDesc)
+	public static function defineFavoritos($tb_origem, $idFav, $nFav, $nUrl, $nIcone, $nDesc, $nOrigem, $nID)
 	{
 		$sql = new Sql();
 		$results = $sql->select("SELECT * from $tb_origem WHERE id = :idFav", array(
@@ -204,9 +298,11 @@ class User extends Model {
 		$desc      = utf8_decode($results[0]['descricao']);
 		$url       = $results[0]['url'];
 		$icone     = $results[0]['icone'];
+		$origem    = strtolower($results[0]['origem']);
+		$idFav     = $results[0]['id'];
 		$matricula = $_SESSION[User::SESSION]['matricula'];
 
-		$update = mysqli_query($con, "UPDATE tb_favoritos set $nFav = '$nomeFav', $nDesc = '$desc', $nUrl = '$url', $nIcone = '$icone' WHERE matricula = '$matricula'");
+		$update = mysqli_query($con, "UPDATE tb_favoritos set $nFav = '$nomeFav', $nDesc = '$desc', $nUrl = '$url', $nIcone = '$icone', $nOrigem = '$origem', $nID = '$idFav' WHERE matricula = '$matricula'");
 
 	}
 
@@ -297,22 +393,14 @@ class User extends Model {
 		}
 			
 	}
-	public function setPassword($password)
-	{
-		$sql = new Sql();
-		$sql->query("UPDATE tb_users SET password = :password WHERE iduser = :iduser", array(
-			":password"=>password_hash($password, PASSWORD_DEFAULT),
-			":iduser"=>$_SESSION[User::SESSION]['iduser']
-		));
 
-		if(!$sql)
-		{
-			return $msg = "Não foi possível alterar a senha, tente novamente";
-		}
-		else
-		{
-			return $msg = "Senha alterada com sucesso!";
-		}
+	public static function sentPassword($email, $nome, $senha)
+	{
+		$mailer = new Mailer($email, $nome, "Cadastro no PortalAPS", "cadastro", $senha, array(
+			"name"=>$nome,
+			"senha"=>$senha
+		));
+		$mailer->send();
 	}
 	
 	// Mensagens de erro ou sucesso

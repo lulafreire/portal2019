@@ -29,7 +29,7 @@
                                         <td><small>{$value.nome}</small></td>
                                         <td><small>{$value.origem}</small></td>
                                         <td><small>{$value.caixa}</small></td>
-                                        <td><a class="fas fa-file-download text-secondary text-center" title="Download" href="download/{$value.url}"></a></td>
+                                        <td><a class="fas fa-file-download text-secondary text-center" title="Download" href="download/{$value.id}"></a></td>
                                         <td><a class="fas fa-file-alt text-secondary text-center" title="Detalhar" href="detalhar-arquivo/{$value.id}"></td>
                                         </tr>
                                     {/loop}                                                                
@@ -51,7 +51,7 @@
                         <p class="text-muted text-center">Nenhum sistema localizado com o termo <strong>{$q}</strong></p>                    
                     {else}    
                     {loop="$qSistemas"}
-                        <small><i class="fas fa-desktop text-primary"></i>&nbsp;&nbsp;<a class="text-primary link" title="{$value.descricao}" href="{$value.url}">{$value.nome}</a></small>
+                        <small><i class="fas fa-desktop text-primary"></i>&nbsp;&nbsp;<a class="text-primary link" title="{$value.descricao}" href="sistemas/{$value.id}">{$value.nome}</a></small>
                         <hr class="my-1 text-secondary">
                     {/loop}
                     {/if}            
@@ -69,7 +69,7 @@
                             <p class="text-muted text-center">Nenhum link localizado com o termo <strong>{$q}</strong></p>                    
                         {else}    
                         {loop="$qLinks"}
-                            <small><i class="fas fa-mouse-pointer text-success"></i>&nbsp;&nbsp;<a class="text-success link" title="{$value.descricao}" href="{$value.url}">{$value.nome}</a></small>
+                            <small><i class="fas fa-mouse-pointer text-success"></i>&nbsp;&nbsp;<a class="text-success link" title="{$value.descricao}" href="links/{$value.id}">{$value.nome}</a></small>
                             <hr class="my-1 text-secondary">
                         {/loop} 
                         {/if}
@@ -86,7 +86,7 @@
                             <p class="text-muted text-center">Nenhum formulário localizado com o termo <strong>{$q}</strong></p>                    
                         {else}  
                         {loop="$qFormularios"}
-                            <small><i class="far fa-file-alt text-info"></i>&nbsp;&nbsp;<a class="text-info link" title="{$value.descricao}" href="{$value.url}">{$value.nome}</a></small>
+                            <small><i class="far fa-file-alt text-info"></i>&nbsp;&nbsp;<a class="text-info link" title="{$value.descricao}" href="formularios/{$value.id}">{$value.nome}</a></small>
                             <hr class="my-1 text-secondary">
                         {/loop}
                         {/if}

@@ -10,6 +10,103 @@ function diaDaSemana()
 
 }
 
+function converteData($data)
+{
+	if(strstr($data, "/"))
+	{
+		$d = explode("/", $data);
+		$r = "$d[2]-$d[1]-$d[0]";
+	}
+	else
+	{
+		$d = explode("-", $data);
+		$r = "$d[2]/$d[1]/$d[0]";
+
+	}
+
+	return $r;
+}
+
+function reduzData($data)
+{
+	$d = explode("/", $data);
+	$data = $d[0]."/".$d[1];
+	return $data;
+}
+
+function converteComp($comp)
+{
+	$ano = substr($comp, 0, 4);
+	$mes = substr($comp, 4, 2);
+	$c = $mes."/".$ano;
+
+	return $c;
+}
+
+function reverteComp($comp)
+{
+	$c = explode("/", $comp);
+	$competencia = $c[1].$c[0];
+	return $competencia;
+}
+
+function mesComp($competencia)
+{
+	$m = explode("/", $competencia);
+	$mes = $m[0];
+	$ano = substr($m[1], 2, 2);
+
+	switch($mes)
+	{
+		case 1: $mes = "JAN/".$ano;
+		break;
+		case 2: $mes = "FEV/".$ano;
+		break;
+		case 3: $mes = "MAR/".$ano;
+		break;
+		case 4: $mes = "ABR/".$ano;
+		break;
+		case 5: $mes = "MAI/".$ano;
+		break;
+		case 6: $mes = "JUN/".$ano;
+		break;
+		case 7: $mes = "JUL/".$ano;
+		break;
+		case 8: $mes = "AGO/".$ano;
+		break;
+		case 9: $mes = "SET/".$ano;
+		break;
+		case 10: $mes = "OUT/".$ano;
+		break;
+		case 11: $mes = "NOV/".$ano;
+		break;
+		case 12: $mes = "DEZ/".$ano;
+		break;
+	}
+	
+	return $mes;
+}
+
+function siglaEquipe($equipe)
+{
+	return $sigla = substr($equipe, 0, 1);
+}
+
+function nomeEquipe($equipe)
+{
+	$e = explode ("-", $equipe);
+	return $nome = $e[1];
+}
+
+function limpaPesquisa($q)
+{
+	$q = str_replace(".", "", $q);
+	$q = str_replace(",", "", $q);
+	$q = str_replace("-", "", $q);
+	$q = str_replace("/", "", $q);
+	return $q;
+}
+
 function formataNumero($numero, $origem)
 {
 	$qNum = strlen($numero);
@@ -60,25 +157,6 @@ function formataNumero($numero, $origem)
 		default: // Outros formatos indefinidos
 			return $numero;
 		break;
-	}
-}
-
-function iconQuery()
-{
-    $q = Query::listAll();
-	
-	$qtResults = count($q);
-
-    for ($i=0; $i < $qtResults; $i++) 
-    {		
-		$origem = $q[$i]['origem'];
-		switch($origem)
-		{
-			case "Sistemas": $icon = "fas fa-desktop"; break;
-			case "Formularios": $icon = "far fa-file-alt"; break;
-			case "Arquivos": $icon = "far fa-folder-open"; break;
-			default: $icon = "fas fa-desktop"; break;
-		}
 	}
 }
 

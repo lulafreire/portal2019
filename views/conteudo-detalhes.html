@@ -1,0 +1,51 @@
+<div class="container-fluid">
+
+    <div class="row mt-2">
+        <div class="col-8 mx-0">            
+            <div class="card border-warning mb-3" style="height: 410px;">
+                <div class="card-header bg-warning text-light"> <i class="fas fa-desktop"></i> 
+                    Conteúdo
+                </div>
+                <div class="card-body text-dark">
+                    <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>                        
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Origem</th>
+                        <th scope="col"><i class="far fa-file-alt"></i></th>
+                        <th scope="col"><i class="far fa-trash-alt"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>                                    
+                        {loop="$selFav"}
+                            <tr>
+                            <td><i class="{$value.icone}"></i></td>
+                            <td><small>{$value.nome}</small></td>
+                            <td><small>{$value.descricao}</small></td>
+                            <td><small>{$value.origem}</small></td>
+                            <td><a class="far fa-file-alt text-secondary text-center" title="Detalhar/Editar" href="conteudo/{$value.origem}/{$value.id}"></a></td>
+                            <td><a class="far fa-trash-alt text-secondary text-center" title="Excluir" href="detalhar-arquivo/{$value.id}"></td>
+                            </tr>
+                        {/loop}                                                                
+                    </tbody>
+                    </table>
+                    
+                </div>
+            </div>            
+        </div>
+       
+        <div class="col-4 mx-0">            
+            <div class="card border-info mb-3" style="height: 410px;">
+                <div class="card-header bg-info text-light"> <i class="fas fa-file-alt"></i> 
+                    Detalhes
+                </div>
+                <div class="card-body text-dark">
+                    Form Detalhes
+                </div>
+            </div>            
+        </div>
+        
+    </div>
+</div>

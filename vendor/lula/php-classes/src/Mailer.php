@@ -29,7 +29,9 @@ class Mailer {
 			<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Coat_of_arms_of_the_United_States_of_Brazil.svg/766px-Coat_of_arms_of_the_United_States_of_Brazil.svg.png' height='100'><br>
 			<strong><h2>PortalAPS</h2></strong><br>
 			Olá, ".$toName. ",<br>
-			utilize a senha provisória <strong>".$senhaProvisoria. "</strong> para acessar o PortalAPS.
+			Você ou seu gestor realizou seu cadastro no PortalAPS.<br>
+			Utilize a senha provisória <strong>".$senhaProvisoria. "</strong> para acessar o Portal no endereço abaixo.
+			<p><strong>http://127.0.0.1/portalaps/
 			<p>Após acessar a página, altere sua senha pessoal.<p>
 			</center>
 		</body>";

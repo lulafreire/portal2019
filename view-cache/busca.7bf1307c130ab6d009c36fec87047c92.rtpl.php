@@ -29,7 +29,7 @@
                                         <td><small><?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?></small></td>
                                         <td><small><?php echo htmlspecialchars( $value1["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?></small></td>
                                         <td><small><?php echo htmlspecialchars( $value1["caixa"], ENT_COMPAT, 'UTF-8', FALSE ); ?></small></td>
-                                        <td><a class="fas fa-file-download text-secondary text-center" title="Download" href="download/<?php echo htmlspecialchars( $value1["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></a></td>
+                                        <td><a class="fas fa-file-download text-secondary text-center" title="Download" href="download/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></a></td>
                                         <td><a class="fas fa-file-alt text-secondary text-center" title="Detalhar" href="detalhar-arquivo/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></td>
                                         </tr>
                                     <?php } ?>                                                                
@@ -51,7 +51,7 @@
                         <p class="text-muted text-center">Nenhum sistema localizado com o termo <strong><?php echo htmlspecialchars( $q, ENT_COMPAT, 'UTF-8', FALSE ); ?></strong></p>                    
                     <?php }else{ ?>    
                     <?php $counter1=-1;  if( isset($qSistemas) && ( is_array($qSistemas) || $qSistemas instanceof Traversable ) && sizeof($qSistemas) ) foreach( $qSistemas as $key1 => $value1 ){ $counter1++; ?>
-                        <small><i class="fas fa-desktop text-primary"></i>&nbsp;&nbsp;<a class="text-primary link" title="<?php echo htmlspecialchars( $value1["descricao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" href="<?php echo htmlspecialchars( $value1["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></small>
+                        <small><i class="fas fa-desktop text-primary"></i>&nbsp;&nbsp;<a class="text-primary link" title="<?php echo htmlspecialchars( $value1["descricao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" href="sistemas/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></small>
                         <hr class="my-1 text-secondary">
                     <?php } ?>
                     <?php } ?>            
@@ -69,7 +69,7 @@
                             <p class="text-muted text-center">Nenhum link localizado com o termo <strong><?php echo htmlspecialchars( $q, ENT_COMPAT, 'UTF-8', FALSE ); ?></strong></p>                    
                         <?php }else{ ?>    
                         <?php $counter1=-1;  if( isset($qLinks) && ( is_array($qLinks) || $qLinks instanceof Traversable ) && sizeof($qLinks) ) foreach( $qLinks as $key1 => $value1 ){ $counter1++; ?>
-                            <small><i class="fas fa-mouse-pointer text-success"></i>&nbsp;&nbsp;<a class="text-success link" title="<?php echo htmlspecialchars( $value1["descricao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" href="<?php echo htmlspecialchars( $value1["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></small>
+                            <small><i class="fas fa-mouse-pointer text-success"></i>&nbsp;&nbsp;<a class="text-success link" title="<?php echo htmlspecialchars( $value1["descricao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" href="links/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></small>
                             <hr class="my-1 text-secondary">
                         <?php } ?> 
                         <?php } ?>
@@ -86,7 +86,7 @@
                             <p class="text-muted text-center">Nenhum formulário localizado com o termo <strong><?php echo htmlspecialchars( $q, ENT_COMPAT, 'UTF-8', FALSE ); ?></strong></p>                    
                         <?php }else{ ?>  
                         <?php $counter1=-1;  if( isset($qFormularios) && ( is_array($qFormularios) || $qFormularios instanceof Traversable ) && sizeof($qFormularios) ) foreach( $qFormularios as $key1 => $value1 ){ $counter1++; ?>
-                            <small><i class="far fa-file-alt text-info"></i>&nbsp;&nbsp;<a class="text-info link" title="<?php echo htmlspecialchars( $value1["descricao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" href="<?php echo htmlspecialchars( $value1["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></small>
+                            <small><i class="far fa-file-alt text-info"></i>&nbsp;&nbsp;<a class="text-info link" title="<?php echo htmlspecialchars( $value1["descricao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" href="formularios/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></small>
                             <hr class="my-1 text-secondary">
                         <?php } ?>
                         <?php } ?>
