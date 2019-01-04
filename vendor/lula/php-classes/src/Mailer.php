@@ -4,7 +4,7 @@ use Rain\Tpl;
 class Mailer {
 	
 	const USERNAME = "luizalbertofreire@gmail.com";
-	const PASSWORD = "BetinhO";
+	const PASSWORD = "**********";
 	const NAME_FROM = "PortalAPS";
 	private $mail;
 	public function __construct($toAddress, $toName, $subject, $tplName, $senhaProvisoria, $data = array())
