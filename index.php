@@ -272,7 +272,10 @@ $app->get('/dashboard', function() {
 	$iib        = Indicators::iib();
 	$tarefas    = Indicators::tarefas();
 	$represados = Indicators::represados();
-	
+
+	// Conteudo mais acessado
+	$maisAcessados = Query::maisAcessados();
+
 	$page = new Page();
 	
 	$page->setTpl("index", array(
@@ -284,7 +287,8 @@ $app->get('/dashboard', function() {
 		"nomeUnidade"=>$nomeUnidade,
 		"ip"=>$ip,
 		"fav"=>$fav,
-		"selFav"=>$selFav
+		"selFav"=>$selFav,
+		"maisAcessados"=>$maisAcessados
 	));
 
 });
@@ -1007,7 +1011,7 @@ $app->post('/:indicador', function($indicador){
 
 		case 'iib':
 
-			Indicators::atualizaiib($_POST['competencia'], $_POST['indice'], $user['lotacao']);
+			Indicators::atualizaiib($_POST['competencia'], decimal($_POST['indice']), $user['lotacao']);
 			header('Location: iib');
 			exit;
 

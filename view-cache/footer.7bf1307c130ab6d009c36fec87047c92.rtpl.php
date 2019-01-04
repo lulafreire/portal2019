@@ -450,7 +450,18 @@ $(document).ready(function () {
                 <div class="container">
                     <div class="row">
                         <div class="col-4"><img class="img-fluid" src="img/users/<?php echo htmlspecialchars( $value1["foto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></div>
-                        <div class="col-8"><h5><?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?>&nbsp;&nbsp;<small><font class="text-secondary"><i><?php echo htmlspecialchars( $value1["matricula"], ENT_COMPAT, 'UTF-8', FALSE ); ?></i></font></small></h5></div>
+                        <div class="col-8">
+                            <h5><?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?>&nbsp;&nbsp;<small><font class="text-secondary"><i><?php echo htmlspecialchars( $value1["matricula"], ENT_COMPAT, 'UTF-8', FALSE ); ?></i></font></small></h5>
+                            <P class="card-text mb-1"><strong>Cargo: </strong><?php echo htmlspecialchars( $value1["cargo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></P>
+                            <P class="card-text mb-1"><strong>E-mail: </strong><?php echo htmlspecialchars( $value1["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?></P>
+                            <p class="card-text mb-1"><strong>Telefone: </strong><?php if( $value1["publicTelefone"]==1 ){ ?><?php if( $user["status"]!=1 ){ ?><span class="text-muted">Não disponível</span><?php }else{ ?><?php echo htmlspecialchars( $value1["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?><?php }else{ ?><?php echo htmlspecialchars( $value1["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></p>
+                            <P class="card-text mb-1"><strong>Endereço: </strong><?php echo htmlspecialchars( $value1["endereco"], ENT_COMPAT, 'UTF-8', FALSE ); ?></P>
+                            <p class="card-text mb-1"><strong>Data de Nascimento: </strong><?php if( $value1["publicDtNascimento"]==1 ){ ?><?php if( $user["status"]!=1 ){ ?><span class="text-muted">Não disponível</span><?php }else{ ?><?php echo converteData($value1["dt_nascimento"]); ?><?php } ?><?php }else{ ?><?php echo converteData($value1["dt_nascimento"]); ?><?php } ?></p>
+                            <P class="card-text mb-1"><strong>Ingresso: </strong><?php echo converteData($value1["dt_ingresso"]); ?></P>
+                            <P class="card-text mb-1"><strong>CPF: </strong><?php echo htmlspecialchars( $value1["cpf"], ENT_COMPAT, 'UTF-8', FALSE ); ?></P>
+                            <P class="card-text mb-1"><strong>NIT: </strong><?php echo htmlspecialchars( $value1["nit"], ENT_COMPAT, 'UTF-8', FALSE ); ?></P>
+                            <P class="card-text mb-1"><strong>Equipe: </strong><?php echo nomeEquipe($value1["equipe"]); ?></P>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -87,6 +87,23 @@ function mesComp($competencia)
 	return $mes;
 }
 
+function hoje()
+{
+	return date('Y-m-d');
+}
+
+function decimal($num)
+{
+	$n = str_replace(',', '.', $num);
+	return $n;
+}
+
+function minusculas($text)
+{
+	$t = strtolower($text);
+	return $t;
+}
+
 function siglaEquipe($equipe)
 {
 	return $sigla = substr($equipe, 0, 1);

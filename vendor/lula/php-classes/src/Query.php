@@ -15,6 +15,16 @@ class Query{
             
     }
 
+    public static function maisAcessados() {
+    
+        // Pesquisa todos os usuários
+        $sql = new Sql();
+        $results = $sql->select("SELECT * FROM tb_sistemas UNION ALL SELECT * FROM tb_links UNION ALL SELECT * FROM tb_formularios ORDER BY hits DESC LIMIT 6");
+
+        return $results;
+            
+    }
+
     public static function listUnidades() {
     
         // Pesquisa todas as unidades

@@ -450,7 +450,18 @@ $(document).ready(function () {
                 <div class="container">
                     <div class="row">
                         <div class="col-4"><img class="img-fluid" src="img/users/{$value.foto}"></div>
-                        <div class="col-8"><h5>{$value.nome}&nbsp;&nbsp;<small><font class="text-secondary"><i>{$value.matricula}</i></font></small></h5></div>
+                        <div class="col-8">
+                            <h5>{$value.nome}&nbsp;&nbsp;<small><font class="text-secondary"><i>{$value.matricula}</i></font></small></h5>
+                            <P class="card-text mb-1"><strong>Cargo: </strong>{$value.cargo}</P>
+                            <P class="card-text mb-1"><strong>E-mail: </strong>{$value.email}</P>
+                            <p class="card-text mb-1"><strong>Telefone: </strong>{if="$value.publicTelefone==1"}{if="$user.status!=1"}<span class="text-muted">Não disponível</span>{else}{$value.telefone}{/if}{else}{$value.telefone}{/if}</p>
+                            <P class="card-text mb-1"><strong>Endereço: </strong>{$value.endereco}</P>
+                            <p class="card-text mb-1"><strong>Data de Nascimento: </strong>{if="$value.publicDtNascimento==1"}{if="$user.status!=1"}<span class="text-muted">Não disponível</span>{else}{function="converteData($value.dt_nascimento)"}{/if}{else}{function="converteData($value.dt_nascimento)"}{/if}</p>
+                            <P class="card-text mb-1"><strong>Ingresso: </strong>{function="converteData($value.dt_ingresso)"}</P>
+                            <P class="card-text mb-1"><strong>CPF: </strong>{$value.cpf}</P>
+                            <P class="card-text mb-1"><strong>NIT: </strong>{$value.nit}</P>
+                            <P class="card-text mb-1"><strong>Equipe: </strong>{function="nomeEquipe($value.equipe)"}</P>
+                        </div>
                     </div>
                 </div>
             </div>

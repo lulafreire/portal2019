@@ -232,8 +232,22 @@
                 
             </div>
         
-            <!-- Gráfico e Calendário -->    
+            <!-- Mais Acessados e Gráficos -->    
             <div class="row mt-1">
+                <div class="col p-0">                   
+                    <!-- Mais Acessados -->
+                    <div class="card border-primary mb-3">
+                        <div class="card-header bg-primary text-light"> 
+                            <i class="fas fa-plus"></i> Mais Acessados
+                        </div>
+                        <div class="card-body text-dark">                           
+                            <?php $counter1=-1;  if( isset($maisAcessados) && ( is_array($maisAcessados) || $maisAcessados instanceof Traversable ) && sizeof($maisAcessados) ) foreach( $maisAcessados as $key1 => $value1 ){ $counter1++; ?>
+                                <i class="<?php echo htmlspecialchars( $value1["icone"], ENT_COMPAT, 'UTF-8', FALSE ); ?> text-primary"></i>&nbsp;&nbsp;<a class="text-primary link" title="<?php echo htmlspecialchars( $value1["descricao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" href="<?php echo minusculas($value1["origem"]); ?>/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a>
+                                <hr class="my-1 text-secondary">
+                            <?php } ?>                            
+                        </div>
+                    </div>                    
+                </div>
                 <div class="col-7 p-0">
                   
                     <div id="carouselGraph" class="carousel slide align-itens-left" data-ride="carousel" style="width: 100%;">
@@ -552,16 +566,6 @@
                         </div>
                     </div>
 
-                </div>
-                <div class="col">                   
-                    <!-- Calendário -->
-                    <div class="container">
-                        <div class="row"> 
-                            <div class="col-12"> 
-                                <div id="my-calendar"></div>                    
-                            </div><!--(./col-lg-12 col-md-12 col-sm-12 col-xs-12"BELOW ROW:)-->
-                        </div><!--(./row)-->
-                    </div><!--(./COntainer")-->
                 </div>
             </div>
             
