@@ -107,6 +107,50 @@ class User extends Model {
 				
 	}
 
+	public static function updateUsers($iduser, $dados)
+	{
+		$sql = new Sql();
+		$sql->query("UPDATE tb_users SET 
+			nome = :nome,
+			matricula = :matricula,
+			lotacao = :lotacao,
+			cargo = :cargo,
+			cpf = :cpf,
+			email = :email,
+			foto = :foto,
+			equipe = :equipe,
+			telefone = :telefone,
+			dt_nascimento = :dt_nascimento,
+			dt_ingresso = :dt_ingresso,
+			endereco = :endereco,
+			publicTelefone = :publicTelefone,
+			publicDtNascimento = :publicDtNascimento WHERE iduser = :iduser", array(
+				":iduser"=>$iduser,
+				":nome" => strtoupper($dados['nome']),
+				":matricula" => $dados['matricula'],
+				":lotacao" => $dados['lotacao'],
+				":cargo" => $dados['cargo'],
+				":cpf" => $dados['cpf'],
+				":email" => $dados['email'],
+				":foto" => $dados['foto'],
+				":equipe"=>$dados['equipe'],
+				":telefone" => $dados['telefone'],
+				":dt_nascimento" => $dados['dt_nascimento'],
+				":dt_ingresso" => $dados['dt_ingresso'],
+				":endereco" => $dados['endereco'],
+				":publicTelefone" => $dados['publicTelefone'],
+				":publicDtNascimento" => $dados['publicDtNascimento']
+			));				
+	}
+
+	public function deleteUsers($iduser)
+	{
+		$sql = new Sql();
+		$sql->query("DELETE FROM tb_users WHERE iduser = :iduser", array(
+			":iduser"=>$iduser
+		));
+	}
+
 	public static function login($matricula, $password)
 	{
 		$sql = new Sql();
@@ -515,6 +559,7 @@ class User extends Model {
 			'total'=>(int)$resultTotal[0]["nrtotal"],
 			'pages'=>ceil($resultTotal[0]["nrtotal"] / $itemsPerPage)
 		];
-	} 
+	}
+
 }
  ?>

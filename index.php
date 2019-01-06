@@ -61,9 +61,23 @@ $app->post('/cadastro', function(){
 		$email = $_POST['email'];
 		$cargo = $_POST['cargo'];
 		$lotacao = $_POST['lotacao'];
-		$dt_ingresso = converteData($_POST['dt_ingresso']);
-		$telefone = $_POST['telefone'];
-		$dt_nascimento = converteData($_POST['dt_nascimento']);
+			if(!empty($_POST['dt_ingresso']))
+			{
+				$dt_ingresso = converteData($_POST['dt_ingresso']);
+			}
+			else
+			{
+				$dt_ingresso = "0000-00-00";
+			}
+			if(!empty($_POST['dt_nascimento']))
+			{
+				$dt_nascimento = converteData($_POST['dt_nascimento']);
+			}
+			else
+			{
+				$dt_nascimento = "0000-00-00";
+			}
+		$telefone = $_POST['telefone'];		
 		$nit = $_POST['nit'];
 		$endereco = $_POST['endereco'];		
 
@@ -216,7 +230,8 @@ $app->post('/cadastro', function(){
 				"fav"=>$fav,
 				"selFav"=>$selFav,
 				"users"=>$users,
-				"pages"=>$pages
+				"pages"=>$pages,
+				"registros"=>$users['total']
 			));
 		} 
 		else
@@ -346,7 +361,8 @@ $app->get('/equipe', function() {
 		"fav"=>$fav,
 		"selFav"=>$selFav,
 		"users"=>$users,
-		"pages"=>$pages
+		"pages"=>$pages,
+		"registros"=>$users['total']
 	));
 
 });
@@ -1025,6 +1041,67 @@ $app->post('/:indicador', function($indicador){
 
 		break;
 	}
+
+});
+
+$app->post('/usuarios/:iduser', function($iduser){
+
+	if(isset($_POST))
+	{
+		// Opção por dados públicos ou ocultos (telefone e data de nascimento)
+		if(isset($_POST['publicTelefone']))
+		{
+			$publicTelefone = $_POST['publicTelefone'];
+		}
+		else
+		{
+			$publicTelefone = 0;
+		}
+		if(isset($_POST['publicDtNascimento']))
+		{
+			$publicDtNascimento = $_POST['publicDtNascimento'];
+		}
+		else
+		{
+			$publicDtNascimento = 0;
+		}
+	
+		$dados = [
+			"matricula" => $_POST['matricula'],
+			"nome"  => $_POST['nome'],
+			"cpf" => $_POST['cpf'],
+			"email" => $_POST['email'],
+			"cargo" => $_POST['cargo'],
+			"lotacao" => $_POST['lotacao'],
+			"foto"=>$_POST['foto'],
+			"equipe"=>$_POST['equipe'],
+			"dt_ingresso" => converteData($_POST['dt_ingresso']),
+			"telefone" => $_POST['telefone'],
+			"dt_nascimento" => converteData($_POST['dt_nascimento']),
+			"nit" => $_POST['nit'],
+			"endereco" => $_POST['endereco'],
+			"equipe" => $_POST['equipe'],
+			"publicTelefone"=>$publicTelefone,
+			"publicDtNascimento"=>$publicDtNascimento
+		];
+
+		$page = $_POST['page'];
+			
+	}
+
+	User::updateUsers($_POST['iduser'], $dados);
+	
+	header("Location: ../equipe?page=$page");
+	exit;
+
+});
+
+$app->get('/users/:iduser/delete/:page', function($iduser, $page){
+	
+	user::deleteUsers($iduser);
+	
+	header("Location: ../../../equipe?page=$page");
+	exit;
 
 });
 

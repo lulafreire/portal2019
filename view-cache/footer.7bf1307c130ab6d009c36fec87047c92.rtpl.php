@@ -111,6 +111,7 @@ $(document).ready(function () {
                                             <option value="Técnico do Seguro Social" <?php if( $user["cargo"]=='Técnico do Seguro Social' ){ ?> selected <?php } ?>>Técnico do Seguro Social</option>
                                             <option value="Analista do Seguro Social" <?php if( $user["cargo"]=='Analista do Seguro Social' ){ ?> selected <?php } ?>>Analista do Seguro Social</option>
                                             <option value="Médico Perito" <?php if( $user["cargo"]=='Médico Perito' ){ ?> selected <?php } ?>>Médico Perito</option>
+                                            <option value="Estagiário"  <?php if( $user["cargo"]=='Estagiário' ){ ?> selected <?php } ?>>Estagiário</option>
                                         </select>
                                     </div>
                                 </div>            
@@ -468,6 +469,117 @@ $(document).ready(function () {
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
             </div>
+        </div>
+    </div>
+</div>
+<?php } ?>
+
+<?php $counter1=-1;  if( isset($users["data"]) && ( is_array($users["data"]) || $users["data"] instanceof Traversable ) && sizeof($users["data"]) ) foreach( $users["data"] as $key1 => $value1 ){ $counter1++; ?>
+<!-- Modal Editar Usuário -->
+<div class="modal" id="modalEditarUsuario-<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="far fa-user text-primary"></i> Detalhes do Usuário</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3"><img class="img-fluid" src="img/users/<?php echo htmlspecialchars( $value1["foto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></div>
+                        <div class="col-9">
+                            <form autocomplete="off" role="form" action="usuarios/<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="POST" enctype="multipart/form-data">                                            
+                            <div class="row">
+                                <div class="col">
+                                    <label class="mb-0" for="nome">Nome</label>
+                                    <input type="text" value="<?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="form-control mb-1" name="nome" id="nome" placeholder="Nome completo" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="mb-0" for="matricula">Matrícula</label>
+                                    <input type="text" value="<?php echo htmlspecialchars( $value1["matricula"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="form-control mb-1" name="matricula" id="matricula" placeholder="Matrícula" required>
+                                </div>
+                                <div class="col-6">
+                                    <label class="mb-0" for="cpf">CPF</label>
+                                    <input type="text" value="<?php echo htmlspecialchars( $value1["cpf"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="form-control mb-1" name="cpf" id="cpf" maxlength='14' onkeypress="formatar_mascara(this, '###.###.###-##')" placeholder="CPF">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="mb-0" for="email">E-mail</label>
+                                    <input type="text" value="<?php echo htmlspecialchars( $value1["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="form-control mb-1" name="email" id="email" placeholder="Seu e-mail">
+                                </div>
+                                <div class="col-6">
+                                    <label class="mb-0" for="cargo">Cargo</label>
+                                    <select class="form-control" name="cargo" id="cargo">
+                                        <option value="Técnico do Seguro Social" <?php if( $value1["cargo"]=='Técnico do Seguro Social' ){ ?> selected <?php } ?> >Técnico do Seguro Social</option>
+                                        <option value="Analista do Seguro Social" <?php if( $value1["cargo"]=='Analista do Seguro Social' ){ ?> selected <?php } ?> >Analista do Seguro Social</option>
+                                        <option value="Médico Perito"  <?php if( $value1["cargo"]=='Médico Perito' ){ ?> selected <?php } ?>>Médico Perito</option>
+                                        <option value="Estagiário"  <?php if( $value1["cargo"]=='Estagiário' ){ ?> selected <?php } ?>>Estagiário</option>
+                                    </select>
+                                </div>
+                            </div>            
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="mb-0" for="lotacao">Lotação</label>
+                                    <input type="text" readonly="readonly" value="<?php echo htmlspecialchars( $user["lotacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="form-control mb-1" name="lotacao" id="lotacao" placeholder="Código da Unidade" required>
+                                </div>
+                                <div class="col-6">
+                                    <label class="mb-0" for="dt_ingresso">Data de Ingresso</label>
+                                    <input type="text" value="<?php echo converteData($value1["dt_ingresso"]); ?>" class="form-control mb-1" name="dt_ingresso" id="dt_ingresso" maxlength='10' onkeypress="formatar_mascara(this, '##/##/####')" placeholder="Data de Ingresso">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="mb-0" for="telefone">Telefone</label>
+                                    <input type="text" value="<?php echo htmlspecialchars( $value1["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="form-control mb-0" name="telefone" id="telefone" maxlength='13' onkeypress="formatar_mascara(this, '##.#####-####')" placeholder="Telefone">
+                                    <small class="text-muted"><input type="checkbox" name="publicTelefone" id="publicTelefone" value="1" <?php if( $value1["publicTelefone"]==1 ){ ?>checked<?php } ?>> Deixar oculto para outros usuários*</small>
+                                </div>
+                                <div class="col-6">
+                                    <label class="mb-0" for="dt_nascimento">Data de Nascimento</label>
+                                    <input type="text" value="<?php echo converteData($value1["dt_nascimento"]); ?>" class="form-control mb-1" name="dt_nascimento" id="dt_nascimento" maxlength='10' onkeypress="formatar_mascara(this, '##/##/####')" placeholder="Data de Nascimento">
+                                    <small class="text-muted"><input type="checkbox" name="publicDtNascimento" id="publicDtNascimento" value="1" <?php if( $value1["publicDtNascimento"]==1 ){ ?>checked<?php } ?>> Deixar oculto para outros usuários*</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="mb-0" for="nit">NIT</label>
+                                    <input type="text" value="<?php echo htmlspecialchars( $value1["nit"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="form-control mb-1" name="nit" id="nit" placeholder="NIT/PIS/PASEP">
+                                </div>
+                                <div class="col-6">
+                                    <label class="mb-0" for="equipe">EQUIPE</label>
+                                    <select name="equipe" class="form-control">
+                                    <option value="A-Assistentes Sociais" <?php if( $value1["equipe"]=='A-Assistentes Sociais' ){ ?> selected <?php } ?>>Assistentes Sociais</option>
+                                    <option value="D-INSS Digital" <?php if( $value1["equipe"]=='D-INSS Digital' ){ ?> selected <?php } ?>>INSS Digital (Protocolo)</option>
+                                    <option value="T-Análise de Tarefas" <?php if( $value1["equipe"]=='T-Análise de Tarefas' ){ ?> selected <?php } ?>>Análise de Tarefas</option>
+                                    <option value="E-Estagiários" <?php if( $value1["equipe"]=='E-Estagiários' ){ ?> selected <?php } ?>>Estagiários</option>                                        
+                                    <option value="G-Gestores" <?php if( $value1["equipe"]=='G-Gestores' ){ ?> selected <?php } ?>>Gestores</option>
+                                    <option value="O-OI/Manutenção" <?php if( $value1["equipe"]=='O-OI/Manutenção' ){ ?> selected <?php } ?>>OI/Manutenção</option>
+                                    <option value="R-Retaguarda" <?php if( $value1["equipe"]=='R-Retaguarda' ){ ?> selected <?php } ?>>Retaguarda</option>
+                                    <option value="M-MOB" <?php if( $value1["equipe"]=='M-MOB' ){ ?> selected <?php } ?>>MOB</option>
+                                    <option value="P-Perícia Médica" <?php if( $value1["equipe"]=='P-Perícia Médica' ){ ?> selected <?php } ?>>Perícia Médica</option>
+                                    </select>                                       
+                                </div>
+                            </div> 
+                            <div class="row">
+                                <div class="col">
+                                    <label class="mb-0" for="endereco">Endereço completo</label>
+                                    <input type="text" value="<?php echo htmlspecialchars( $value1["endereco"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="form-control mb-1" name="endereco" id="endereco" placeholder="Endereço completo">
+                                </div>
+                            </div>                                            
+                            <hr class="text-muted mb-0">
+                            <small class="text-muted"><i>(*) Apenas usuários com perfil de gestor visualizarão os dados ocultos.</i></small>                                                                                                           
+                            </div>                                                        
+                        </div>
+                    </div>
+                </div>            
+            <div class="modal-footer">
+                <input type="hidden" name="foto" value="<?php echo htmlspecialchars( $value1["foto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php $counter2=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key2 => $value2 ){ $counter2++; ?><?php if( $value2["i"] == $value2["page"] ){ ?><input type="hidden" name="page" value="<?php echo htmlspecialchars( $value2["page"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php } ?><?php } ?><input type="hidden" value="<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" name="iduser"><input type="submit" class="btn btn-success" value="Atualizar"><button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>

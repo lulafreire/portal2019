@@ -1,9 +1,9 @@
 <div class="container-fluid my-2 mx-2">
     <div class="row">
-        <div class="col-6 my-2">
-            <h6 class="text-dark"><i class="fas fa-users"></i> Equipe <small class="text-muted"> <i>Detalha os servidores da Unidade e permite edição e exclusão pelos gestores</i></small></h6>
+        <div class="col-11 my-2">
+            <h6 class="text-dark"><i class="fas fa-users"></i> Equipe <small class="text-muted"> <i>Detalha os servidores da Unidade e permite edição e exclusão pelos gestores</i></small><span class="float-right">{$registros} Usuários Cadastrados</span></h6>
         </div>
-        <div class="col-6">
+        <div class="col-1">
         {if="$user.status==1"}<button class="btn btn-success btn-sm float-right mr-3" data-toggle="modal" data-target="#modalNovoUsuario"><i class="fas fa-file"></i> Novo</button>{/if}                   
         </div>
     </div>
@@ -32,8 +32,8 @@
             <td class="text-center">
                 <a href="#" data-toggle="modal" data-target="#modalDetalhaUsuario-{$value.iduser}" class="btn btn-info btn-sm"><i class="fas fa-asterisk"></i> Detalhar </a>
                 {if="$user.status==1"}
-                <a href="users/update/{$value.iduser}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar </a>
-                <a href="users/{$value.iduser}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir este registro?')"><i class="fa fa-trash"></i> Excluir</a>
+                <a href="#" data-toggle="modal" data-target="#modalEditarUsuario-{$value.iduser}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar </a>
+                <a href="users/{$value.iduser}/delete/{loop="$pages"}{if="$value.i == $value.page"}{$value.i}{/if}{/loop}" class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir {$value.nome}?')"><i class="fa fa-trash"></i> Excluir</a>
                 {/if}
             </td>
             </tr>
@@ -54,8 +54,7 @@
                         <li class="page-item"><a class="page-link" href="{$value.link}">{$value.i}</a></li>
                         {/if}
                     {/if}                        
-                    {/loop}
-            
+                    {/loop}            
                 </ul>                                    
             </nav>
         </div>
@@ -106,7 +105,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <label class="mb-0" for="email">E-mail</label>
-                                        <input type="text" value="" class="form-control mb-1" name="email" id="email" placeholder="Seu e-mail">
+                                        <input type="text" value="" class="form-control mb-1" name="email" id="email" placeholder="Seu e-mail" required>
                                     </div>
                                     <div class="col-6">
                                         <label class="mb-0" for="cargo">Cargo</label>
@@ -114,6 +113,7 @@
                                             <option value="Técnico do Seguro Social" >Técnico do Seguro Social</option>
                                             <option value="Analista do Seguro Social" >Analista do Seguro Social</option>
                                             <option value="Médico Perito" >Médico Perito</option>
+                                            <option value="Estagiário">Estagiário</option>
                                         </select>
                                     </div>
                                 </div>            

@@ -111,6 +111,7 @@ $(document).ready(function () {
                                             <option value="Técnico do Seguro Social" {if="$user.cargo=='Técnico do Seguro Social'"} selected {/if}>Técnico do Seguro Social</option>
                                             <option value="Analista do Seguro Social" {if="$user.cargo=='Analista do Seguro Social'"} selected {/if}>Analista do Seguro Social</option>
                                             <option value="Médico Perito" {if="$user.cargo=='Médico Perito'"} selected {/if}>Médico Perito</option>
+                                            <option value="Estagiário"  {if="$user.cargo=='Estagiário'"} selected {/if}>Estagiário</option>
                                         </select>
                                     </div>
                                 </div>            
@@ -468,6 +469,117 @@ $(document).ready(function () {
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
             </div>
+        </div>
+    </div>
+</div>
+{/loop}
+
+{loop="$users.data"}
+<!-- Modal Editar Usuário -->
+<div class="modal" id="modalEditarUsuario-{$value.iduser}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="far fa-user text-primary"></i> Detalhes do Usuário</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3"><img class="img-fluid" src="img/users/{$value.foto}"></div>
+                        <div class="col-9">
+                            <form autocomplete="off" role="form" action="usuarios/{$value.iduser}" method="POST" enctype="multipart/form-data">                                            
+                            <div class="row">
+                                <div class="col">
+                                    <label class="mb-0" for="nome">Nome</label>
+                                    <input type="text" value="{$value.nome}" class="form-control mb-1" name="nome" id="nome" placeholder="Nome completo" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="mb-0" for="matricula">Matrícula</label>
+                                    <input type="text" value="{$value.matricula}" class="form-control mb-1" name="matricula" id="matricula" placeholder="Matrícula" required>
+                                </div>
+                                <div class="col-6">
+                                    <label class="mb-0" for="cpf">CPF</label>
+                                    <input type="text" value="{$value.cpf}" class="form-control mb-1" name="cpf" id="cpf" maxlength='14' onkeypress="formatar_mascara(this, '###.###.###-##')" placeholder="CPF">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="mb-0" for="email">E-mail</label>
+                                    <input type="text" value="{$value.email}" class="form-control mb-1" name="email" id="email" placeholder="Seu e-mail">
+                                </div>
+                                <div class="col-6">
+                                    <label class="mb-0" for="cargo">Cargo</label>
+                                    <select class="form-control" name="cargo" id="cargo">
+                                        <option value="Técnico do Seguro Social" {if="$value.cargo=='Técnico do Seguro Social'"} selected {/if} >Técnico do Seguro Social</option>
+                                        <option value="Analista do Seguro Social" {if="$value.cargo=='Analista do Seguro Social'"} selected {/if} >Analista do Seguro Social</option>
+                                        <option value="Médico Perito"  {if="$value.cargo=='Médico Perito'"} selected {/if}>Médico Perito</option>
+                                        <option value="Estagiário"  {if="$value.cargo=='Estagiário'"} selected {/if}>Estagiário</option>
+                                    </select>
+                                </div>
+                            </div>            
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="mb-0" for="lotacao">Lotação</label>
+                                    <input type="text" readonly="readonly" value="{$user.lotacao}" class="form-control mb-1" name="lotacao" id="lotacao" placeholder="Código da Unidade" required>
+                                </div>
+                                <div class="col-6">
+                                    <label class="mb-0" for="dt_ingresso">Data de Ingresso</label>
+                                    <input type="text" value="{function="converteData($value.dt_ingresso)"}" class="form-control mb-1" name="dt_ingresso" id="dt_ingresso" maxlength='10' onkeypress="formatar_mascara(this, '##/##/####')" placeholder="Data de Ingresso">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="mb-0" for="telefone">Telefone</label>
+                                    <input type="text" value="{$value.telefone}" class="form-control mb-0" name="telefone" id="telefone" maxlength='13' onkeypress="formatar_mascara(this, '##.#####-####')" placeholder="Telefone">
+                                    <small class="text-muted"><input type="checkbox" name="publicTelefone" id="publicTelefone" value="1" {if="$value.publicTelefone==1"}checked{/if}> Deixar oculto para outros usuários*</small>
+                                </div>
+                                <div class="col-6">
+                                    <label class="mb-0" for="dt_nascimento">Data de Nascimento</label>
+                                    <input type="text" value="{function="converteData($value.dt_nascimento)"}" class="form-control mb-1" name="dt_nascimento" id="dt_nascimento" maxlength='10' onkeypress="formatar_mascara(this, '##/##/####')" placeholder="Data de Nascimento">
+                                    <small class="text-muted"><input type="checkbox" name="publicDtNascimento" id="publicDtNascimento" value="1" {if="$value.publicDtNascimento==1"}checked{/if}> Deixar oculto para outros usuários*</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label class="mb-0" for="nit">NIT</label>
+                                    <input type="text" value="{$value.nit}" class="form-control mb-1" name="nit" id="nit" placeholder="NIT/PIS/PASEP">
+                                </div>
+                                <div class="col-6">
+                                    <label class="mb-0" for="equipe">EQUIPE</label>
+                                    <select name="equipe" class="form-control">
+                                    <option value="A-Assistentes Sociais" {if="$value.equipe=='A-Assistentes Sociais'"} selected {/if}>Assistentes Sociais</option>
+                                    <option value="D-INSS Digital" {if="$value.equipe=='D-INSS Digital'"} selected {/if}>INSS Digital (Protocolo)</option>
+                                    <option value="T-Análise de Tarefas" {if="$value.equipe=='T-Análise de Tarefas'"} selected {/if}>Análise de Tarefas</option>
+                                    <option value="E-Estagiários" {if="$value.equipe=='E-Estagiários'"} selected {/if}>Estagiários</option>                                        
+                                    <option value="G-Gestores" {if="$value.equipe=='G-Gestores'"} selected {/if}>Gestores</option>
+                                    <option value="O-OI/Manutenção" {if="$value.equipe=='O-OI/Manutenção'"} selected {/if}>OI/Manutenção</option>
+                                    <option value="R-Retaguarda" {if="$value.equipe=='R-Retaguarda'"} selected {/if}>Retaguarda</option>
+                                    <option value="M-MOB" {if="$value.equipe=='M-MOB'"} selected {/if}>MOB</option>
+                                    <option value="P-Perícia Médica" {if="$value.equipe=='P-Perícia Médica'"} selected {/if}>Perícia Médica</option>
+                                    </select>                                       
+                                </div>
+                            </div> 
+                            <div class="row">
+                                <div class="col">
+                                    <label class="mb-0" for="endereco">Endereço completo</label>
+                                    <input type="text" value="{$value.endereco}" class="form-control mb-1" name="endereco" id="endereco" placeholder="Endereço completo">
+                                </div>
+                            </div>                                            
+                            <hr class="text-muted mb-0">
+                            <small class="text-muted"><i>(*) Apenas usuários com perfil de gestor visualizarão os dados ocultos.</i></small>                                                                                                           
+                            </div>                                                        
+                        </div>
+                    </div>
+                </div>            
+            <div class="modal-footer">
+                <input type="hidden" name="foto" value="{$value.foto}">{loop="$pages"}{if="$value.i == $value.page"}<input type="hidden" name="page" value="{$value.page}">{/if}{/loop}<input type="hidden" value="{$value.iduser}" name="iduser"><input type="submit" class="btn btn-success" value="Atualizar"><button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>

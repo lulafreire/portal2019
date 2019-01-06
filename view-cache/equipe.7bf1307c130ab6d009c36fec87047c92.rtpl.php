@@ -1,9 +1,9 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><div class="container-fluid my-2 mx-2">
     <div class="row">
-        <div class="col-6 my-2">
-            <h6 class="text-dark"><i class="fas fa-users"></i> Equipe <small class="text-muted"> <i>Detalha os servidores da Unidade e permite edição e exclusão pelos gestores</i></small></h6>
+        <div class="col-11 my-2">
+            <h6 class="text-dark"><i class="fas fa-users"></i> Equipe <small class="text-muted"> <i>Detalha os servidores da Unidade e permite edição e exclusão pelos gestores</i></small><span class="float-right"><?php echo htmlspecialchars( $registros, ENT_COMPAT, 'UTF-8', FALSE ); ?> Usuários Cadastrados</span></h6>
         </div>
-        <div class="col-6">
+        <div class="col-1">
         <?php if( $user["status"]==1 ){ ?><button class="btn btn-success btn-sm float-right mr-3" data-toggle="modal" data-target="#modalNovoUsuario"><i class="fas fa-file"></i> Novo</button><?php } ?>                   
         </div>
     </div>
@@ -32,8 +32,8 @@
             <td class="text-center">
                 <a href="#" data-toggle="modal" data-target="#modalDetalhaUsuario-<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-info btn-sm"><i class="fas fa-asterisk"></i> Detalhar </a>
                 <?php if( $user["status"]==1 ){ ?>
-                <a href="users/update/<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar </a>
-                <a href="users/<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir este registro?')"><i class="fa fa-trash"></i> Excluir</a>
+                <a href="#" data-toggle="modal" data-target="#modalEditarUsuario-<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar </a>
+                <a href="users/<?php echo htmlspecialchars( $value1["iduser"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete/<?php $counter2=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key2 => $value2 ){ $counter2++; ?><?php if( $value2["i"] == $value2["page"] ){ ?><?php echo htmlspecialchars( $value2["i"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?><?php } ?>" class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir <?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?>?')"><i class="fa fa-trash"></i> Excluir</a>
                 <?php } ?>
             </td>
             </tr>
@@ -54,8 +54,7 @@
                         <li class="page-item"><a class="page-link" href="<?php echo htmlspecialchars( $value1["link"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["i"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
                         <?php } ?>
                     <?php } ?>                        
-                    <?php } ?>
-            
+                    <?php } ?>            
                 </ul>                                    
             </nav>
         </div>
@@ -106,7 +105,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <label class="mb-0" for="email">E-mail</label>
-                                        <input type="text" value="" class="form-control mb-1" name="email" id="email" placeholder="Seu e-mail">
+                                        <input type="text" value="" class="form-control mb-1" name="email" id="email" placeholder="Seu e-mail" required>
                                     </div>
                                     <div class="col-6">
                                         <label class="mb-0" for="cargo">Cargo</label>
@@ -114,6 +113,7 @@
                                             <option value="Técnico do Seguro Social" >Técnico do Seguro Social</option>
                                             <option value="Analista do Seguro Social" >Analista do Seguro Social</option>
                                             <option value="Médico Perito" >Médico Perito</option>
+                                            <option value="Estagiário">Estagiário</option>
                                         </select>
                                     </div>
                                 </div>            

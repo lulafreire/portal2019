@@ -166,6 +166,7 @@
                                             <option value="Técnico do Seguro Social" >Técnico do Seguro Social</option>
                                             <option value="Analista do Seguro Social" >Analista do Seguro Social</option>
                                             <option value="Médico Perito" >Médico Perito</option>
+                                            <option value="Estagiário">Estagiário</option>
                                         </select>
                                     </div>
                                 </div>            
