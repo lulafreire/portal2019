@@ -144,7 +144,7 @@ $app->post('/cadastro', function(){
 	}
 	else
 	{
-		$equipe = "";
+		$equipe = "N-Não Definida";
 	}
 	
 	// Envio de dados para a classe User
@@ -927,6 +927,110 @@ $app->post("/editar-conteudo/:origem/:id", function($origem, $id){
 
 });
 
+$app->get('/unidades', function(){
+	
+	// Verifica se o usuário está logado
+	User::verifyLogin();
+
+	// Favoritos do usuário logado
+	$favoritos = User::favoritos();
+	$fav = $favoritos[0];
+
+	// Permite a Edição de Favoritos
+	$selFav = User::selectFavoritos();
+
+	// Variáveis do usuário logado
+	$user = $_SESSION[User::SESSION];
+
+	// Nome da Unidade
+	$nomeUnidade = User::nomeUnidade($_SESSION[User::SESSION]['lotacao']);
+	
+	// IP
+	$ip      = $_SERVER['REMOTE_ADDR'];
+	
+	// Verifica o status do usuário
+	$iduser = $_SESSION[User::SESSION]['iduser'];
+	$status = User::verificaStatus($iduser);
+
+	if($status!='1')
+	{
+		$tpl = "conteudo-erro";
+	}
+	else
+	{
+		$tpl = "unidades";
+	}
+
+	// Pesquisa o conteúdo cadastrado
+	$page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
+	$unidades = Query::getUnidades($page, 7);
+	$max_links = 10;
+	$pages = [];
+	$links_laterais = ceil($max_links / 2);
+	$inicio = $page - $links_laterais;
+	if($inicio<1)
+	{
+		$inicio = 1;
+	}
+	$limite = $page + $links_laterais;
+
+	for ($i = $inicio; $i <= $limite; $i++)
+	{
+		array_push($pages, [
+			'link'=>'unidades?page='.$i,
+			'page'=>$page,
+			'i'=>$i,
+			'total'=>$unidades['pages']
+		]);
+	}
+
+	$page = new Page([
+
+	]);
+
+	$page->setTpl("$tpl", array(
+		"unidades"=>$unidades['data'],
+		"pages"=>$pages,
+		"user"=>$user,
+		"nomeUnidade"=>$nomeUnidade,
+		"ip"=>$ip,
+		"fav"=>$fav,
+		"selFav"=>$selFav,
+		"registros"=>$unidades['total']
+	));
+});
+
+$app->post('/unidades', function(){
+
+	if(isset($_POST))
+	{
+		$dados = [
+			"nome"=>$_POST['nome'],
+			"codigo"=>$_POST['codigo'],
+			"telefone"=>$_POST['telefone'],
+			"endereco"=>$_POST['endereco']
+		];
+
+		Query::cadastraUnidade($dados);
+	}
+
+	header("Location: unidades");
+	exit;
+
+});
+
+$app->post('/unidades/:id', function($id){
+
+	echo "Edita os dados da Undiade $id";
+	
+});
+
+$app->get('/unidades/:id/delete/:page', function($id, $page){
+
+	echo "Exclui a Unidade $id page $page";
+
+});
+
 $app->get('/:indicador', function($indicador){
 	
 	// Verifica se o usuário está logado
@@ -1082,7 +1186,8 @@ $app->post('/usuarios/:iduser', function($iduser){
 			"endereco" => $_POST['endereco'],
 			"equipe" => $_POST['equipe'],
 			"publicTelefone"=>$publicTelefone,
-			"publicDtNascimento"=>$publicDtNascimento
+			"publicDtNascimento"=>$publicDtNascimento,
+			"status"=>$_POST['status']
 		];
 
 		$page = $_POST['page'];

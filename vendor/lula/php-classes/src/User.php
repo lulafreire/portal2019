@@ -124,6 +124,7 @@ class User extends Model {
 			dt_ingresso = :dt_ingresso,
 			endereco = :endereco,
 			publicTelefone = :publicTelefone,
+			status = :status,
 			publicDtNascimento = :publicDtNascimento WHERE iduser = :iduser", array(
 				":iduser"=>$iduser,
 				":nome" => strtoupper($dados['nome']),
@@ -139,6 +140,7 @@ class User extends Model {
 				":dt_ingresso" => $dados['dt_ingresso'],
 				":endereco" => $dados['endereco'],
 				":publicTelefone" => $dados['publicTelefone'],
+				":status"=>$dados['status'],
 				":publicDtNascimento" => $dados['publicDtNascimento']
 			));				
 	}

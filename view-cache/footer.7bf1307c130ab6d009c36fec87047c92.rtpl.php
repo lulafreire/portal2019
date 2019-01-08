@@ -569,6 +569,12 @@ $(document).ready(function () {
                                     <label class="mb-0" for="endereco">Endereço completo</label>
                                     <input type="text" value="<?php echo htmlspecialchars( $value1["endereco"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="form-control mb-1" name="endereco" id="endereco" placeholder="Endereço completo">
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="mb-0" for="status">Status: </label>
+                                    <input type="radio" name="status" value="1" <?php if( $value1["status"]==1 ){ ?>checked<?php } ?>> Administrador &nbsp;&nbsp;<input type="radio" name="status" value="2" <?php if( $value1["status"]==2 ){ ?>checked<?php } ?>> Usuário Comum &nbsp;&nbsp;<input type="radio" name="status" value="3" <?php if( $value1["status"]==3 ){ ?>checked<?php } ?>> Atualiza Conteúdo &nbsp;&nbsp;
+                                </div>
                             </div>                                            
                             <hr class="text-muted mb-0">
                             <small class="text-muted"><i>(*) Apenas usuários com perfil de gestor visualizarão os dados ocultos.</i></small>                                                                                                           

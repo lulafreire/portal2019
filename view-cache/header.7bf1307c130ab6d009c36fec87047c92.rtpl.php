@@ -145,9 +145,8 @@
                         <i class="fas fa-cog"></i> Gestão
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="conteudo"><i class="fas fa-desktop"></i> Gerenciar Conteúdo</a>
-                        <a class="dropdown-item" href="unidades"><i class="fa fa-fw fa-hotel"></i> Cadastrar Unidade</a>
-                        <a class="dropdown-item" href="perfil"><i class="fa fa-fw fa-user-plus"></i> Alterar Perfil de Usuário</a>
+                        <a class="dropdown-item" href="conteudo"><i class="fas fa-desktop"></i> Conteúdo</a>
+                        <a class="dropdown-item" href="unidades"><i class="fa fa-fw fa-hotel"></i> Unidades</a>
                     </div>
                 </li>
                 

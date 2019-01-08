@@ -10,38 +10,52 @@ class Indicators {
     public static function imaGdass()
     {
         $sql = new Sql();
-        $imaGdass12 = $sql->select("SELECT * from tb_imagdass WHERE unidade = :lotacao ORDER BY competencia DESC limit 12", array(
+        $imaGdass12 = $sql->select("SELECT SQL_CALC_FOUND_ROWS * from tb_imagdass WHERE unidade = :lotacao ORDER BY competencia DESC limit 12", array(
             ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
         ));
 
-        $imaGdassAtual = $sql->select("SELECT * from tb_imagdass WHERE unidade = :lotacao ORDER BY competencia DESC limit 1", array(
-            ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
-        ));
+        $registros = $sql->select("SELECT FOUND_ROWS() AS total");
 
-        $imaGdassAnt = $sql->select("SELECT * from tb_imagdass WHERE unidade = :lotacao and id < :idImaGdassAtual ORDER BY competencia DESC limit 1", array(
-            ":lotacao"=>$_SESSION[User::SESSION]['lotacao'],
-            ":idImaGdassAtual" => $imaGdassAtual[0]['id']
-        ));
-
-        if($imaGdassAtual[0]['indicador']>$imaGdassAnt[0]['indicador']) 
+        if($registros[0]['total']==0)
         {
-            $iconeImaGdass = "far fa-arrow-alt-circle-up";
-        } 
-        if($imaGdassAtual[0]['indicador']<$imaGdassAnt[0]['indicador']) 
-        {
-            $iconeImaGdass = "far fa-arrow-alt-circle-down";
+            return [
+                "imaGdass12"=>array(),
+                "imaGdassAtual"=>0,
+                "imaGdassAnt"=>0,
+                "iconeImaGdass"=>"far fa-pause-circle"
+            ];
         }
-        if($imaGdassAtual[0]['indicador']==$imaGdassAnt[0]['indicador'])
+        else
         {
-            $iconeImaGdass = "far fa-pause-circle";
-        }
-
-        return [
-            "imaGdass12"=>array_reverse($imaGdass12, true),
-            "imaGdassAtual"=>$imaGdassAtual,
-            "imaGdassAnt"=>$imaGdassAnt,
-            "iconeImaGdass"=>$iconeImaGdass
-        ];        
+            $imaGdassAtual = $sql->select("SELECT * from tb_imagdass WHERE unidade = :lotacao ORDER BY competencia DESC limit 1", array(
+                ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
+            ));
+    
+            $imaGdassAnt = $sql->select("SELECT * from tb_imagdass WHERE unidade = :lotacao and competencia < :compImaGdassAtual ORDER BY competencia DESC limit 1", array(
+                ":lotacao"=>$_SESSION[User::SESSION]['lotacao'],
+                ":compImaGdassAtual" => $imaGdassAtual[0]['competencia']
+            ));
+    
+            if($imaGdassAtual[0]['indicador']>$imaGdassAnt[0]['indicador']) 
+            {
+                $iconeImaGdass = "far fa-arrow-alt-circle-up";
+            } 
+            if($imaGdassAtual[0]['indicador']<$imaGdassAnt[0]['indicador']) 
+            {
+                $iconeImaGdass = "far fa-arrow-alt-circle-down";
+            }
+            if($imaGdassAtual[0]['indicador']==$imaGdassAnt[0]['indicador'])
+            {
+                $iconeImaGdass = "far fa-pause-circle";
+            }
+    
+            return [
+                "imaGdass12"=>array_reverse($imaGdass12, true),
+                "imaGdassAtual"=>$imaGdassAtual,
+                "imaGdassAnt"=>$imaGdassAnt,
+                "iconeImaGdass"=>$iconeImaGdass
+            ];
+        }               
 
     }
     
@@ -49,38 +63,53 @@ class Indicators {
     public static function iib()
     {
         $sql = new Sql();
-        $iib12 = $sql->select("SELECT * from tb_iib WHERE unidade = :lotacao ORDER BY competencia DESC limit 12", array(
+        $iib12 = $sql->select("SELECT SQL_CALC_FOUND_ROWS * from tb_iib WHERE unidade = :lotacao ORDER BY competencia DESC limit 12", array(
             ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
         ));
 
-        $iibAtual = $sql->select("SELECT * from tb_iib WHERE unidade = :lotacao ORDER BY competencia DESC limit 1", array(
-            ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
-        ));
+        $registros = $sql->select("SELECT FOUND_ROWS() AS total");
 
-        $iibAnt = $sql->select("SELECT * from tb_iib WHERE unidade = :lotacao and id < :idiibAtual ORDER BY competencia DESC limit 1", array(
-            ":lotacao"=>$_SESSION[User::SESSION]['lotacao'],
-            ":idiibAtual" => $iibAtual[0]['id']
-        ));
-
-        if($iibAtual[0]['indicador']>$iibAnt[0]['indicador']) 
+        if($registros[0]['total']==0)
         {
-            $iconeiib = "far fa-arrow-alt-circle-up";
-        } 
-        if($iibAtual[0]['indicador']<$iibAnt[0]['indicador']) 
-        {
-            $iconeiib = "far fa-arrow-alt-circle-down";
+            return [
+                "iib12"=>array(),
+                "iibAtual"=>0,
+                "iibAnt"=>0,
+                "iconeiib"=>"far fa-pause-circle"
+            ];
         }
-        if($iibAtual[0]['indicador']==$iibAnt[0]['indicador'])
+        else
         {
-            $iconeiib = "far fa-pause-circle";
-        }
 
-        return [
-            "iib12"=>array_reverse($iib12, true),
-            "iibAtual"=>$iibAtual,
-            "iibAnt"=>$iibAnt,
-            "iconeiib"=>$iconeiib
-        ];        
+            $iibAtual = $sql->select("SELECT * from tb_iib WHERE unidade = :lotacao ORDER BY competencia DESC limit 1", array(
+                ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
+            ));
+
+            $iibAnt = $sql->select("SELECT * from tb_iib WHERE unidade = :lotacao and competencia < :compiibAtual ORDER BY competencia DESC limit 1", array(
+                ":lotacao"=>$_SESSION[User::SESSION]['lotacao'],
+                ":compiibAtual" => $iibAtual[0]['competencia']
+            ));
+
+            if($iibAtual[0]['indicador']>$iibAnt[0]['indicador']) 
+            {
+                $iconeiib = "far fa-arrow-alt-circle-up";
+            } 
+            if($iibAtual[0]['indicador']<$iibAnt[0]['indicador']) 
+            {
+                $iconeiib = "far fa-arrow-alt-circle-down";
+            }
+            if($iibAtual[0]['indicador']==$iibAnt[0]['indicador'])
+            {
+                $iconeiib = "far fa-pause-circle";
+            }
+
+            return [
+                "iib12"=>array_reverse($iib12, true),
+                "iibAtual"=>$iibAtual,
+                "iibAnt"=>$iibAnt,
+                "iconeiib"=>$iconeiib
+            ];
+        }        
 
     } 
 
@@ -88,52 +117,68 @@ class Indicators {
     public static function tarefas()
     {
         $sql = new Sql();
-        $tarefas12 = $sql->select("SELECT * from tb_tarefas WHERE unidade = :lotacao ORDER BY competencia DESC limit 12", array(
+        $tarefas12 = $sql->select("SELECT SQL_CALC_FOUND_ROWS * from tb_tarefas WHERE unidade = :lotacao ORDER BY competencia DESC limit 12", array(
             ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
         ));
 
-        $tarefasAtual = $sql->select("SELECT * from tb_tarefas WHERE unidade = :lotacao ORDER BY competencia DESC limit 1", array(
-            ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
-        ));
+        $registros = $sql->select("SELECT FOUND_ROWS() AS total");
 
-        $tarefasAnt = $sql->select("SELECT * from tb_tarefas WHERE unidade = :lotacao and id < :idtarefasAtual ORDER BY competencia DESC limit 1", array(
-            ":lotacao"=>$_SESSION[User::SESSION]['lotacao'],
-            ":idtarefasAtual" => $tarefasAtual[0]['id']
-        ));
+        if($registros[0]['total']==0)
+        {
+            return [
+                "tarefas12"=>array(),
+                "tarefasAtual"=>0,
+                "tarefasAnt"=>0,
+                "iconetarefasconcluidas"=>"far fa-pause-circle",
+                "iconetarefaspendentes"=>"far fa-pause-circle"
+            ];
+        }
+        else
+        {
 
-        if($tarefasAtual[0]['concluidas']>$tarefasAnt[0]['concluidas']) 
-        {
-            $iconetarefasconcluidas = "far fa-arrow-alt-circle-up";
-        } 
-        if($tarefasAtual[0]['concluidas']<$tarefasAnt[0]['concluidas']) 
-        {
-            $iconetarefasconcluidas = "far fa-arrow-alt-circle-down";
-        }
-        if($tarefasAtual[0]['concluidas']==$tarefasAnt[0]['concluidas'])
-        {
-            $iconetarefasconcluidas = "far fa-pause-circle";
-        }
+            $tarefasAtual = $sql->select("SELECT * from tb_tarefas WHERE unidade = :lotacao ORDER BY competencia DESC limit 1", array(
+                ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
+            ));
 
-        if($tarefasAtual[0]['pendentes']>$tarefasAnt[0]['pendentes']) 
-        {
-            $iconetarefaspendentes = "far fa-arrow-alt-circle-up";
-        } 
-        if($tarefasAtual[0]['pendentes']<$tarefasAnt[0]['pendentes']) 
-        {
-            $iconetarefaspendentes = "far fa-arrow-alt-circle-down";
-        }
-        if($tarefasAtual[0]['pendentes']==$tarefasAnt[0]['pendentes'])
-        {
-            $iconetarefaspendentes = "far fa-pause-circle";
-        }
+            $tarefasAnt = $sql->select("SELECT * from tb_tarefas WHERE unidade = :lotacao and competencia < :comptarefasAtual ORDER BY competencia DESC limit 1", array(
+                ":lotacao"=>$_SESSION[User::SESSION]['lotacao'],
+                ":comptarefasAtual" => $tarefasAtual[0]['competencia']
+            ));
 
-        return [
-            "tarefas12"=>array_reverse($tarefas12, true),
-            "tarefasAtual"=>$tarefasAtual,
-            "tarefasAnt"=>$tarefasAnt,
-            "iconetarefasconcluidas"=>$iconetarefasconcluidas,
-            "iconetarefaspendentes"=>$iconetarefaspendentes
-        ];        
+            if($tarefasAtual[0]['concluidas']>$tarefasAnt[0]['concluidas']) 
+            {
+                $iconetarefasconcluidas = "far fa-arrow-alt-circle-up";
+            } 
+            if($tarefasAtual[0]['concluidas']<$tarefasAnt[0]['concluidas']) 
+            {
+                $iconetarefasconcluidas = "far fa-arrow-alt-circle-down";
+            }
+            if($tarefasAtual[0]['concluidas']==$tarefasAnt[0]['concluidas'])
+            {
+                $iconetarefasconcluidas = "far fa-pause-circle";
+            }
+
+            if($tarefasAtual[0]['pendentes']>$tarefasAnt[0]['pendentes']) 
+            {
+                $iconetarefaspendentes = "far fa-arrow-alt-circle-up";
+            } 
+            if($tarefasAtual[0]['pendentes']<$tarefasAnt[0]['pendentes']) 
+            {
+                $iconetarefaspendentes = "far fa-arrow-alt-circle-down";
+            }
+            if($tarefasAtual[0]['pendentes']==$tarefasAnt[0]['pendentes'])
+            {
+                $iconetarefaspendentes = "far fa-pause-circle";
+            }
+
+            return [
+                "tarefas12"=>array_reverse($tarefas12, true),
+                "tarefasAtual"=>$tarefasAtual,
+                "tarefasAnt"=>$tarefasAnt,
+                "iconetarefasconcluidas"=>$iconetarefasconcluidas,
+                "iconetarefaspendentes"=>$iconetarefaspendentes
+            ];        
+        }
 
     } 
 
@@ -141,39 +186,52 @@ class Indicators {
     public static function represados()
     {
         $sql = new Sql();
-        $represados12 = $sql->select("SELECT * from tb_represados WHERE unidade = :lotacao ORDER BY data DESC limit 12", array(
+        $represados12 = $sql->select("SELECT SQL_CALC_FOUND_ROWS * from tb_represados WHERE unidade = :lotacao ORDER BY data DESC limit 12", array(
             ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
         ));
 
-        $represadosAtual = $sql->select("SELECT * from tb_represados WHERE unidade = :lotacao ORDER BY data DESC limit 1", array(
-            ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
-        ));
+        $registros = $sql->select("SELECT FOUND_ROWS() AS total");
 
-        $represadosAnt = $sql->select("SELECT * from tb_represados WHERE unidade = :lotacao and id < :idrepresadosAtual ORDER BY data DESC limit 1", array(
-            ":lotacao"=>$_SESSION[User::SESSION]['lotacao'],
-            ":idrepresadosAtual" => $represadosAtual[0]['id']
-        ));
-
-        if($represadosAtual[0]['indicador']>$represadosAnt[0]['indicador']) 
+        if($registros[0]['total']==0)
         {
-            $iconerepresados = "far fa-arrow-alt-circle-up";
-        } 
-        if($represadosAtual[0]['indicador']<$represadosAnt[0]['indicador']) 
-        {
-            $iconerepresados = "far fa-arrow-alt-circle-down";
+            return [
+                "represados12"=>array(),
+                "represadosAtual"=>0,
+                "represadosAnt"=>0,
+                "iconerepresados"=>"far fa-pause-circle"
+            ];
         }
-        if($represadosAtual[0]['indicador']==$represadosAnt[0]['indicador'])
+        else
         {
-            $iconerepresados = "far fa-pause-circle";
+            $represadosAtual = $sql->select("SELECT * from tb_represados WHERE unidade = :lotacao ORDER BY data DESC limit 1", array(
+                ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
+            ));
+
+            $represadosAnt = $sql->select("SELECT * from tb_represados WHERE unidade = :lotacao and data < :dtrepresadosAtual ORDER BY data DESC limit 1", array(
+                ":lotacao"=>$_SESSION[User::SESSION]['lotacao'],
+                ":dtrepresadosAtual" => $represadosAtual[0]['data']
+            ));
+
+            if($represadosAtual[0]['indicador']>$represadosAnt[0]['indicador']) 
+            {
+                $iconerepresados = "far fa-arrow-alt-circle-up";
+            } 
+            if($represadosAtual[0]['indicador']<$represadosAnt[0]['indicador']) 
+            {
+                $iconerepresados = "far fa-arrow-alt-circle-down";
+            }
+            if($represadosAtual[0]['indicador']==$represadosAnt[0]['indicador'])
+            {
+                $iconerepresados = "far fa-pause-circle";
+            }
+
+            return [
+                "represados12"=>array_reverse($represados12, true),
+                "represadosAtual"=>$represadosAtual,
+                "represadosAnt"=>$represadosAnt,
+                "iconerepresados"=>$iconerepresados
+            ];        
         }
-
-        return [
-            "represados12"=>array_reverse($represados12, true),
-            "represadosAtual"=>$represadosAtual,
-            "represadosAnt"=>$represadosAnt,
-            "iconerepresados"=>$iconerepresados
-        ];        
-
     } 
     
     public static function atualizaRepresados($data, $adm, $pm_as, $lotacao)

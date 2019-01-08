@@ -165,6 +165,22 @@ class Query{
             "actual"=>$page
         ];
     }
+
+    public function getUnidades($page = 1, $itensPerPage = 7)
+    {
+        $start = ($page - 1) * $itensPerPage;
+        
+        $sql = new Sql();
+        $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * FROM tb_unidades ORDER BY nome ASC LIMIT $start, $itensPerPage");
+        $total = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
+
+        return [
+            "data"=>$results,
+            "total"=>(int)$total[0]['nrtotal'],
+            "pages"=>ceil($total[0]['nrtotal'] / $itensPerPage),
+            "actual"=>$page
+        ];
+    }
     
     public static function novoConteudo($tabela, $nome, $descricao, $url, $origem, $icone, $tags)
     {
@@ -178,6 +194,17 @@ class Query{
             ":tags"=>$tags
         ));
 
+    }
+
+    public static function cadastraUnidade($dados)
+    {
+        $sql = new Sql();
+        $sql->query("INSERT INTO tb_unidades (nome, codigo, telefone, endereco) VALUES (:nome, :codigo, :telefone, :endereco)", array(
+            ":nome"=>strtoupper($dados['nome']),
+            ":codigo"=>$dados['codigo'],
+            ":telefone"=>$dados['telefone'],
+            ":endereco"=>$dados['endereco']
+        ));
     }
 
     public static function updateConteudo($id, $tabela, $nome, $descricao, $url, $origem, $icone, $tags)

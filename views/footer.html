@@ -569,6 +569,12 @@ $(document).ready(function () {
                                     <label class="mb-0" for="endereco">Endereço completo</label>
                                     <input type="text" value="{$value.endereco}" class="form-control mb-1" name="endereco" id="endereco" placeholder="Endereço completo">
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="mb-0" for="status">Status: </label>
+                                    <input type="radio" name="status" value="1" {if="$value.status==1"}checked{/if}> Administrador &nbsp;&nbsp;<input type="radio" name="status" value="2" {if="$value.status==2"}checked{/if}> Usuário Comum &nbsp;&nbsp;<input type="radio" name="status" value="3" {if="$value.status==3"}checked{/if}> Atualiza Conteúdo &nbsp;&nbsp;
+                                </div>
                             </div>                                            
                             <hr class="text-muted mb-0">
                             <small class="text-muted"><i>(*) Apenas usuários com perfil de gestor visualizarão os dados ocultos.</i></small>                                                                                                           
