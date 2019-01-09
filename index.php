@@ -291,6 +291,31 @@ $app->get('/dashboard', function() {
 	// Conteudo mais acessado
 	$maisAcessados = Query::maisAcessados();
 
+	// Pesquisa os avisos do mesmo OL
+	$page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
+	$avisos = Query::avisos($_SESSION[User::SESSION]['lotacao'], $page, 1);
+	$max_links = 10;
+	$pages = [];
+	$links_laterais = ceil($max_links / 2);
+	$inicio = $page - $links_laterais;
+	if($inicio<1)
+	{
+		$inicio = 1;
+	}
+	$limite = $page + $links_laterais;
+
+	
+	for ($i = $inicio; $i <= $limite; $i++)
+	{
+		array_push($pages, [
+			'link'=>'dashboard?page='.$i,
+			'page'=>$page,
+			'i'=>$i,
+			'total'=>$avisos['pages'],
+			'registros'=>$avisos['total']
+		]);
+	}
+
 	$page = new Page();
 	
 	$page->setTpl("index", array(
@@ -303,7 +328,9 @@ $app->get('/dashboard', function() {
 		"ip"=>$ip,
 		"fav"=>$fav,
 		"selFav"=>$selFav,
-		"maisAcessados"=>$maisAcessados
+		"maisAcessados"=>$maisAcessados,
+		"pages"=>$pages,
+		"avisos"=>$avisos
 	));
 
 });

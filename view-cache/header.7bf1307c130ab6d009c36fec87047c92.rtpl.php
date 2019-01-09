@@ -147,6 +147,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="conteudo"><i class="fas fa-desktop"></i> Conteúdo</a>
                         <a class="dropdown-item" href="unidades"><i class="fa fa-fw fa-hotel"></i> Unidades</a>
+                        <a class="dropdown-item" href="avisos"><i class="fa fa-fw fa-bullhorn"></i> Avisos</a>
                     </div>
                 </li>
                 

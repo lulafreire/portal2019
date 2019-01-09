@@ -181,6 +181,24 @@ class Query{
             "actual"=>$page
         ];
     }
+
+    public function avisos($unidade, $page = 1, $itensPerPage = 1)
+    {
+        $start = ($page - 1) * $itensPerPage;
+        
+        $sql = new Sql();
+        $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * FROM tb_avisos WHERE unidade = :unidade ORDER BY data DESC LIMIT $start, $itensPerPage", array(
+            ":unidade"=>$unidade
+        ));
+        $total = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
+
+        return [
+            "data"=>$results,
+            "total"=>(int)$total[0]['nrtotal'],
+            "pages"=>ceil($total[0]['nrtotal'] / $itensPerPage),
+            "actual"=>$page
+        ];
+    }
     
     public static function novoConteudo($tabela, $nome, $descricao, $url, $origem, $icone, $tags)
     {

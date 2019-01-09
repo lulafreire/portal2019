@@ -1,93 +1,86 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><div class="container-fluid">
 
     <div class="row">
-        <div class="col-4 my-2">
-           
-            <nav class="navbar border border-secondary shadow rounded-top p-0 navbar-light style=" style="background-color: #adc8e6cb">
-                <span class="navbar-text mb-0 my-0">
-                    &nbsp;&nbsp;<i class="far fa-star"></i> <i>Meus</i> <b>Links Favoritos</b>
-                </span>
-            </nav>
-                    
-            <div class="container border border-secondary border-top-0 rounded-bottom" style="height: 380px;">
-
-                <div class="row">
-                    <div class="col mt-2 align-middle" align="center">
-                        <a href="<?php echo htmlspecialchars( $fav["origem01"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav01"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc01"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone01"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
-                        <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav01"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-                    </div>
-
-                    <div class="col mt-2 align-middle" align="center">
-                        <a href="<?php echo htmlspecialchars( $fav["origem02"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav02"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc02"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone02"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
-                        <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav02"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-                    </div>
-
-                    <div class="col mt-2 align-middle" align="center">
-                        <a href="<?php echo htmlspecialchars( $fav["origem03"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav03"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc03"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone03"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
-                        <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav03"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-                    </div>
-
-                    <div class="col mt-2 align-middle" align="center">
-                        <a href="<?php echo htmlspecialchars( $fav["origem04"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav04"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc04"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone04"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
-                        <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav04"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-                    </div>
-
+        <div class="col-4 mt-2">
+           <!-- Avisos -->
+           <div class="card border-success mb-3 h-100">
+                <div class="card-header bg-success text-light"> 
+                    <i class="fas fa-star text-warning"></i> Links Favoritos
                 </div>
-
-                <div class="row">
-                    
-                    <div class="col align-middle" align="center">
-                        <a href="<?php echo htmlspecialchars( $fav["origem05"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav05"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc05"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone05"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
-                        <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav05"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                <div class="card-body text-dark p-1">                           
+                    <div class="row">
+                        <div class="col mt-2 align-middle" align="center">
+                            <a href="<?php echo htmlspecialchars( $fav["origem01"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav01"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc01"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone01"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
+                            <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav01"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                        </div>
+    
+                        <div class="col mt-2 align-middle" align="center">
+                            <a href="<?php echo htmlspecialchars( $fav["origem02"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav02"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc02"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone02"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
+                            <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav02"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                        </div>
+    
+                        <div class="col mt-2 align-middle" align="center">
+                            <a href="<?php echo htmlspecialchars( $fav["origem03"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav03"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc03"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone03"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
+                            <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav03"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                        </div>
+    
+                        <div class="col mt-2 align-middle" align="center">
+                            <a href="<?php echo htmlspecialchars( $fav["origem04"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav04"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc04"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone04"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
+                            <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav04"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                        </div>
+    
                     </div>
-
-                    <div class="col align-middle" align="center">
-                        <a href="<?php echo htmlspecialchars( $fav["origem06"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav06"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc06"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone06"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
-                        <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav06"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+    
+                    <div class="row">
+                        
+                        <div class="col align-middle" align="center">
+                            <a href="<?php echo htmlspecialchars( $fav["origem05"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav05"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc05"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone05"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
+                            <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav05"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                        </div>
+    
+                        <div class="col align-middle" align="center">
+                            <a href="<?php echo htmlspecialchars( $fav["origem06"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav06"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc06"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone06"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
+                            <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav06"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                        </div>
+    
+                        <div class="col align-middle" align="center">
+                            <a href="<?php echo htmlspecialchars( $fav["origem07"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav07"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc07"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone07"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
+                            <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav07"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                        </div>
+    
+                        <div class="col align-middle" align="center">
+                            <a href="<?php echo htmlspecialchars( $fav["origem08"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav08"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc08"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone08"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
+                            <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav08"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                        </div>
+    
                     </div>
-
-                    <div class="col align-middle" align="center">
-                        <a href="<?php echo htmlspecialchars( $fav["origem07"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav07"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc07"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone07"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
-                        <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav07"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-                    </div>
-
-                    <div class="col align-middle" align="center">
-                        <a href="<?php echo htmlspecialchars( $fav["origem08"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav08"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc08"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone08"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
-                        <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav08"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-                    </div>
-
+    
+                    <div class="row">
+                        
+                        <div class="col align-middle mb-0" align="center">
+                            <a href="<?php echo htmlspecialchars( $fav["origem09"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav09"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc09"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone09"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
+                            <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav09"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                        </div>
+    
+                        <div class="col align-middle mb-0" align="center">
+                            <a href="<?php echo htmlspecialchars( $fav["origem10"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav10"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc10"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone10"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
+                            <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav10"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                        </div>
+    
+                        <div class="col align-middle mb-0" align="center">
+                            <a href="<?php echo htmlspecialchars( $fav["origem11"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav11"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc11"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone11"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
+                            <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav11"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                        </div>
+    
+                        <div class="col align-middle mb-0" align="center">
+                            <a href="<?php echo htmlspecialchars( $fav["origem12"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav12"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc12"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone12"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
+                            <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav12"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                        </div>
+    
+                    </div>                        
                 </div>
-
-                <div class="row">
-                    
-                    <div class="col align-middle" align="center">
-                        <a href="<?php echo htmlspecialchars( $fav["origem09"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav09"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc09"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone09"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
-                        <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav09"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-                    </div>
-
-                    <div class="col align-middle" align="center">
-                        <a href="<?php echo htmlspecialchars( $fav["origem10"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav10"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc10"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone10"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
-                        <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav10"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-                    </div>
-
-                    <div class="col align-middle" align="center">
-                        <a href="<?php echo htmlspecialchars( $fav["origem11"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav11"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc11"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone11"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
-                        <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav11"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-                    </div>
-
-                    <div class="col align-middle" align="center">
-                        <a href="<?php echo htmlspecialchars( $fav["origem12"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $fav["idFav12"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" title="<?php echo htmlspecialchars( $fav["desc12"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><h1 class="text-secondary"><i class="<?php echo htmlspecialchars( $fav["icone12"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></i></h1></a>
-                        <p style="font-size: 12px;"><?php echo htmlspecialchars( $fav["fav12"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-                    </div>
-
-                </div>
-
-                <p class='text-center' style="font-size: 12px; color: #748396">Escolha os seus links favoritos editando seus dados. <i class="fas fa-arrow-down"></i></p>
                 
-                
-            </div> 
-
-
+            </div>
         </div>
         
         <div class="col-8">
@@ -233,10 +226,10 @@
             </div>
         
             <!-- Mais Acessados e Gráficos -->    
-            <div class="row mt-1">
-                <div class="col p-0">                   
+            <div class="row mt-0">
+                <div class="col-5 p-0">                   
                     <!-- Mais Acessados -->
-                    <div class="card border-primary mb-3">
+                    <div class="card border-primary mb-3 h-100">
                         <div class="card-header bg-primary text-light"> 
                             <i class="fas fa-plus"></i> Mais Acessados
                         </div>
@@ -248,328 +241,39 @@
                         </div>
                     </div>                    
                 </div>
-                <div class="col-7 p-0">
-                  
-                    <div id="carouselGraph" class="carousel slide align-itens-left" data-ride="carousel" style="width: 100%;">
-                        
-                        <div class="carousel-inner">
-                            
-                            <div class="carousel-item active">                                
-                                <!-- BAR CHART REPRESADOS -->
-                                <div class="col">
-                                    <div class="card bar-chart-represados">                        
-                                      <div class="card-body ">
-                                        
-                                        <!-- BAR CHART REPRESADOS -->                                            
-                                        <canvas id="myChartRep" height="166"></canvas>
-                                        <script>
-                                        var ctx = document.getElementById("myChartRep");
-                                        var chartGraph = new Chart (ctx, {
-                                            type: 'bar',
-                                            data: {
-                                                labels: [<?php $counter1=-1;  if( isset($represados["represados12"]) && ( is_array($represados["represados12"]) || $represados["represados12"] instanceof Traversable ) && sizeof($represados["represados12"]) ) foreach( $represados["represados12"] as $key1 => $value1 ){ $counter1++; ?>"<?php echo reduzData(converteData($value1["data"])); ?>",<?php } ?>],
-                                                datasets:[{
-                                                    label: "REPRESADOS",
-                                                    data: [<?php $counter1=-1;  if( isset($represados["represados12"]) && ( is_array($represados["represados12"]) || $represados["represados12"] instanceof Traversable ) && sizeof($represados["represados12"]) ) foreach( $represados["represados12"] as $key1 => $value1 ){ $counter1++; ?><?php echo htmlspecialchars( $value1["indicador"], ENT_COMPAT, 'UTF-8', FALSE ); ?>,<?php } ?>],           
-                                                    backgroundColor: [
-                                                        'rgba(212, 0, 0, 0.6)',
-                                                        'rgba(212, 0, 0, 0.6)',
-                                                        'rgba(212, 0, 0, 0.6)',
-                                                        'rgba(212, 0, 0, 0.6)',
-                                                        'rgba(212, 0, 0, 0.6)',
-                                                        'rgba(212, 0, 0, 0.6)',
-                                                        'rgba(212, 0, 0, 0.6)',
-                                                        'rgba(212, 0, 0, 0.6)',
-                                                        'rgba(212, 0, 0, 0.6)',
-                                                        'rgba(212, 0, 0, 0.6)',
-                                                        'rgba(212, 0, 0, 0.6)',
-                                                        'rgba(212, 0, 0, 0.6)'
-                                                    ],
-                                                    borderColor: [
-                                                        'rgba(143, 0, 0, 1)',
-                                                        'rgba(143, 0, 0, 1)',
-                                                        'rgba(143, 0, 0, 1)',
-                                                        'rgba(143, 0, 0, 1)',
-                                                        'rgba(143, 0, 0, 1)',
-                                                        'rgba(143, 0, 0, 1)',
-                                                        'rgba(143, 0, 0, 1)',
-                                                        'rgba(143, 0, 0, 1)',
-                                                        'rgba(143, 0, 0, 1)',
-                                                        'rgba(143, 0, 0, 1)',
-                                                        'rgba(143, 0, 0, 1)',
-                                                        'rgba(143, 0, 0, 1)'
-                                                    ],
-                                                    borderWidth: 1,
-                                                    }                                                    
-                                                ]
-                                            },
-                                            "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
-                                            
-                                        });
-                                        </script>
-
-                                      </div>
-                                    </div>
-                                  </div>
-                            </div>
-
-                            <div class="carousel-item">                                
-                                    <!-- BAR CHART TAREFAS -->
-                                    <div class="col">
-                                        <div class="card bar-chart-tarefas">
-                                          
-                                          <div class="card-body">
-                                           
-                                            <!-- BAR CHART TAREFAS CONCLUÍDAS -->                                            
-                                            <canvas id="myChartTarefasConcluidas" height="166"></canvas>
-                                            <script>
-                                            var ctx = document.getElementById("myChartTarefasConcluidas");
-                                            var chartGraph = new Chart (ctx, {
-                                                type: 'bar',
-                                                data: {
-                                                    labels: [<?php $counter1=-1;  if( isset($tarefas["tarefas12"]) && ( is_array($tarefas["tarefas12"]) || $tarefas["tarefas12"] instanceof Traversable ) && sizeof($tarefas["tarefas12"]) ) foreach( $tarefas["tarefas12"] as $key1 => $value1 ){ $counter1++; ?>"<?php echo htmlspecialchars( $value1["mes"], ENT_COMPAT, 'UTF-8', FALSE ); ?>",<?php } ?>],
-                                                    datasets:[{
-                                                        label: "TAREFAS CONCLUÍDAS",
-                                                        data: [<?php $counter1=-1;  if( isset($tarefas["tarefas12"]) && ( is_array($tarefas["tarefas12"]) || $tarefas["tarefas12"] instanceof Traversable ) && sizeof($tarefas["tarefas12"]) ) foreach( $tarefas["tarefas12"] as $key1 => $value1 ){ $counter1++; ?><?php echo htmlspecialchars( $value1["concluidas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>,<?php } ?>],           
-                                                        backgroundColor: [
-                                                            'rgba(51, 179, 90, 0.6)',
-                                                            'rgba(51, 179, 90, 0.6)',
-                                                            'rgba(51, 179, 90, 0.6)',
-                                                            'rgba(51, 179, 90, 0.6)',
-                                                            'rgba(51, 179, 90, 0.6)',
-                                                            'rgba(51, 179, 90, 0.6)',
-                                                            'rgba(51, 179, 90, 0.6)',
-                                                            'rgba(51, 179, 90, 0.6)',
-                                                            'rgba(51, 179, 90, 0.6)',
-                                                            'rgba(51, 179, 90, 0.6)',
-                                                            'rgba(51, 179, 90, 0.6)',
-                                                            'rgba(51, 179, 90, 0.6)'
-                                                        ],
-                                                        borderColor: [
-                                                            'rgba(51, 179, 90, 1)',
-                                                            'rgba(51, 179, 90, 1)',
-                                                            'rgba(51, 179, 90, 1)',
-                                                            'rgba(51, 179, 90, 1)',
-                                                            'rgba(51, 179, 90, 1)',
-                                                            'rgba(51, 179, 90, 1)',
-                                                            'rgba(51, 179, 90, 1)',
-                                                            'rgba(51, 179, 90, 1)',
-                                                            'rgba(51, 179, 90, 1)',
-                                                            'rgba(51, 179, 90, 1)',
-                                                            'rgba(51, 179, 90, 1)',
-                                                            'rgba(51, 179, 90, 1)'
-                                                        ],
-                                                        borderWidth: 1,
-                                                        }   
-                                                        
-                                                    ]
-                                                },
-                                                "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
-                                                
-                                            });
-                                            </script>
-    
-                                          </div>
-                                        </div>
-                                      </div>
-                                </div>
-
-                                <div class="carousel-item">                                
-                                <!-- BAR CHART TAREFAS PENDENTES -->
-                                <div class="col">
-                                    <div class="card bar-chart-tarefas">
-                                        
-                                        <div class="card-body">
-                                        
-                                        <!-- BAR CHART TAREFAS PENDENTES -->                                            
-                                        <canvas id="myChartTarefasPendentes" height="166"></canvas>
-                                        <script>
-                                        var ctx = document.getElementById("myChartTarefasPendentes");
-                                        var chartGraph = new Chart (ctx, {
-                                            type: 'bar',
-                                            data: {
-                                                labels: [<?php $counter1=-1;  if( isset($tarefas["tarefas12"]) && ( is_array($tarefas["tarefas12"]) || $tarefas["tarefas12"] instanceof Traversable ) && sizeof($tarefas["tarefas12"]) ) foreach( $tarefas["tarefas12"] as $key1 => $value1 ){ $counter1++; ?>"<?php echo htmlspecialchars( $value1["mes"], ENT_COMPAT, 'UTF-8', FALSE ); ?>",<?php } ?>],
-                                                datasets:[{
-                                                    label: "TAREFAS PENDENTES",
-                                                    data: [<?php $counter1=-1;  if( isset($tarefas["tarefas12"]) && ( is_array($tarefas["tarefas12"]) || $tarefas["tarefas12"] instanceof Traversable ) && sizeof($tarefas["tarefas12"]) ) foreach( $tarefas["tarefas12"] as $key1 => $value1 ){ $counter1++; ?><?php echo htmlspecialchars( $value1["pendentes"], ENT_COMPAT, 'UTF-8', FALSE ); ?>,<?php } ?>],           
-                                                    backgroundColor: [
-                                                        'rgba(0, 120, 255, 0.6)',
-                                                        'rgba(0, 120, 255, 0.6)',
-                                                        'rgba(0, 120, 255, 0.6)',
-                                                        'rgba(0, 120, 255, 0.6)',
-                                                        'rgba(0, 120, 255, 0.6)',
-                                                        'rgba(0, 120, 255, 0.6)',
-                                                        'rgba(0, 120, 255, 0.6)',
-                                                        'rgba(0, 120, 255, 0.6)',
-                                                        'rgba(0, 120, 255, 0.6)',
-                                                        'rgba(0, 120, 255, 0.6)',
-                                                        'rgba(0, 120, 255, 0.6)',
-                                                        'rgba(0, 120, 255, 0.6)'
-                                                    ],
-                                                    borderColor: [
-                                                        'rgba(0, 58, 166, 1)',
-                                                        'rgba(0, 58, 166, 1)',
-                                                        'rgba(0, 58, 166, 1)',
-                                                        'rgba(0, 58, 166, 1)',
-                                                        'rgba(0, 58, 166, 1)',
-                                                        'rgba(0, 58, 166, 1)',
-                                                        'rgba(0, 58, 166, 1)',
-                                                        'rgba(0, 58, 166, 1)',
-                                                        'rgba(0, 58, 166, 1)',
-                                                        'rgba(0, 58, 166, 1)',
-                                                        'rgba(0, 58, 166, 1)',
-                                                        'rgba(0, 58, 166, 1)'
-                                                    ],
-                                                    borderWidth: 1,
-                                                    }
-                                                    
-                                                ]
-                                            },
-                                            "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
-                                            
-                                        });
-                                        </script>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="carousel-item">
-                                <div class="col">
-                                    <div class="card my-0">
-                                        
-                                        <div class="card-body">                                
-                                            <!-- BAR CHART IMA-GDASS -->                                            
-                                            <canvas id="myChart" height="166"></canvas>
-                                            <script>
-                                            var ctx = document.getElementById("myChart");
-                                            var chartGraph = new Chart (ctx, {
-                                                type: 'bar',
-                                                data: {
-                                                    labels: [<?php $counter1=-1;  if( isset($imaGdass["imaGdass12"]) && ( is_array($imaGdass["imaGdass12"]) || $imaGdass["imaGdass12"] instanceof Traversable ) && sizeof($imaGdass["imaGdass12"]) ) foreach( $imaGdass["imaGdass12"] as $key1 => $value1 ){ $counter1++; ?>"<?php echo htmlspecialchars( $value1["mes"], ENT_COMPAT, 'UTF-8', FALSE ); ?>",<?php } ?>],
-                                                    datasets:[{
-                                                        label: "IMA-GDASS",
-                                                        data: [<?php $counter1=-1;  if( isset($imaGdass["imaGdass12"]) && ( is_array($imaGdass["imaGdass12"]) || $imaGdass["imaGdass12"] instanceof Traversable ) && sizeof($imaGdass["imaGdass12"]) ) foreach( $imaGdass["imaGdass12"] as $key1 => $value1 ){ $counter1++; ?><?php echo htmlspecialchars( $value1["indicador"], ENT_COMPAT, 'UTF-8', FALSE ); ?>,<?php } ?>],           
-                                                        backgroundColor: [
-                                                            'rgba(216, 136, 0, 0.6)',
-                                                            'rgba(216, 136, 0, 0.6)',
-                                                            'rgba(216, 136, 0, 0.6)',
-                                                            'rgba(216, 136, 0, 0.6)',
-                                                            'rgba(216, 136, 0, 0.6)',
-                                                            'rgba(216, 136, 0, 0.6)',
-                                                            'rgba(216, 136, 0, 0.6)',
-                                                            'rgba(216, 136, 0, 0.6)',
-                                                            'rgba(216, 136, 0, 0.6)',
-                                                            'rgba(216, 136, 0, 0.6)',
-                                                            'rgba(216, 136, 0, 0.6)',
-                                                            'rgba(216, 136, 0, 0.6)'
-                                                        ],
-                                                        borderColor: [
-                                                            'rgba(164, 98, 0, 1)',
-                                                            'rgba(164, 98, 0, 1)',
-                                                            'rgba(164, 98, 0, 1)',
-                                                            'rgba(164, 98, 0, 1)',
-                                                            'rgba(164, 98, 0, 1)',
-                                                            'rgba(164, 98, 0, 1)',
-                                                            'rgba(164, 98, 0, 1)',
-                                                            'rgba(164, 98, 0, 1)',
-                                                            'rgba(164, 98, 0, 1)',
-                                                            'rgba(164, 98, 0, 1)',
-                                                            'rgba(164, 98, 0, 1)',
-                                                            'rgba(164, 98, 0, 1)'
-                                                        ],
-                                                        borderWidth: 1,
-                                                        }
-                                                        
-                                                    ]
-                                                },
-                                                "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}                                                
-                                            });
-                                            </script>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item">                                
-                                    <!-- BAR CHART INDEFERIMENTO -->
-                                    <div class="col">
-                                        <div class="card bar-chart-tarefas">
-                                            
-                                            <div class="card-body">
-                                            
-                                            <!-- BAR CHART TAREFAS INDEFERIMENTO -->                                            
-                                            <canvas id="myChartIndeferidos" height="166"></canvas>
-                                            <script>
-                                            var ctx = document.getElementById("myChartIndeferidos");
-                                            var chartGraph = new Chart (ctx, {
-                                                type: 'bar',
-                                                data: {
-                                                    labels: [<?php $counter1=-1;  if( isset($iib["iib12"]) && ( is_array($iib["iib12"]) || $iib["iib12"] instanceof Traversable ) && sizeof($iib["iib12"]) ) foreach( $iib["iib12"] as $key1 => $value1 ){ $counter1++; ?>"<?php echo htmlspecialchars( $value1["mes"], ENT_COMPAT, 'UTF-8', FALSE ); ?>",<?php } ?>],
-                                                    datasets:[{
-                                                        label: "ÍNDICE DE INDEFERIMENTO",
-                                                        data: [<?php $counter1=-1;  if( isset($iib["iib12"]) && ( is_array($iib["iib12"]) || $iib["iib12"] instanceof Traversable ) && sizeof($iib["iib12"]) ) foreach( $iib["iib12"] as $key1 => $value1 ){ $counter1++; ?><?php echo htmlspecialchars( $value1["indicador"], ENT_COMPAT, 'UTF-8', FALSE ); ?>,<?php } ?>],           
-                                                        backgroundColor: [
-                                                            'rgba(25, 25, 25, 0.6)',
-                                                            'rgba(25, 25, 25, 0.6)',
-                                                            'rgba(25, 25, 25, 0.6)',
-                                                            'rgba(25, 25, 25, 0.6)',
-                                                            'rgba(25, 25, 25, 0.6)',
-                                                            'rgba(25, 25, 25, 0.6)',
-                                                            'rgba(25, 25, 25, 0.6)',
-                                                            'rgba(25, 25, 25, 0.6)',
-                                                            'rgba(25, 25, 25, 0.6)',
-                                                            'rgba(25, 25, 25, 0.6)',
-                                                            'rgba(25, 25, 25, 0.6)',
-                                                            'rgba(25, 25, 25, 0.6)'
-                                                        ],
-                                                        borderColor: [
-                                                            'rgba(20, 20, 20, 1)',
-                                                            'rgba(20, 20, 20, 1)',
-                                                            'rgba(20, 20, 20, 1)',
-                                                            'rgba(20, 20, 20, 1)',
-                                                            'rgba(20, 20, 20, 1)',
-                                                            'rgba(20, 20, 20, 1)',
-                                                            'rgba(20, 20, 20, 1)',
-                                                            'rgba(20, 20, 20, 1)',
-                                                            'rgba(20, 20, 20, 1)',
-                                                            'rgba(20, 20, 20, 1)',
-                                                            'rgba(20, 20, 20, 1)',
-                                                            'rgba(20, 20, 20, 1)'
-                                                        ],
-                                                        borderWidth: 1,
-                                                        }
-                                                        
-                                                    ]
-                                                },
-                                                "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
-                                                
-                                            });
-                                            </script>
-    
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                            
-                            <a class="carousel-control-prev text-secondary" href="#carouselGraph" role="button" data-slide="prev" style="background: none;">
-                            <span class="carousel-control-prev-icon"><h1><i class="fas fa-angle-left"></i></h1></span>
-                            <span class="sr-only">Anterior</span>
-                            </a>
-                            <a class="carousel-control-next text-secondary" href="#carouselGraph" role="button" data-slide="next" style="background: none;">
-                            <span class="carousel-control-next-icon"><h1><i class="fas fa-angle-right"></i></h1></span>
-                            <span class="sr-only">Próximo</span>
-                            </a>
-
+                <div class="col-7">
+                    <!-- Avisos -->
+                    <div class="card border-secondary mb-3 h-100">
+                        <div class="card-header bg-secondary text-light"> 
+                            <i class="fas fa-fw fa-bullhorn"></i> Quadro de Avisos
+                        </div>
+                        <div class="card-body text-dark">                           
+                            <?php $counter1=-1;  if( isset($avisos["data"]) && ( is_array($avisos["data"]) || $avisos["data"] instanceof Traversable ) && sizeof($avisos["data"]) ) foreach( $avisos["data"] as $key1 => $value1 ){ $counter1++; ?>
+                            <strong><?php echo htmlspecialchars( $value1["titulo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></strong>
+                            <p><?php echo htmlspecialchars( $value1["texto"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                            <hr class="my-1 text-secondary">
+                            <small class="text-muted"><i class="far fa-calendar-alt"></i> <?php echo converteData($value1["data"]); ?> <i class="fas fa-user"></i> <?php echo htmlspecialchars( $value1["autor"], ENT_COMPAT, 'UTF-8', FALSE ); ?> </small>
+                            <?php } ?>                        
+                        </div>
+                        <div class="card-footer bg-muted border-secondary text-muted text-light p-0">
+                            <nav class="navbar">
+                                <ul class="pagination pagination-sm mb-0">
+                                    
+                                    <?php $counter1=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key1 => $value1 ){ $counter1++; ?>
+                                    <?php if( $value1["i"] == $value1["page"] ){ ?>
+                                    <li class="page-item active"><a class="page-link" href="<?php echo htmlspecialchars( $value1["link"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["page"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+                                    <?php }else{ ?>
+                                        <?php if( $value1["i"] >= 1 && $value1["i"] <= $value1["total"] ){ ?>
+                                        <li class="page-item"><a class="page-link" href="<?php echo htmlspecialchars( $value1["link"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["i"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+                                        <?php } ?>
+                                    <?php } ?>                        
+                                    <?php } ?>            
+                                </ul>                                    
+                            </nav>
                         </div>
                     </div>
-
                 </div>
-            </div>
-            
+            </div>            
         </div>
     </div>
-
 </div>

@@ -1,0 +1,315 @@
+<div id="carouselGraph" class="carousel slide align-itens-left" data-ride="carousel" style="width: 100%;">
+                        
+                        <div class="carousel-inner">
+                            
+                            <div class="carousel-item active">                                
+                                <!-- BAR CHART REPRESADOS -->
+                                <div class="col">
+                                    <div class="card bar-chart-represados">                        
+                                      <div class="card-body ">
+                                        
+                                        <!-- BAR CHART REPRESADOS -->                                            
+                                        <canvas id="myChartRep" height="166"></canvas>
+                                        <script>
+                                        var ctx = document.getElementById("myChartRep");
+                                        var chartGraph = new Chart (ctx, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: [{loop="$represados.represados12"}"{function="reduzData(converteData($value.data))"}",{/loop}],
+                                                datasets:[{
+                                                    label: "REPRESADOS",
+                                                    data: [{loop="$represados.represados12"}{$value.indicador},{/loop}],           
+                                                    backgroundColor: [
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)',
+                                                        'rgba(212, 0, 0, 0.6)'
+                                                    ],
+                                                    borderColor: [
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)',
+                                                        'rgba(143, 0, 0, 1)'
+                                                    ],
+                                                    borderWidth: 1,
+                                                    }                                                    
+                                                ]
+                                            },
+                                            "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
+                                            
+                                        });
+                                        </script>
+
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+
+                            <div class="carousel-item">                                
+                                    <!-- BAR CHART TAREFAS -->
+                                    <div class="col">
+                                        <div class="card bar-chart-tarefas">
+                                          
+                                          <div class="card-body">
+                                           
+                                            <!-- BAR CHART TAREFAS CONCLUÍDAS -->                                            
+                                            <canvas id="myChartTarefasConcluidas" height="166"></canvas>
+                                            <script>
+                                            var ctx = document.getElementById("myChartTarefasConcluidas");
+                                            var chartGraph = new Chart (ctx, {
+                                                type: 'bar',
+                                                data: {
+                                                    labels: [{loop="$tarefas.tarefas12"}"{$value.mes}",{/loop}],
+                                                    datasets:[{
+                                                        label: "TAREFAS CONCLUÍDAS",
+                                                        data: [{loop="$tarefas.tarefas12"}{$value.concluidas},{/loop}],           
+                                                        backgroundColor: [
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)',
+                                                            'rgba(51, 179, 90, 0.6)'
+                                                        ],
+                                                        borderColor: [
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)',
+                                                            'rgba(51, 179, 90, 1)'
+                                                        ],
+                                                        borderWidth: 1,
+                                                        }   
+                                                        
+                                                    ]
+                                                },
+                                                "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
+                                                
+                                            });
+                                            </script>
+    
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+
+                                <div class="carousel-item">                                
+                                <!-- BAR CHART TAREFAS PENDENTES -->
+                                <div class="col">
+                                    <div class="card bar-chart-tarefas">
+                                        
+                                        <div class="card-body">
+                                        
+                                        <!-- BAR CHART TAREFAS PENDENTES -->                                            
+                                        <canvas id="myChartTarefasPendentes" height="166"></canvas>
+                                        <script>
+                                        var ctx = document.getElementById("myChartTarefasPendentes");
+                                        var chartGraph = new Chart (ctx, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: [{loop="$tarefas.tarefas12"}"{$value.mes}",{/loop}],
+                                                datasets:[{
+                                                    label: "TAREFAS PENDENTES",
+                                                    data: [{loop="$tarefas.tarefas12"}{$value.pendentes},{/loop}],           
+                                                    backgroundColor: [
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)',
+                                                        'rgba(0, 120, 255, 0.6)'
+                                                    ],
+                                                    borderColor: [
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)',
+                                                        'rgba(0, 58, 166, 1)'
+                                                    ],
+                                                    borderWidth: 1,
+                                                    }
+                                                    
+                                                ]
+                                            },
+                                            "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
+                                            
+                                        });
+                                        </script>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="carousel-item">
+                                <div class="col">
+                                    <div class="card my-0">
+                                        
+                                        <div class="card-body">                                
+                                            <!-- BAR CHART IMA-GDASS -->                                            
+                                            <canvas id="myChart" height="166"></canvas>
+                                            <script>
+                                            var ctx = document.getElementById("myChart");
+                                            var chartGraph = new Chart (ctx, {
+                                                type: 'bar',
+                                                data: {
+                                                    labels: [{loop="$imaGdass.imaGdass12"}"{$value.mes}",{/loop}],
+                                                    datasets:[{
+                                                        label: "IMA-GDASS",
+                                                        data: [{loop="$imaGdass.imaGdass12"}{$value.indicador},{/loop}],           
+                                                        backgroundColor: [
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)',
+                                                            'rgba(216, 136, 0, 0.6)'
+                                                        ],
+                                                        borderColor: [
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)',
+                                                            'rgba(164, 98, 0, 1)'
+                                                        ],
+                                                        borderWidth: 1,
+                                                        }
+                                                        
+                                                    ]
+                                                },
+                                                "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}                                                
+                                            });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">                                
+                                    <!-- BAR CHART INDEFERIMENTO -->
+                                    <div class="col">
+                                        <div class="card bar-chart-tarefas">
+                                            
+                                            <div class="card-body">
+                                            
+                                            <!-- BAR CHART TAREFAS INDEFERIMENTO -->                                            
+                                            <canvas id="myChartIndeferidos" height="166"></canvas>
+                                            <script>
+                                            var ctx = document.getElementById("myChartIndeferidos");
+                                            var chartGraph = new Chart (ctx, {
+                                                type: 'bar',
+                                                data: {
+                                                    labels: [{loop="$iib.iib12"}"{$value.mes}",{/loop}],
+                                                    datasets:[{
+                                                        label: "ÍNDICE DE INDEFERIMENTO",
+                                                        data: [{loop="$iib.iib12"}{$value.indicador},{/loop}],           
+                                                        backgroundColor: [
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)',
+                                                            'rgba(25, 25, 25, 0.6)'
+                                                        ],
+                                                        borderColor: [
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)',
+                                                            'rgba(20, 20, 20, 1)'
+                                                        ],
+                                                        borderWidth: 1,
+                                                        }
+                                                        
+                                                    ]
+                                                },
+                                                "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
+                                                
+                                            });
+                                            </script>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            
+                            <a class="carousel-control-prev text-secondary" href="#carouselGraph" role="button" data-slide="prev" style="background: none;">
+                            <span class="carousel-control-prev-icon"><h1><i class="fas fa-angle-left"></i></h1></span>
+                            <span class="sr-only">Anterior</span>
+                            </a>
+                            <a class="carousel-control-next text-secondary" href="#carouselGraph" role="button" data-slide="next" style="background: none;">
+                            <span class="carousel-control-next-icon"><h1><i class="fas fa-angle-right"></i></h1></span>
+                            <span class="sr-only">Próximo</span>
+                            </a>
+
+                        </div>
+                    </div>

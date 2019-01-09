@@ -1,7 +1,7 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Navbar bottom -->
-<nav class="border border-secondary navbar fixed-bottom navbar-expand-lg navbar-light" style="background-color: #adc8e6cb">
+<nav class="border border-secondary navbar fixed-bottom navbar-expand-lg navbar-light p-0" style="background-color: #adc8e6cb">
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-2">
             <li class="nav-item dropup">
             <a class="ml-auto nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <small><i class="fas fa-user"></i> <?php echo htmlspecialchars( $user["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?>, <?php echo htmlspecialchars( $user["matricula"], ENT_COMPAT, 'UTF-8', FALSE ); ?></small>
@@ -15,8 +15,8 @@
         </li>
         </ul>
     </div>
-    <div class="nav-item ml-auto">
-        <span class="nav-item text-muted"><small><i class="fas fa-map-marker-alt"></i> Sua Lotação: <strong><?php echo htmlspecialchars( $user["lotacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $nomeUnidade, ENT_COMPAT, 'UTF-8', FALSE ); ?></strong>&nbsp;&nbsp;<i class="fas fa-desktop"></i> Seu IP: <strong><?php echo htmlspecialchars( $ip, ENT_COMPAT, 'UTF-8', FALSE ); ?></strong></small></span>
+    <div class="nav-item ml-auto p-0">
+        <span class="nav-item text-muted mr-3"><small><i class="fas fa-map-marker-alt"></i> Sua Lotação: <strong><?php echo htmlspecialchars( $user["lotacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $nomeUnidade, ENT_COMPAT, 'UTF-8', FALSE ); ?></strong>&nbsp;&nbsp;<i class="fas fa-desktop"></i> Seu IP: <strong><?php echo htmlspecialchars( $ip, ENT_COMPAT, 'UTF-8', FALSE ); ?></strong></small></span>
     </div>
 </nav>
 
