@@ -15,11 +15,11 @@ class Query{
             
     }
 
-    public static function maisAcessados() {
+    public static function maisAcessados($tabela) {
     
         // Pesquisa todos os usuários
         $sql = new Sql();
-        $results = $sql->select("SELECT * FROM tb_sistemas UNION ALL SELECT * FROM tb_links UNION ALL SELECT * FROM tb_formularios ORDER BY hits DESC LIMIT 6");
+        $results = $sql->select("SELECT * FROM $tabela ORDER BY hits DESC LIMIT 5");
 
         return $results;
             

@@ -3,9 +3,9 @@
     <div class="row">
         <div class="col-4 mt-2">
            <!-- Avisos -->
-           <div class="card border-success mb-3 h-100">
-                <div class="card-header bg-success text-light"> 
-                    <i class="fas fa-star text-warning"></i> Links Favoritos
+           <div class="card border-muted mb-3 h-100">
+                <div class="card-header bg-muted text-dark"> 
+                    <i class="fas fa-star text-secondary"></i> Meus Favoritos
                 </div>
                 <div class="card-body text-dark p-1">                           
                     <div class="row">
@@ -229,47 +229,55 @@
             <div class="row mt-0">
                 <div class="col-5 p-0">                   
                     <!-- Mais Acessados -->
-                    <div class="card border-primary mb-3 h-100">
-                        <div class="card-header bg-primary text-light"> 
-                            <i class="fas fa-plus"></i> Mais Acessados
+                    <div class="card border-muted mb-3 h-100 box-shadow shadow">
+                        <div class="card-header bg-muted text-dark shadow"> 
+                            <i class="fas fa-plus text-secondary"></i> <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?> Mais Acessados
                         </div>
                         <div class="card-body text-dark">                           
                             <?php $counter1=-1;  if( isset($maisAcessados) && ( is_array($maisAcessados) || $maisAcessados instanceof Traversable ) && sizeof($maisAcessados) ) foreach( $maisAcessados as $key1 => $value1 ){ $counter1++; ?>
-                                <i class="<?php echo htmlspecialchars( $value1["icone"], ENT_COMPAT, 'UTF-8', FALSE ); ?> text-primary"></i>&nbsp;&nbsp;<a class="text-primary link" title="<?php echo htmlspecialchars( $value1["descricao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" href="<?php echo minusculas($value1["origem"]); ?>/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a>
+                                <a class="text-dark link" title="<?php echo htmlspecialchars( $value1["descricao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" href="<?php echo minusculas($value1["origem"]); ?>/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a>
                                 <hr class="my-1 text-secondary">
-                            <?php } ?>                            
+                            <?php } ?>
+                            <a class="btn btn-secondary btn-sm mt-2 mr-2" href="dashboard?origem=Sistemas">Sistemas</a><a class="btn btn-secondary btn-sm mt-2 mr-2" href="dashboard?origem=Links">Links</a><a class="btn btn-secondary btn-sm mt-2" href="dashboard?origem=Formularios">Formulários</a>
                         </div>
+                        
                     </div>                    
                 </div>
                 <div class="col-7">
                     <!-- Avisos -->
-                    <div class="card border-secondary mb-3 h-100">
-                        <div class="card-header bg-secondary text-light"> 
-                            <i class="fas fa-fw fa-bullhorn"></i> Quadro de Avisos
+                    <div class="card border-muted mb-3 h-100">
+                        <div class="card-header bg-muted text-dark"> 
+                            <i class="fas fa-fw fa-bullhorn text-secondary"></i> Quadro de Avisos
                         </div>
                         <div class="card-body text-dark">                           
-                            <?php $counter1=-1;  if( isset($avisos["data"]) && ( is_array($avisos["data"]) || $avisos["data"] instanceof Traversable ) && sizeof($avisos["data"]) ) foreach( $avisos["data"] as $key1 => $value1 ){ $counter1++; ?>
-                            <strong><?php echo htmlspecialchars( $value1["titulo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></strong>
-                            <p><?php echo htmlspecialchars( $value1["texto"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-                            <hr class="my-1 text-secondary">
-                            <small class="text-muted"><i class="far fa-calendar-alt"></i> <?php echo converteData($value1["data"]); ?> <i class="fas fa-user"></i> <?php echo htmlspecialchars( $value1["autor"], ENT_COMPAT, 'UTF-8', FALSE ); ?> </small>
-                            <?php } ?>                        
+                            <?php $counter1=-1;  if( isset($avisos["data"]) && ( is_array($avisos["data"]) || $avisos["data"] instanceof Traversable ) && sizeof($avisos["data"]) ) foreach( $avisos["data"] as $key1 => $value1 ){ $counter1++; ?>                        
+                            <h5 class="card-title"><?php echo htmlspecialchars( $value1["titulo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h5>
+                            <p class="mb-0"><?php echo htmlspecialchars( $value1["texto"], ENT_COMPAT, 'UTF-8', FALSE ); ?> <?php if( $value1["url"]!='' ){ ?><a href="<?php echo htmlspecialchars( $value1["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="text-primary link">[ + ]</a><?php } ?></p>                                                                                
                         </div>
-                        <div class="card-footer bg-muted border-secondary text-muted text-light p-0">
-                            <nav class="navbar">
-                                <ul class="pagination pagination-sm mb-0">
-                                    
-                                    <?php $counter1=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key1 => $value1 ){ $counter1++; ?>
-                                    <?php if( $value1["i"] == $value1["page"] ){ ?>
-                                    <li class="page-item active"><a class="page-link" href="<?php echo htmlspecialchars( $value1["link"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["page"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
-                                    <?php }else{ ?>
-                                        <?php if( $value1["i"] >= 1 && $value1["i"] <= $value1["total"] ){ ?>
-                                        <li class="page-item"><a class="page-link" href="<?php echo htmlspecialchars( $value1["link"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["i"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
-                                        <?php } ?>
-                                    <?php } ?>                        
-                                    <?php } ?>            
-                                </ul>                                    
-                            </nav>
+                        <div class="card-footer bg-muted border-muted text-muted text-light p-0">
+                            <div class="row">
+                                <div class="col-8">
+                                    <small class="text-muted align-text-middle ml-2"><i class="far fa-calendar-alt"></i> <?php echo converteData($value1["data"]); ?> <i class="fas fa-user"></i> <?php echo htmlspecialchars( $value1["autor"], ENT_COMPAT, 'UTF-8', FALSE ); ?> </small>
+                                </div>
+                                <?php } ?>
+                                <div class="col-4">
+                                    <nav class="navbar">
+                                        <ul class="pagination pagination-sm mb-0">
+                                            
+                                            <?php $counter1=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key1 => $value1 ){ $counter1++; ?>
+                                            <?php if( $value1["i"] == $value1["page"] ){ ?>
+                                            <li class="page-item active"><a class="page-link" href="<?php echo htmlspecialchars( $value1["link"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["page"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+                                            <?php }else{ ?>
+                                                <?php if( $value1["i"] >= 1 && $value1["i"] <= $value1["total"] ){ ?>
+                                                <li class="page-item"><a class="page-link" href="<?php echo htmlspecialchars( $value1["link"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["i"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+                                                <?php } ?>
+                                            <?php } ?>                        
+                                            <?php } ?>            
+                                        </ul>                                    
+                                    </nav>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

@@ -289,12 +289,14 @@ $app->get('/dashboard', function() {
 	$represados = Indicators::represados();
 
 	// Conteudo mais acessado
-	$maisAcessados = Query::maisAcessados();
+	$origem = (isset($_GET['origem'])) ? $_GET['origem'] : "Sistemas";
+	$tabela = "tb_".strtolower($origem);
+	$maisAcessados = Query::maisAcessados($tabela);
 
 	// Pesquisa os avisos do mesmo OL
 	$page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 	$avisos = Query::avisos($_SESSION[User::SESSION]['lotacao'], $page, 1);
-	$max_links = 10;
+	$max_links = 7;
 	$pages = [];
 	$links_laterais = ceil($max_links / 2);
 	$inicio = $page - $links_laterais;
@@ -329,6 +331,7 @@ $app->get('/dashboard', function() {
 		"fav"=>$fav,
 		"selFav"=>$selFav,
 		"maisAcessados"=>$maisAcessados,
+		"origem"=>$origem,
 		"pages"=>$pages,
 		"avisos"=>$avisos
 	));

@@ -12,8 +12,8 @@
     <meta http-equiv="pragma" content="no-cache" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="http://127.0.0.1/portalaps/node_modules/bootstrap/compiler/bootstrap.css">
-    <link rel="stylesheet" href="http://127.0.0.1/portalaps/node_modules/bootstrap/compiler/style.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/compiler/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/compiler/style.css">
 
     <!-- Calendar.css -->
     <link rel="stylesheet" href="css/calendar.css">
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="css/fontawesome-free-5.6.3-web/css/all.css">
 
     <!-- Charts.js -->
-    <script src="http://127.0.0.1/portalaps/node_modules/chart.js/dist/Chart.min.js"></script>
+    <script src="node_modules/chart.js/dist/Chart.min.js"></script>
   
     <title>PortalAPS</title>
 
@@ -109,7 +109,7 @@
     <!-- Navbar Principal -->
     <nav class="navbar fixed navbar-expand-lg navbar-dark" style="background-color: #0f3d5e;">
 
-        <a class="navbar-brand h1 mb-0" href="dashboard"><img src="http://127.0.0.1/portalaps/img/logo.png" valign="middle" alt="">PortalAPS</a>
+        <a class="navbar-brand h1 mb-0" href="dashboard"><img src="img/logo.png" valign="middle" alt="">PortalAPS</a>
         
         <!-- Botão para recolher a navbar -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
