@@ -1,33 +1,31 @@
 <div class="container-fluid my-2 mx-2">
     <div class="row">
         <div class="col-10 my-2">
-            <h6 class="text-dark"><i class="fa fa-fw fa-hotel"></i> Unidades <small class="text-muted"> <i>Visualize e cadastre novas Unidades de Atendimento</i></small><span class="float-right">{$registros} Unidades Cadastradas</span></h6>
+            <h6 class="text-dark"><i class="fa fa-fw fa-bullhorn"></i> Avisos <small class="text-muted"> <i>Cadastro e edição de avisos</i></small><span class="float-right">{$registros} Avisos Cadastrados</span></h6>
         </div>
         <div class="col-2">
-        <button class="btn btn-success btn-sm float-right mr-3" data-toggle="modal" data-target="#modalNovaUnidade"><i class="fas fa-file"></i> Nova Unidade</button>                   
+        <button class="btn btn-success btn-sm float-right mr-3" data-toggle="modal" data-target="#modalNovoAviso"><i class="fas fa-file"></i> Novo Aviso</button>                   
         </div>
     </div>
     <div class="row" style="min-height: 320px;">
         <table class="table mb-1 table-sm table-hover">
         <thead>
-            <tr>              
-            <th>Código</th>
-            <th>Nome</th>
-            <th>Endereço</th>            
-            <th>Telefone</th>                             
-            <th class="text-center">Opções</th>
+            <tr>                          
+            <th width="15%">Título</th>                      
+            <th>Texto</th>                             
+            <th width="15%" class="text-center">Opções</th>
             </tr>
         </thead>
         <tbody>
-            {loop="$unidades"}
-            <tr>            
-            <td>{$value.codigo}</td>
-            <td>{$value.nome}</td>
-            <td>{$value.endereco}</td>
-            <td>{$value.telefone}</td>            
-            <td class="text-center">                                
-                <a href="#" data-toggle="modal" data-target="#modalEditarUnidade-{$value.id}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar </a>
-                <a href="unidades/{$value.id}/delete/{loop="$pages"}{if="$value.i == $value.page"}{$value.i}{/if}{/loop}" class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir a Unidade {$value.nome}?')"><i class="fa fa-trash"></i> Excluir</a>                
+            {loop="$avisos"}
+            <tr>                        
+            <td width="15%"><strong>{$value.titulo}</strong></td>            
+            <td>{$value.texto}
+                <p><small><i class="fas fa-user text-muted"></i> {$value.autor}, em {function="converteData($value.data)"}</small></p>
+            </td>            
+            <td width="15%" class="text-center">                                
+                <a href="#" data-toggle="modal" data-target="#modalEditarAviso-{$value.id}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar </a>
+                <a href="admin-avisos/{$value.id}/delete/{loop="$pages"}{if="$value.i == $value.page"}{$value.i}{/if}{/loop}" class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir este aviso?')"><i class="fa fa-trash"></i> Excluir</a>                
             </td>
             </tr>
             {/loop}
@@ -101,44 +99,54 @@
         </div>
     </div>
 </div>
+    
+<!-- Modal Editar Aviso-->
+{loop="$avisos"}
+<script>
+    function limite_textarea{$value.id}(valor) {
+        quant = 280;
+        total = valor.length;
+        if(total <= quant) {
+            resto = quant - total;
+            document.getElementById('cont-{$value.id}').innerHTML = resto;
+        } else {
+            document.getElementById('texto-{$value.id}').value = valor.substr(0,quant);
+        }
+    }
+</script>
 
-<!-- Modal Editar Unidade-->
-{loop="$unidades"}
-<div class="modal" id="modalEditarUnidade-{$value.id}" data-backdrop="static">
+<div class="modal" id="modalEditarAviso-{$value.id}" data-backdrop="static">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><i class="fa fa-fw fa-hotel"></i> Alterar dados da Unidade</h5>
+                <h5 class="modal-title"><i class="fa fa-fw fa-bullhorn"></i> Editar Aviso</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <span>&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form autocomplete="off" role="form" action="unidades/{$value.id}/{loop="$pages"}{if="$value.i == $value.page"}{$value.i}{/if}{/loop}" method="POST" enctype="multipart/form-data">
+                <form autocomplete="off" role="form" action="admin-avisos/{$value.id}/{loop="$pages"}{if="$value.i == $value.page"}{$value.i}{/if}{/loop}" method="POST" enctype="multipart/form-data">
                     <div class="container-fluid text-left">
                         <div class="row">                            
                             <div class="col-12">                                
                                 <div class="row">
                                     <div class="col">
-                                        <label class="mb-0" for="nome">Nome</label>
-                                        <input type="text" value="{$value.nome}" class="form-control mb-1" name="nome" id="nome" placeholder="Nome da Unidade" required>
+                                        <label class="mb-0" for="titulo">Título</label>
+                                        <input type="text" value="{$value.titulo}" class="form-control mb-1" name="titulo" id="titulo" placeholder="Título do aviso" required>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
-                                        <label class="mb-0" for="codigo">Código OL</label>
-                                        <input type="text" value="{$value.codigo}" class="form-control mb-1" name="codigo" id="codigo" placeholder="Código OL" required>
-                                    </div>
-                                    <div class="col-6">
-                                        <label class="mb-0" for="telefone">Telefone</label>
-                                        <input type="text" value="{$value.telefone}" class="form-control mb-0" name="telefone" id="telefone" maxlength='13' onkeypress="formatar_mascara(this, '##.####-####')" placeholder="Telefone">                                
-                                    </div>
-                                </div>                                
+                                    <div class="col">
+                                        <label class="mb-0" for="codigo">Texto</label>
+                                        <textarea name="texto" rows="5" class="form-control mb-1" onkeyup="limite_textarea{$value.id}(this.value)" id="texto-{$value.id}" placeholder="Digite o texto com até 300 caracteres" maxlength="280" required>{$value.texto}</textarea>
+                                        <p class="text-muted"><small><span id="cont-{$value.id}">{function="contarCaracteres($value.texto)"}</span></small> caracteres restantes</p>
+                                    </div>                                    
+                                </div>
                                 <div class="row">
                                     <div class="col">
-                                        <label class="mb-0" for="endereco">Endereço completo</label>
-                                        <input type="text" value="{$value.endereco}" class="form-control mb-1" name="endereco" id="endereco" placeholder="Endereço completo">
-                                    </div>
+                                        <label class="mb-0" for="url">URL</label>
+                                        <input type="text" value="{$value.url}" class="form-control mb-0" name="url" id="url" placeholder="Link para mais informações">                                
+                                    </div>                                                                
                                 </div>
                             </div>
                         </div>
@@ -152,3 +160,4 @@
     </div>
 </div>
 {/loop}
+

@@ -229,57 +229,11 @@
             <div class="row mt-0">
                 <div class="col-5 p-0">                   
                     <!-- Mais Acessados -->
-                    <div class="card border-muted mb-3 h-100 box-shadow shadow">
-                        <div class="card-header bg-muted text-dark shadow"> 
-                            <i class="fas fa-plus text-secondary"></i> {$origem} Mais Acessados
-                        </div>
-                        <div class="card-body text-dark">                           
-                            {loop="$maisAcessados"}
-                                <a class="text-dark link" title="{$value.descricao}" href="{function="minusculas($value.origem)"}/{$value.id}">{$value.nome}</a>
-                                <hr class="my-1 text-secondary">
-                            {/loop}
-                            <a class="btn btn-secondary btn-sm mt-2 mr-2" href="dashboard?origem=Sistemas">Sistemas</a><a class="btn btn-secondary btn-sm mt-2 mr-2" href="dashboard?origem=Links">Links</a><a class="btn btn-secondary btn-sm mt-2" href="dashboard?origem=Formularios">Formulários</a>
-                        </div>
-                        
-                    </div>                    
+                    <iframe name="avisos" src="mais_acessados" width="100%" height="300" frameborder="no" scrolling="no"></iframe>                                       
                 </div>
                 <div class="col-7">
                     <!-- Avisos -->
-                    <div class="card border-muted mb-3 h-100">
-                        <div class="card-header bg-muted text-dark"> 
-                            <i class="fas fa-fw fa-bullhorn text-secondary"></i> Quadro de Avisos
-                        </div>
-                        <div class="card-body text-dark">                           
-                            {loop="$avisos.data"}                        
-                            <h5 class="card-title">{$value.titulo}</h5>
-                            <p class="mb-0">{$value.texto} {if="$value.url!=''"}<a href="{$value.url}" class="text-primary link">[ + ]</a>{/if}</p>                                                                                
-                        </div>
-                        <div class="card-footer bg-muted border-muted text-muted text-light p-0">
-                            <div class="row">
-                                <div class="col-8">
-                                    <small class="text-muted align-text-middle ml-2"><i class="far fa-calendar-alt"></i> {function="converteData($value.data)"} <i class="fas fa-user"></i> {$value.autor} </small>
-                                </div>
-                                {/loop}
-                                <div class="col-4">
-                                    <nav class="navbar">
-                                        <ul class="pagination pagination-sm mb-0">
-                                            
-                                            {loop="$pages"}
-                                            {if="$value.i == $value.page"}
-                                            <li class="page-item active"><a class="page-link" href="{$value.link}">{$value.page}</a></li>
-                                            {else}
-                                                {if="$value.i >= 1 && $value.i <= $value.total"}
-                                                <li class="page-item"><a class="page-link" href="{$value.link}">{$value.i}</a></li>
-                                                {/if}
-                                            {/if}                        
-                                            {/loop}            
-                                        </ul>                                    
-                                    </nav>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
+                    <iframe name="avisos" src="avisos" width="100%" height="100%" frameborder="no" scrolling="no"></iframe>
                 </div>
             </div>            
         </div>

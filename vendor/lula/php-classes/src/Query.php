@@ -182,6 +182,54 @@ class Query{
         ];
     }
 
+    public function deleteUnidade($id)
+    {
+        $sql = new Sql();
+        
+        // Pesquisa o código da Unidade para verificar se houve mudança
+        $results = $sql->select("SELECT codigo FROM tb_unidades WHERE id=:id", array(
+            ":id"=>$id
+        ));
+
+        $codigo = $results[0]['codigo'];
+        
+        $sql->query("UPDATE tb_users SET lotacao = '' WHERE lotacao = :codigo", array(
+            ":codigo"=>$codigo
+        ));
+
+        $sql->query("DELETE FROM tb_unidades WHERE id = :id", array(
+            ":id"=>$id
+        ));
+    }
+
+    public function editarUnidade($dados)
+    {
+        $sql = new Sql();
+
+        // Pesquisa o código da Unidade para verificar se houve mudança
+        $results = $sql->select("SELECT codigo FROM tb_unidades WHERE id=:id", array(
+            ":id"=>$dados['id']
+        ));
+
+        $codAtual = $results[0]['codigo'];
+
+        if($codAtual != $dados['codigo'])
+        {
+            $sql->query("UPDATE tb_users SET lotacao = :codigo WHERE lotacao = :codAtual", array(
+                ":codigo"=>$dados['codigo'],
+                ":codAtual"=>$codAtual
+            ));
+        }
+
+        $sql->query("UPDATE tb_unidades SET nome = :nome, codigo = :codigo, telefone = :telefone, endereco = :endereco WHERE id = :id", array(
+            ":nome"=>$dados['nome'],
+            ":codigo"=>$dados['codigo'],
+            ":telefone"=>$dados['telefone'],
+            ":endereco"=>$dados['endereco'],
+            "id"=>$dados['id']
+        ));
+    }
+
     public function avisos($unidade, $page = 1, $itensPerPage = 1)
     {
         $start = ($page - 1) * $itensPerPage;
@@ -198,6 +246,41 @@ class Query{
             "pages"=>ceil($total[0]['nrtotal'] / $itensPerPage),
             "actual"=>$page
         ];
+    }
+
+    public function getAvisos($page = 1, $itensPerPage = 2)
+    {
+        $start = ($page - 1) * $itensPerPage;
+        
+        $sql = new Sql();
+        $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * FROM tb_avisos ORDER BY data DESC LIMIT $start, $itensPerPage");
+        $total = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
+        
+        return [
+            "data"=>$results,
+            "total"=>(int)$total[0]['nrtotal'],
+            "pages"=>ceil($total[0]['nrtotal'] / $itensPerPage),
+            "actual"=>$page,
+        ];
+    }
+
+    public function editarAviso($dados)
+    {
+        $sql = new Sql();
+        $sql->query("UPDATE tb_avisos SET titulo = :titulo, texto = :texto, url = :url WHERE id = :id", array(
+            ":titulo"=>$dados['titulo'],
+            ":texto"=>$dados['texto'],
+            ":url"=>$dados['url'],
+            ":id"=>$dados['id']
+        ));
+    }
+
+    public function deleteAviso($id)
+    {
+        $sql = new Sql();
+        $sql->query("DELETE FROM tb_avisos WHERE id = :id", array(
+            ":id"=>$id
+        ));
     }
     
     public static function novoConteudo($tabela, $nome, $descricao, $url, $origem, $icone, $tags)

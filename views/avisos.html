@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Limpeza de chache -->
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1997 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/compiler/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/compiler/style.css">
+
+    <!-- Calendar.css -->
+    <link rel="stylesheet" href="css/calendar.css">
+    
+    <!-- Fonts Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.6.3-web/css/fontawesome.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.6.3-web/css/all.css">
+
+    <!-- Charts.js -->
+    <script src="node_modules/chart.js/dist/Chart.min.js"></script>
+    
+
+        <div class="card border-muted mb-3 h-100">
+            <div class="card-header bg-muted text-dark"> 
+                <i class="fas fa-fw fa-bullhorn text-secondary"></i> Quadro de Avisos
+            </div>
+            <div class="card-body text-dark" style="min-height: 200px;">                           
+                {loop="$avisos.data"}                        
+                <h5 class="card-title">{$value.titulo}</h5>
+                <p class="mb-0">{$value.texto} {if="$value.url!=''"}<a href="{$value.url}" class="text-primary link">[ + ]</a>{/if}</p>                                                                                
+            </div>
+            <div class="card-footer bg-muted border-muted text-muted text-light p-0">
+                <div class="row">
+                    <div class="col-8">
+                        <small class="text-muted align-text-middle ml-2"><i class="far fa-calendar-alt"></i> {function="converteData($value.data)"} <i class="fas fa-user"></i> {$value.autor} </small>
+                    </div>
+                    {/loop}
+                    <div class="col-4">
+                        <nav class="navbar">
+                            <ul class="pagination pagination-sm mb-0">
+                                
+                                {loop="$pages"}
+                                {if="$value.i == $value.page"}
+                                <li class="page-item active"><a class="page-link" href="{$value.link}">{$value.page}</a></li>
+                                {else}
+                                    {if="$value.i >= 1 && $value.i <= $value.total"}
+                                    <li class="page-item"><a class="page-link" href="{$value.link}">{$value.i}</a></li>
+                                    {/if}
+                                {/if}                        
+                                {/loop}            
+                            </ul>                                    
+                        </nav>
+                    </div>
+                </div>                            
+            </div>
+        </div>

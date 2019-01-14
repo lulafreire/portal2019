@@ -276,6 +276,19 @@ $app->get('/dashboard', function() {
 	// Variáveis do usuário logado
 	$user = $_SESSION[User::SESSION];
 
+	// Caso a Unidade tenha não exista
+	if($_SESSION[User::SESSION]['lotacao']=='')
+	{
+		$page = new Page([
+
+			"header"=>false,
+			"footer"=>false
+	
+		]);
+		$page->setTpl("unidade-erro");
+		exit;
+	}
+
 	// Nome da Unidade
 	$nomeUnidade = User::nomeUnidade($_SESSION[User::SESSION]['lotacao']);
 	
@@ -336,6 +349,68 @@ $app->get('/dashboard', function() {
 		"avisos"=>$avisos
 	));
 
+});
+
+$app->get('/avisos', function(){
+
+	// Pesquisa os avisos do mesmo OL
+	$page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
+	$avisos = Query::avisos($_SESSION[User::SESSION]['lotacao'], $page, 1);
+	$max_links = 7;
+	$pages = [];
+	$links_laterais = ceil($max_links / 2);
+	$inicio = $page - $links_laterais;
+	if($inicio<1)
+	{
+		$inicio = 1;
+	}
+	$limite = $page + $links_laterais;
+
+	
+	for ($i = $inicio; $i <= $limite; $i++)
+	{
+		array_push($pages, [
+			'link'=>'avisos?page='.$i,
+			'page'=>$page,
+			'i'=>$i,
+			'total'=>$avisos['pages'],
+			'registros'=>$avisos['total']
+		]);
+	}
+
+	$page = new Page([
+
+		"header"=>false,
+		"footer"=>false
+
+	]);
+	
+	$page->setTpl("avisos", array(
+		"pages"=>$pages,
+		"avisos"=>$avisos
+	));
+	
+});
+
+$app->get('/mais_acessados', function(){
+
+	// Conteudo mais acessado
+	$origem = (isset($_GET['origem'])) ? $_GET['origem'] : "Sistemas";
+	$tabela = "tb_".strtolower($origem);
+	$maisAcessados = Query::maisAcessados($tabela);
+
+	$page = new Page([
+
+		"header"=>false,
+		"footer"=>false
+
+	]);
+	
+	$page->setTpl("mais_acessados", array(
+		"maisAcessados"=>$maisAcessados,
+		"origem"=>$origem
+	));
+	
 });
 
 $app->get('/equipe', function() {
@@ -1049,15 +1124,136 @@ $app->post('/unidades', function(){
 
 });
 
-$app->post('/unidades/:id', function($id){
+$app->post('/unidades/:id/:page', function($id, $page){
 
-	echo "Edita os dados da Undiade $id";
+	if(isset($_POST))
+	{
+		$dados = [
+			"id"=>$id,
+			"nome"=>$_POST['nome'],
+			"codigo"=>$_POST['codigo'],
+			"telefone"=>$_POST['telefone'],
+			"endereco"=>$_POST['endereco']
+		];
+	}
+
+	Query::editarUnidade($dados);
+
+	header("Location: ../../unidades?page=$page");
+	exit;
 	
 });
 
 $app->get('/unidades/:id/delete/:page', function($id, $page){
 
-	echo "Exclui a Unidade $id page $page";
+	Query::deleteUnidade($id);
+
+	header("Location: ../../../unidades?page=$page");
+	exit;
+
+
+});
+
+$app->get('/admin-avisos', function(){
+
+	// Verifica se o usuário está logado
+	User::verifyLogin();
+
+	// Favoritos do usuário logado
+	$favoritos = User::favoritos();
+	$fav = $favoritos[0];
+
+	// Permite a Edição de Favoritos
+	$selFav = User::selectFavoritos();
+
+	// Variáveis do usuário logado
+	$user = $_SESSION[User::SESSION];
+
+	// Nome da Unidade
+	$nomeUnidade = User::nomeUnidade($_SESSION[User::SESSION]['lotacao']);
+	
+	// IP
+	$ip      = $_SERVER['REMOTE_ADDR'];
+	
+	// Verifica o status do usuário
+	$iduser = $_SESSION[User::SESSION]['iduser'];
+	$status = User::verificaStatus($iduser);
+
+	if($status!='1')
+	{
+		$tpl = "conteudo-erro";
+	}
+	else
+	{
+		$tpl = "admin-avisos";
+	}
+
+	// Pesquisa o conteúdo cadastrado
+	$page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
+	$avisos = Query::getAvisos($page, 2);
+	$max_links = 10;
+	$pages = [];
+	$links_laterais = ceil($max_links / 2);
+	$inicio = $page - $links_laterais;
+	if($inicio<1)
+	{
+		$inicio = 1;
+	}
+	$limite = $page + $links_laterais;
+
+	for ($i = $inicio; $i <= $limite; $i++)
+	{
+		array_push($pages, [
+			'link'=>'admin-avisos?page='.$i,
+			'page'=>$page,
+			'i'=>$i,
+			'total'=>$avisos['pages']
+		]);
+	}
+
+	$page = new Page([
+
+	]);
+
+	$page->setTpl("$tpl", array(
+		"avisos"=>$avisos['data'],
+		"pages"=>$pages,
+		"user"=>$user,
+		"nomeUnidade"=>$nomeUnidade,
+		"ip"=>$ip,
+		"fav"=>$fav,
+		"selFav"=>$selFav,
+		"registros"=>$avisos['total']
+	));
+
+});
+
+$app->post('/admin-avisos/:id/:page', function($id, $page){
+
+	if(isset($_POST))
+	{
+		$dados = [
+			"id"=>$id,
+			"titulo"=>$_POST['titulo'],
+			"texto"=>$_POST['texto'],
+			"url"=>$_POST['url']
+		];
+	}
+
+	Query::editarAviso($dados);
+
+	header("Location: ../../admin-avisos?page=$page");
+	exit;
+	
+});
+
+$app->get('/admin-avisos/:id/delete/:page', function($id, $page){
+
+	Query::deleteAviso($id);
+
+	header("Location: ../../../admin-avisos?page=$page");
+	exit;
+
 
 });
 

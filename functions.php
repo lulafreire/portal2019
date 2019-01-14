@@ -124,6 +124,12 @@ function limpaPesquisa($q)
 	return $q;
 }
 
+function contarCaracteres($texto)
+{
+	$qtCaracteres = strlen($texto);
+	return $restantes = 280 - $qtCaracteres;
+}
+
 function formataNumero($numero, $origem)
 {
 	$qNum = strlen($numero);
