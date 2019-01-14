@@ -264,6 +264,18 @@ class Query{
         ];
     }
 
+    public function novoAviso($dados)
+    {
+        $sql = new Sql();
+        $sql->query("INSERT INTO tb_avisos (titulo, texto, url, autor, data, unidade) VALUES (:titulo, :texto, :url, :autor, curdate(), :unidade)", array(
+            ":titulo"=>$dados['titulo'],
+            ":texto"=>$dados['texto'],
+            ":url"=>$dados['url'],
+            ":autor"=>$_SESSION[User::SESSION]['nome'],
+            ":unidade"=>$_SESSION[User::SESSION]['lotacao']
+        ));
+    }
+
     public function editarAviso($dados)
     {
         $sql = new Sql();

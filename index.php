@@ -1228,6 +1228,24 @@ $app->get('/admin-avisos', function(){
 
 });
 
+$app->post('/admin-avisos/novo/:page', function($page){
+
+	if(isset($_POST))
+	{
+		$dados = [
+			"titulo"=>$_POST['titulo'],
+			"texto"=>$_POST['texto'],
+			"url"=>$_POST['url']
+		];
+	}
+
+	Query::novoAviso($dados);
+
+	header("Location: ../../admin-avisos?page=$page");
+	exit;
+	
+});
+
 $app->post('/admin-avisos/:id/:page', function($id, $page){
 
 	if(isset($_POST))
