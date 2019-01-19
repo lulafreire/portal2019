@@ -1,0 +1,141 @@
+<div class="container-fluid my-2 mx-2">
+    <div class="row">
+        <div class="col-11 my-2">
+            <h6 class="text-dark"><i class="fas fa-box-open"></i> Arquivos <small class="text-muted"> <i>Disponibiliza os processos arquivados</i></small><span class="float-right">{$registros} Processos Cadastrados</span></h6>
+        </div>
+        <div class="col-1">
+        {if="$user.status==1 OR $user.status==3"}<button class="btn btn-success btn-sm float-right mr-3" data-toggle="modal" data-target="#modalNovoArquivo"><i class="fas fa-file"></i> Novo</button>{/if}                   
+        </div>
+    </div>
+    <div class="row" style="min-height: 320px;">
+        <table class="table mb-1 table-sm table-hover">
+        <thead>
+            <tr>              
+            <th>Número</th>
+            <th>Titular</th>
+            <th class="text-center">Origem</th>
+            <th class="text-center">Caixa</th>
+            <th class="text-center">Cadastrado em</th>
+            <th class="text-center">Atualizado em</th>             
+            <th class="text-center">Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            {loop="$arquivos.data"}
+            <tr>    
+            <td>{function="formataNumero($value.numero, $value.origem)"}</td>
+            <td>{$value.titular}</td>            
+            <td class="text-center">{$value.origem}</td>
+            <td class="text-center">{$value.caixa}</td>
+            <td class="text-center">{function="converteData($value.dt_cadastro)"}</td>
+            <td class="text-center">{function="converteData($value.dt_atualizacao)"}</td>
+            <td class="text-center">
+                <a href="download/{$value.id}" data-toggle="tooltip" data-placement="top" title="Baixar o anexo principal com {$value.tam} Mb. Para baixar outros anexos, detalhe o registro." class="btn btn-secondary btn-sm {if="$value.url==''"}disabled{/if}"><i class="fas fa-download"></i> Baixar </a>
+                <a href="#" data-toggle="modal" data-target="#modalDetalhaArquivo-{$value.id}" class="btn btn-info btn-sm"><i class="fas fa-asterisk"></i> Detalhar </a>
+                {if="$user.status==1 or $user.status==3"}
+                <a href="#" data-toggle="modal" data-target="#modalEditarArquivo-{$value.id}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar </a>
+                <a href="arquivos/{$value.id}/delete/{loop="$pages"}{if="$value.i == $value.page"}{$value.i}{/if}{/loop}" class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir {$value.titular}?')"><i class="fa fa-trash"></i> Excluir</a>
+                {/if}
+            </td>
+            </tr>
+            {/loop}
+        </tbody>
+        </table>
+    </div>                
+    <div class="row">
+        <div class="col-6">
+            <nav aria-label="Navegação de página exemplo" class="mt-2 mx-2">
+                <ul class="pagination pagination-sm">
+                    
+                    {loop="$pages"}
+                    {if="$value.i == $value.page"}
+                    <li class="page-item active"><a class="page-link" href="{$value.link}">{$value.page}</a></li>
+                    {else}
+                        {if="$value.i >= 1 && $value.i <= $value.total"}
+                        <li class="page-item"><a class="page-link" href="{$value.link}">{$value.i}</a></li>
+                        {/if}
+                    {/if}                        
+                    {/loop}            
+                </ul>                                    
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Modal Novo Arquivo-->
+<div class="modal" id="modalNovoArquivo" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-box-open"></i> Cadastre um novo Processo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <form autocomplete="off" role="form" action="novo-arquivo" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="numero" class="mb-0">Número do Processo</label>
+                                <input type="text" class="form-control mb-1" id="numero" name="numero" placeholder="Número do processo" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="numero" class="mb-0">Nome do Titular</label>
+                                <input type="text" class="form-control mb-1" id="titular" name="titular" placeholder="Nome do titular" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="instituidor" class="mb-0">Instituidor</label>
+                                <input type="text" class="form-control mb-1" id="instituidor" name="instituidor" placeholder="Nome do Instituidor">
+                            </div>
+                            <div class="col-6">
+                                <label for="representante" class="mb-0">Representante Legal</label>
+                                <input type="text" class="form-control mb-1" id="representante" name="representante" placeholder="Nome do RL, caso exista" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="caixa" class="mb-0">Caixa</label>
+                                <input type="text" class="form-control mb-1" id="caixa" name="caixa" placeholder="Número Alternativo de Arquivamento">
+                            </div>
+                            <div class="col-6">
+                                <label for="origem" class="mb-0">Origem</label>
+                                <select name="origem" class="form-control mb-1">
+                                    <option value="TBM">TBM - Benefícios transferidos de outro OL</option>
+                                    <option value="REQ">Requerimentos Diversos</option>
+                                    <option value="ATU">Atualizações de Benefícios</option>
+                                    <option value="CNIS">Acertos de Vínculos e Remunerações</option>
+                                    <option value="SABI">SABI</option>
+                                    <option value="AP">Autorizações de Pagamento - AP</option>
+                                    <option value="ID">INSS Digital</option>
+                                    <option value="DIG">Cópias Digitalizadas</option>
+                                    <option value="CTC">Certidões de Tempo de Contribuição - CTC</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="anexo" class="mb-0">Anexo</label>
+                                <input type="file" class="form-control-file" name="file" id="file">
+                            </div>
+                            <div class="col-6">
+                                <label for="descricao" class="mb-0">Descrição do Anexo</label>
+                                <input type="text" class="form-control mb-1" id="descricao" name="descricao" placeholder="Concessório, dossiê, recurso, etc">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="text-muted">Outros anexos podem ser adicionados utilizando-se a opção "Editar".</span>
+                            </div>                            
+                        </div>                           
+                    </div>                    
+                </div>                
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-success" value="Cadastrar"><button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                </div>                        
+            </form>
+        </div>
+    </div>
+</div>
+

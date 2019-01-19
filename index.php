@@ -10,6 +10,7 @@ use \Lula\PageAdmin;
 use \Lula\User;
 use \Lula\Indicators;
 use \Lula\Query;
+use \Lula\Arquivos;
 
 $app = new Slim();
 
@@ -398,6 +399,7 @@ $app->get('/mais_acessados', function(){
 	$origem = (isset($_GET['origem'])) ? $_GET['origem'] : "Sistemas";
 	$tabela = "tb_".strtolower($origem);
 	$maisAcessados = Query::maisAcessados($tabela);
+	$todos = Query::todos($tabela);
 
 	$page = new Page([
 
@@ -408,7 +410,8 @@ $app->get('/mais_acessados', function(){
 	
 	$page->setTpl("mais_acessados", array(
 		"maisAcessados"=>$maisAcessados,
-		"origem"=>$origem
+		"origem"=>$origem,
+		"todos"=>$todos
 	));
 	
 });
@@ -469,6 +472,169 @@ $app->get('/equipe', function() {
 		"pages"=>$pages,
 		"registros"=>$users['total']
 	));
+
+});
+
+$app->get('/arquivos', function(){
+
+	// Verifica se o usuário está logado
+	User::verifyLogin();
+
+	// Favoritos do usuário logado
+	$favoritos = User::favoritos();
+	$fav = $favoritos[0];
+
+	// Permite a Edição de Favoritos
+	$selFav = User::selectFavoritos();
+
+	// Variáveis do usuário logado
+	$user = $_SESSION[User::SESSION];
+
+	// Nome da Unidade
+	$nomeUnidade = User::nomeUnidade($_SESSION[User::SESSION]['lotacao']);
+	
+	// IP
+	$ip      = $_SERVER['REMOTE_ADDR'];
+
+	// Pesquisa os usuários do mesmo OL
+	$page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
+	$q = (isset($_GET['q'])) ? $_GET['q'] : '';
+	$arquivos = Arquivos::getArquivos($_SESSION[User::SESSION]['lotacao'], $page, 7, $q);
+	$max_links = 10;
+	$pages = [];
+	$links_laterais = ceil($max_links / 2);
+	$inicio = $page - $links_laterais;
+	if($inicio<1)
+	{
+		$inicio = 1;
+	}
+	$limite = $page + $links_laterais;
+
+	for ($i = $inicio; $i <= $limite; $i++)
+	{
+		array_push($pages, [
+			'link'=>'arquivos?q='.$q.'&page='.$i,
+			'page'=>$page,
+			'i'=>$i,
+			'total'=>$arquivos['pages']
+		]);
+	}
+
+	$page = new PageAdmin();
+
+	$page->setTpl("arquivos", array(
+		"user"=>$user,
+		"nomeUnidade"=>$nomeUnidade,
+		"ip"=>$ip,
+		"fav"=>$fav,
+		"selFav"=>$selFav,
+		"arquivos"=>$arquivos,
+		"pages"=>$pages,
+		"registros"=>$arquivos['total']
+	));
+
+});
+
+$app->post('/arquivos', function(){
+
+	// Verifica se o usuário está logado
+	User::verifyLogin();
+
+	// Favoritos do usuário logado
+	$favoritos = User::favoritos();
+	$fav = $favoritos[0];
+
+	// Permite a Edição de Favoritos
+	$selFav = User::selectFavoritos();
+
+	// Variáveis do usuário logado
+	$user = $_SESSION[User::SESSION];
+
+	// Nome da Unidade
+	$nomeUnidade = User::nomeUnidade($_SESSION[User::SESSION]['lotacao']);
+	
+	// IP
+	$ip      = $_SERVER['REMOTE_ADDR'];
+
+	// Pesquisa os usuários do mesmo OL
+	$page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
+	$q = (isset($_POST['q'])) ? $_POST['q'] : $_GET['q'];
+	$arquivos = Arquivos::buscaArquivos($_SESSION[User::SESSION]['lotacao'], $page, 7, $_POST['q']);
+	$max_links = 10;
+	$pages = [];
+	$links_laterais = ceil($max_links / 2);
+	$inicio = $page - $links_laterais;
+	if($inicio<1)
+	{
+		$inicio = 1;
+	}
+	$limite = $page + $links_laterais;
+
+	for ($i = $inicio; $i <= $limite; $i++)
+	{
+		array_push($pages, [
+			'link'=>'arquivos?q='.$q.'&page='.$i,
+			'page'=>$page,
+			'i'=>$i,
+			'total'=>$arquivos['pages']
+		]);
+	}
+
+	$page = new PageAdmin();
+
+	$page->setTpl("arquivos", array(
+		"user"=>$user,
+		"nomeUnidade"=>$nomeUnidade,
+		"ip"=>$ip,
+		"fav"=>$fav,
+		"selFav"=>$selFav,
+		"arquivos"=>$arquivos,
+		"pages"=>$pages,
+		"registros"=>$arquivos['total']
+	));
+
+});
+
+$app->post('/novo-arquivo', function(){
+	
+	User::verifyLogin();
+
+	// Recupera os dados do formulário
+	if(!empty($_FILES['file']['name']))
+	{
+		// Apaga a foto atual
+		$ext = strtolower(substr($_FILES['file']['name'],-4)); //Pegando extensão do arquivo
+		$kb = ($_FILES['file']['size'] / 1024) / 1024;
+		$tam = round($kb, 2);
+		$anexo = date('Ymdhis').$ext; //Definindo um novo nome para o arquivo
+		$dir = 'anexos/'; //Diretório para uploads 
+		move_uploaded_file($_FILES['file']['tmp_name'], $dir.$anexo); //Fazer upload do arquivo
+
+		echo $tam;
+		exit;
+	}
+	else
+	{
+		$anexo     = '';
+		$tam       = '';
+	}
+
+	$dados = [
+		"numero"=>$_POST['numero'],
+		"titular"=>$_POST['titular'],
+		"instituidor"=>isset($_POST['instituidor']) ? $_POST['instituidor'] : '',
+		"representante"=>isset($_POST['representante']) ? $_POST['representante'] : '',
+		"origem"=>$_POST['origem'],
+		"caixa"=>$_POST['caixa'],
+		"anexo"=>$anexo,
+		"tam"=>$tam,
+		"descricao"=>isset($_POST['descricao']) ? $_POST['descricao'] : ''
+	];
+
+	Arquivos::novoArquivo($dados);
+
+	header ("Location: arquivos");
+	exit;
 
 });
 
@@ -691,50 +857,33 @@ $app->post('/trocasenha', function(){
 
 $app->post('/busca', function(){
 
-	// Verifica se o usuário está logado
-	User::verifyLogin();
+	// Define o banco de dados a ser efetuada a busca
+	$banco = (isset($_POST['banco'])) ? $_POST['banco'] : '';
 
-	// Favoritos do usuário logado
-	$favoritos = User::favoritos();
-	$fav = $favoritos[0];
+	// Define a classe que fará a busca
+	if($banco == 'Sistemas')
+	{
+		$busca = Query::buscaSistemas($_POST['q']);
+		$id = $busca[0]['id'];
+		header("Location: sistemas/$id");
+		exit;
+	}
 
-	// Permite a Edição de Favoritos
-	$selFav = User::selectFavoritos();
+	if($banco == 'Links')
+	{
+		$busca = Query::buscaLinks($_POST['q']);
+		$id = $busca[0]['id'];
+		header("Location: links/$id");
+		exit;
+	}
 
-	// Variáveis do usuário logado
-	$user = $_SESSION[User::SESSION];
-
-	// Nome da Unidade
-	$nomeUnidade = User::nomeUnidade($_SESSION[User::SESSION]['lotacao']);
-	
-	// IP
-	$ip      = $_SERVER['REMOTE_ADDR'];
-
-	// Retira pontos, traços e barras para a pesquisa por número
-	$q = limpaPesquisa($_POST['q']);
-
-	// Buscas
-	$qProcessos = Query::buscaProcessos($q);
-	$qSistemas = Query::buscaSistemas($q);
-	$qFormularios = Query::buscaFormularios($q);
-	$qLinks = Query::buscaLinks($q);
-
-	$page = new Page([
-
-	]);
-
-	$page->setTpl("busca", array(
-		"q"=>$_POST['q'],
-		"qProcessos"=>$qProcessos,
-		"qSistemas"=>$qSistemas,
-		"qLinks"=>$qLinks,
-		"qFormularios"=>$qFormularios,
-		"user"=>$user,
-		"nomeUnidade"=>$nomeUnidade,
-		"ip"=>$ip,
-		"fav"=>$fav,
-		"selFav"=>$selFav
-	));
+	if($banco == 'Formularios')
+	{
+		$busca = Query::buscaFormularios($_POST['q']);
+		$id = $busca[0]['id'];
+		header("Location: formularios/$id");
+		exit;
+	}
 
 });
 

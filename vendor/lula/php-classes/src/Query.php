@@ -25,6 +25,16 @@ class Query{
             
     }
 
+    public static function todos($tabela) {
+    
+        // Pesquisa todos os usuários
+        $sql = new Sql();
+        $results = $sql->select("SELECT * FROM $tabela ORDER BY nome ASC");
+
+        return $results;
+            
+    }
+
     public static function listUnidades() {
     
         // Pesquisa todas as unidades
@@ -45,24 +55,24 @@ class Query{
     public static function buscaSistemas($q)
     {
         $sql = new Sql();
-        return $sql->select("SELECT * from tb_sistemas WHERE nome like :q OR descricao like :q OR tags like :q ORDER BY nome ASC", array(
-            ":q"=>"%".$q."%"
+        return $sql->select("SELECT * from tb_sistemas WHERE nome = :q", array(
+            ":q"=>$q
         ));
     }
     
     public static function buscaFormularios($q)
     {
         $sql = new Sql();
-        return $sql->select("SELECT * from tb_formularios WHERE nome like :q OR descricao like :q OR tags like :q ORDER BY nome ASC", array(
-            ":q"=>"%".$q."%"
+        return $sql->select("SELECT * from tb_formularios WHERE nome = :q", array(
+            ":q"=>$q
         ));
     }
     
     public static function buscaLinks($q)
     {
         $sql = new Sql();
-        return $sql->select("SELECT * from tb_links WHERE nome like :q OR descricao like :q OR tags like :q ORDER BY nome ASC", array(
-            ":q"=>"%".$q."%"
+        return $sql->select("SELECT * from tb_links WHERE nome = :q", array(
+            ":q"=>$q
         ));
     }
 

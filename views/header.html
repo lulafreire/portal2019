@@ -122,6 +122,11 @@
                 
                 <li class="nav-item">
                     
+                    <a class="nav-link" href="dashboard"><i class="fas fa-home"></i> Início</a>
+                </li>
+                
+                <li class="nav-item">
+                    
                     <a class="nav-link" href="equipe"><i class="fas fa-users"></i> Equipe</a>
                 </li>
 
@@ -130,7 +135,7 @@
                         <i class="fab fa-medapps"></i> Aplicativos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="javascript:abreArquivos();"><i class="fas fa-folder-open"></i> Arquivos</a>
+                        <a class="dropdown-item" href="arquivos"><i class="fas fa-folder-open"></i> Arquivos</a>
                         <a class="dropdown-item" href="desempenho"><i class="fas fa-chart-line"></i> Desempenho</a>
                         <a class="dropdown-item" href="javascript:abreEntidades();"><i class="fas fa-building"></i> Entidades</a>
                         <a class="dropdown-item" href="javascript:abreExpediente();"><i class="fas fa-file-alt"></i> Expediente</a>
@@ -155,9 +160,9 @@
 
             <!-- Busca -->            
             <div class="ui-widget"></div>
-                <form class="form-inline ml-auto" action="busca" method="POST">
-                    <input id="q" size="60" name="q" type="search" class="form-control ml-2 mr-2" placeholder="Pesquisar Sistemas, Links, Formulários e Processos">
-                    <button class="btn btn-warning" type="submit">Ok</button>
+                <form class="form-inline ml-auto" action="arquivos" method="POST">
+                    <input id="q" size="60" name="q" type="search" class="form-control ml-2 mr-2" placeholder="Pesquisar Processos">
+                    <button class="btn btn-warning" type="submit">Ok</button>        
                 </form>
             </div>
         </div>

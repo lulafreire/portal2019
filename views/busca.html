@@ -5,39 +5,7 @@
     <div class="row">
         <div class="col-6 mx-0">
            
-                <div class="card border-warning mb-3" style="height: 390px;">
-                    <div class="card-header bg-warning text-light"> <i class="fas fa-folder-open"></i> Processos Administrativos</div>
-                        <div class="card-body text-dark">
-                            {if="!$qProcessos"}
-                                <p class="text-muted text-center">Nenhum processo administrativo localizado com o termo <strong>{$q}</strong></p>                    
-                            {else}  
-                                <table class="table">
-                                <thead>
-                                    <tr>                        
-                                    <th scope="col">Número</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Origem</th>
-                                    <th scope="col">Caixa</th>
-                                    <th scope="col"><i class="fas fa-file-download"></i></th>
-                                    <th scope="col"><i class="fas fa-file-alt"></i></th>
-                                    </tr>
-                                </thead>
-                                <tbody>                                    
-                                    {loop="$qProcessos"}
-                                        <tr>
-                                        <td><small>{function="formataNumero($value.numero, $value.origem)"}</small></td>
-                                        <td><small>{$value.nome}</small></td>
-                                        <td><small>{$value.origem}</small></td>
-                                        <td><small>{$value.caixa}</small></td>
-                                        <td><a class="fas fa-file-download text-secondary text-center" title="Download" href="download/{$value.id}"></a></td>
-                                        <td><a class="fas fa-file-alt text-secondary text-center" title="Detalhar" href="detalhar-arquivo/{$value.id}"></td>
-                                        </tr>
-                                    {/loop}                                                                
-                                </tbody>
-                                </table>
-                            {/if}
-                        </div>
-                </div>
+                
                 
         </div>
         <div class="col-2 mx-0">
