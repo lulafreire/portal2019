@@ -155,6 +155,10 @@
                         <a class="dropdown-item" href="admin-avisos"><i class="fa fa-fw fa-bullhorn"></i> Avisos</a>
                     </div>
                 </li>
+
+                <li class="nav-item">                    
+                    <a class="nav-link" href="inssdigital"><i class="fas fa-cloud-download-alt"></i> INSS Digital</a>
+                </li>
                 
             </ul>
 

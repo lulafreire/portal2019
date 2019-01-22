@@ -15,8 +15,7 @@
             <th>Titular</th>
             <th class="text-center">Origem</th>
             <th class="text-center">Caixa</th>
-            <th class="text-center">Cadastrado em</th>
-            <th class="text-center">Atualizado em</th>             
+            <th class="text-center">Cadastrado em</th>                         
             <th class="text-center">Opções</th>
             </tr>
         </thead>
@@ -27,10 +26,10 @@
             <td><?php echo htmlspecialchars( $value1["titular"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>            
             <td class="text-center"><?php echo htmlspecialchars( $value1["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
             <td class="text-center"><?php echo htmlspecialchars( $value1["caixa"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-            <td class="text-center"><?php echo converteData($value1["dt_cadastro"]); ?></td>
-            <td class="text-center"><?php echo converteData($value1["dt_atualizacao"]); ?></td>
+            <td class="text-center"><?php echo converteData($value1["dt_cadastro"]); ?></td>            
             <td class="text-center">
-                <a href="download/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" data-toggle="tooltip" data-placement="top" title="Baixar o anexo principal com <?php echo htmlspecialchars( $value1["tam"], ENT_COMPAT, 'UTF-8', FALSE ); ?> Mb. Para baixar outros anexos, detalhe o registro." class="btn btn-secondary btn-sm <?php if( $value1["url"]=='' ){ ?>disabled<?php } ?>"><i class="fas fa-download"></i> Baixar </a>
+                <a href="capa/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" data-toggle="tooltip" data-placement="top" title="Imprima a capa <?php echo htmlspecialchars( $value1["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?>-<?php echo htmlspecialchars( $value1["caixa"], ENT_COMPAT, 'UTF-8', FALSE ); ?> do processo <?php echo formataNumero($value1["numero"], $value1["origem"]); ?>." class="btn btn-outline-dark btn-sm"><i class="far fa-file-alt"></i> Capa</a>
+                <a href="anexos/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" data-toggle="tooltip" data-placement="top" title="Baixar os anexos." class="btn btn-secondary btn-sm <?php if( $value1["url"]=='' ){ ?>disabled<?php } ?>"><i class="fas fa-download"></i> Baixar </a>
                 <a href="#" data-toggle="modal" data-target="#modalDetalhaArquivo-<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-info btn-sm"><i class="fas fa-asterisk"></i> Detalhar </a>
                 <?php if( $user["status"]==1 or $user["status"]==3 ){ ?>
                 <a href="#" data-toggle="modal" data-target="#modalEditarArquivo-<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar </a>
@@ -94,11 +93,7 @@
                                 <input type="text" class="form-control mb-1" id="representante" name="representante" placeholder="Nome do RL, caso exista" required>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <label for="caixa" class="mb-0">Caixa</label>
-                                <input type="text" class="form-control mb-1" id="caixa" name="caixa" placeholder="Número Alternativo de Arquivamento">
-                            </div>
+                        <div class="row">                            
                             <div class="col-6">
                                 <label for="origem" class="mb-0">Origem</label>
                                 <select name="origem" class="form-control mb-1">
@@ -113,22 +108,20 @@
                                     <option value="CTC">Certidões de Tempo de Contribuição - CTC</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-6">
                                 <label for="anexo" class="mb-0">Anexo</label>
                                 <input type="file" class="form-control-file" name="file" id="file">
-                            </div>
+                            </div>                            
+                        </div>
+                        <div class="row">                            
                             <div class="col-6">
                                 <label for="descricao" class="mb-0">Descrição do Anexo</label>
                                 <input type="text" class="form-control mb-1" id="descricao" name="descricao" placeholder="Concessório, dossiê, recurso, etc">
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <span class="text-muted">Outros anexos podem ser adicionados utilizando-se a opção "Editar".</span>
-                            </div>                            
-                        </div>                           
+                            <div class="col-6 p-3 text-center">
+                                <span class="text-muted">Outros anexos podem ser adicionados<br>utilizando-se a opção "Editar".</span>
+                            </div>
+                        </div>                                                  
                     </div>                    
                 </div>                
                 <div class="modal-footer">

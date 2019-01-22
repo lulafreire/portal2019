@@ -94,6 +94,20 @@ class Query{
         ));
     }
 
+    public static function getAnexos($id)
+    {
+        $sql = new Sql();
+        $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * FROM tb_anexos WHERE arquivo = :id", array(
+            ":id"=>$id
+        ));
+        $total = $sql->select("SELECT FOUND_ROWS() AS nrtotal");
+
+        return [
+            "data"=>$results,
+            "total"=>(int)$total[0]['nrtotal'],
+        ];
+    }
+
     public static function hits($origem, $id)
     {
         $sql = new Sql();

@@ -4,6 +4,7 @@ namespace Lula;
 use \Lula\DB\Sql;
 use \Lula\Mailer;
 use \Lula\Model;
+use \Lula\Capa;
 
 class Arquivos{
 
@@ -58,6 +59,22 @@ class Arquivos{
     public function novoArquivo($dados)
     {
         $sql = new Sql();
+
+        // Verifica o último número alternativo cadastrado
+        if($dados['origem']!='Digitalizados' OR $dados['origem']!='INSS Digital')
+        {
+            $cx = $sql->select("SELECT caixa FROM tb_archives WHERE origem = :origem ORDER BY caixa DESC LIMIT 1", array(
+            ":origem"=>$dados['origem']
+            ));
+
+            $caixa_atual = $cx[0]['caixa'];
+            $caixa_nova = $caixa_atual + 1;
+        }
+        else
+        {
+            $caixa_nova = '';
+        }
+
         $sql->query("INSERT INTO tb_archives 
         (numero, titular, instituidor, representante, origem, caixa, unidade, dt_cadastro, dt_atualizacao, url, tam, descricao) 
         VALUES 
@@ -67,12 +84,30 @@ class Arquivos{
             ":instituidor"=>$dados['instituidor'],
             ":representante"=>$dados['representante'],
             ":origem"=>$dados['origem'],
-            ":caixa"=>$dados['caixa'],
+            ":caixa"=>$caixa_nova,
             ":unidade"=>$_SESSION[User::SESSION]['lotacao'],
             ":anexo"=>$dados['anexo'],
             ":tam"=>$dados['tam'],
             ":descricao"=>$dados['descricao']
         ));
+    }
+
+    public function capaArquivo($id)
+    {
+        $sql = new Sql();
+        return $results = $sql->select("SELECT * FROM tb_archives WHERE id = :id", array(
+            ":id"=>$id
+        ));       
+
+    }
+
+    public function printCapa($dados)
+    {
+        $capa = new Capa($dados, array(
+            "dados"=>$dados
+        ));
+
+        $capa->stream();
     }
 
 }

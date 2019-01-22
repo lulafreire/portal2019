@@ -3,8 +3,8 @@ namespace Lula;
 use Rain\Tpl;
 class Mailer {
 	
-	const USERNAME = "luizalbertofreire@gmail.com";
-	const PASSWORD = "**********";
+	const USERNAME = "luiz.aoliveira@inss.gov.br";
+	const PASSWORD = "m@NU2018";
 	const NAME_FROM = "PortalAPS";
 	private $mail;
 	public function __construct($toAddress, $toName, $subject, $tplName, $senhaProvisoria, $data = array())
@@ -46,14 +46,15 @@ class Mailer {
 		//Ask for HTML-friendly debug output
 		$this->mail->Debugoutput = 'html';
 		//Set the hostname of the mail server
-		$this->mail->Host = 'smtp.gmail.com';
+		$this->mail->Host = 'smtp.inss.gov.br';
+		$this->mail->SMTPOptions = array( 'ssl' => array( 'verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true ) );
 		// use
 		// $this->mail->Host = gethostbyname('smtp.gmail.com');
 		// if your network does not support SMTP over IPv6
 		//Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
-		$this->mail->Port = 587;
+		$this->mail->Port = 465;
 		//Set the encryption system to use - ssl (deprecated) or tls
-		$this->mail->SMTPSecure = 'tls';
+		$this->mail->SMTPSecure = 'ssl';
 		//Whether to use SMTP authentication
 		$this->mail->SMTPAuth = true;
 		//Username to use for SMTP authentication - use full email address for gmail

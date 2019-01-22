@@ -15,8 +15,7 @@
             <th>Titular</th>
             <th class="text-center">Origem</th>
             <th class="text-center">Caixa</th>
-            <th class="text-center">Cadastrado em</th>
-            <th class="text-center">Atualizado em</th>             
+            <th class="text-center">Cadastrado em</th>                         
             <th class="text-center">Opções</th>
             </tr>
         </thead>
@@ -27,10 +26,10 @@
             <td>{$value.titular}</td>            
             <td class="text-center">{$value.origem}</td>
             <td class="text-center">{$value.caixa}</td>
-            <td class="text-center">{function="converteData($value.dt_cadastro)"}</td>
-            <td class="text-center">{function="converteData($value.dt_atualizacao)"}</td>
+            <td class="text-center">{function="converteData($value.dt_cadastro)"}</td>            
             <td class="text-center">
-                <a href="download/{$value.id}" data-toggle="tooltip" data-placement="top" title="Baixar o anexo principal com {$value.tam} Mb. Para baixar outros anexos, detalhe o registro." class="btn btn-secondary btn-sm {if="$value.url==''"}disabled{/if}"><i class="fas fa-download"></i> Baixar </a>
+                <a href="capa/{$value.id}" data-toggle="tooltip" data-placement="top" title="Imprima a capa {$value.origem}-{$value.caixa} do processo {function="formataNumero($value.numero, $value.origem)"}." class="btn btn-outline-dark btn-sm"><i class="far fa-file-alt"></i> Capa</a>
+                <a href="anexos/{$value.id}" data-toggle="tooltip" data-placement="top" title="Baixar os anexos." class="btn btn-secondary btn-sm {if="$value.url==''"}disabled{/if}"><i class="fas fa-download"></i> Baixar </a>
                 <a href="#" data-toggle="modal" data-target="#modalDetalhaArquivo-{$value.id}" class="btn btn-info btn-sm"><i class="fas fa-asterisk"></i> Detalhar </a>
                 {if="$user.status==1 or $user.status==3"}
                 <a href="#" data-toggle="modal" data-target="#modalEditarArquivo-{$value.id}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar </a>
@@ -94,11 +93,7 @@
                                 <input type="text" class="form-control mb-1" id="representante" name="representante" placeholder="Nome do RL, caso exista" required>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <label for="caixa" class="mb-0">Caixa</label>
-                                <input type="text" class="form-control mb-1" id="caixa" name="caixa" placeholder="Número Alternativo de Arquivamento">
-                            </div>
+                        <div class="row">                            
                             <div class="col-6">
                                 <label for="origem" class="mb-0">Origem</label>
                                 <select name="origem" class="form-control mb-1">
@@ -113,22 +108,20 @@
                                     <option value="CTC">Certidões de Tempo de Contribuição - CTC</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-6">
                                 <label for="anexo" class="mb-0">Anexo</label>
                                 <input type="file" class="form-control-file" name="file" id="file">
-                            </div>
+                            </div>                            
+                        </div>
+                        <div class="row">                            
                             <div class="col-6">
                                 <label for="descricao" class="mb-0">Descrição do Anexo</label>
                                 <input type="text" class="form-control mb-1" id="descricao" name="descricao" placeholder="Concessório, dossiê, recurso, etc">
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <span class="text-muted">Outros anexos podem ser adicionados utilizando-se a opção "Editar".</span>
-                            </div>                            
-                        </div>                           
+                            <div class="col-6 p-3 text-center">
+                                <span class="text-muted">Outros anexos podem ser adicionados<br>utilizando-se a opção "Editar".</span>
+                            </div>
+                        </div>                                                  
                     </div>                    
                 </div>                
                 <div class="modal-footer">

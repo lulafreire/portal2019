@@ -11,6 +11,7 @@ use \Lula\User;
 use \Lula\Indicators;
 use \Lula\Query;
 use \Lula\Arquivos;
+use \Dompdf\Dompdf;
 
 $app = new Slim();
 
@@ -352,6 +353,16 @@ $app->get('/dashboard', function() {
 
 });
 
+$app->get('/capa/:id', function($id){
+
+	User::verifyLogin();
+
+	$dados = Arquivos::capaArquivo($id);
+	
+	Arquivos::printCapa($dados);
+
+});
+
 $app->get('/avisos', function(){
 
 	// Pesquisa os avisos do mesmo OL
@@ -609,9 +620,6 @@ $app->post('/novo-arquivo', function(){
 		$anexo = date('Ymdhis').$ext; //Definindo um novo nome para o arquivo
 		$dir = 'anexos/'; //Diretório para uploads 
 		move_uploaded_file($_FILES['file']['tmp_name'], $dir.$anexo); //Fazer upload do arquivo
-
-		echo $tam;
-		exit;
 	}
 	else
 	{
@@ -624,8 +632,7 @@ $app->post('/novo-arquivo', function(){
 		"titular"=>$_POST['titular'],
 		"instituidor"=>isset($_POST['instituidor']) ? $_POST['instituidor'] : '',
 		"representante"=>isset($_POST['representante']) ? $_POST['representante'] : '',
-		"origem"=>$_POST['origem'],
-		"caixa"=>$_POST['caixa'],
+		"origem"=>$_POST['origem'],		
 		"anexo"=>$anexo,
 		"tam"=>$tam,
 		"descricao"=>isset($_POST['descricao']) ? $_POST['descricao'] : ''
@@ -633,11 +640,10 @@ $app->post('/novo-arquivo', function(){
 
 	Arquivos::novoArquivo($dados);
 
-	header ("Location: arquivos");
+	header ("Location: arquivos?q=".$_POST['numero']);
 	exit;
 
 });
-
 
 $app->post('/users/create', function() {
     
@@ -947,6 +953,50 @@ $app->get('/formularios/:id', function($id){
 	
 
 });
+
+$app->get('/anexos/:id', function($id){
+
+	$origem = "tb_archives";
+	$processo = Query::getData($origem, $id);
+	$nome = $processo[0]['titular'];
+	$numero = $processo[0]['numero'];
+	$origem = $processo[0]['origem'];
+	$numero = formataNumero($numero, $origem);
+	$nomeArquivo = $origem." ".$numero." - ".$nome;
+	$url = $processo[0]['url'];	
+	
+	$zip = new ZipArchive();
+ 
+	if( $zip->open( 'anexos/'.$nome.'-'.$numero.'.zip' , ZipArchive::CREATE )  === true){
+     
+		$zip->addFile(  'anexos/'.$url, $url );		
+		
+		
+	}		
+
+	// Download dos demais anexos
+	
+	$anexos = Query::getAnexos($id);
+	$total = $anexos['total'];
+
+	for ($i=0; $i <$total ; $i++) {
+		
+		$url = $anexos['data'][$i]['url'];
+		$descricao = $anexos['data'][$i]['descricao'];
+		$nomeArquivo = $origem." ".$numero." - ".$nome." - ".$descricao;
+		$zip->addFile(  'anexos/'.$url, $url );
+		
+	}
+
+	$zip->close();
+
+	header('Content-type: application/zip');
+    header('Content-disposition: attachment; filename="'.$nome.' - '.$numero.'.zip"');
+    readfile('anexos/'.$nome.'-'.$numero.'.zip'); 
+    unlink('anexos/'.$nome.'-'.$numero.'.zip');
+	
+});
+
 
 $app->get('/download/:id', function($id){
 
