@@ -3,8 +3,8 @@ namespace Lula;
 use Rain\Tpl;
 class Mailer {
 	
-	const USERNAME = "luiz.aoliveira@inss.gov.br";
-	const PASSWORD = "m@NU2018";
+	const USERNAME = "***********";
+	const PASSWORD = "***********";
 	const NAME_FROM = "PortalAPS";
 	private $mail;
 	public function __construct($toAddress, $toName, $subject, $tplName, $senhaProvisoria, $data = array())
