@@ -90,7 +90,7 @@
                             </div>
                             <div class="col-6">
                                 <label for="representante" class="mb-0">Representante Legal</label>
-                                <input type="text" class="form-control mb-1" id="representante" name="representante" placeholder="Nome do RL, caso exista" required>
+                                <input type="text" class="form-control mb-1" id="representante" name="representante" placeholder="Nome do RL, caso exista">
                             </div>
                         </div>
                         <div class="row">                            
@@ -131,4 +131,104 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Editar Arquivo-->
+<?php $counter1=-1;  if( isset($arquivos["data"]) && ( is_array($arquivos["data"]) || $arquivos["data"] instanceof Traversable ) && sizeof($arquivos["data"]) ) foreach( $arquivos["data"] as $key1 => $value1 ){ $counter1++; ?>
+<div class="modal" id="modalEditarArquivo-<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-box-open"></i> Editar Processo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <form autocomplete="off" role="form" action="editar-arquivo" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="numero" class="mb-0">Número do Processo</label>
+                                <input value="<?php echo htmlspecialchars( $value1["numero"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" type="text" class="form-control mb-1" id="numero" name="numero" placeholder="Número do processo" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="numero" class="mb-0">Nome do Titular</label>
+                                <input value="<?php echo htmlspecialchars( $value1["titular"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" type="text" class="form-control mb-1" id="titular" name="titular" placeholder="Nome do titular" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="instituidor" class="mb-0">Instituidor</label>
+                                <input value="<?php echo htmlspecialchars( $value1["instituidor"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" type="text" class="form-control mb-1" id="instituidor" name="instituidor" placeholder="Nome do Instituidor">
+                            </div>
+                            <div class="col-6">
+                                <label for="representante" class="mb-0">Representante Legal</label>
+                                <input value="<?php echo htmlspecialchars( $value1["representante"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" type="text" class="form-control mb-1" id="representante" name="representante" placeholder="Nome do RL, caso exista">
+                            </div>
+                        </div>
+                        <div class="row">                            
+                            <div class="col-12">
+                                <label for="origem" class="mb-0">Origem</label>
+                                <select name="origem" class="form-control mb-1">
+                                    <option value="TBM" <?php if( $value1["origem"]=='TBM' ){ ?>selected<?php } ?>>TBM - Benefícios transferidos de outro OL</option>
+                                    <option value="REQ" <?php if( $value1["origem"]=='REQ' ){ ?>selected<?php } ?>>Requerimentos Diversos</option>
+                                    <option value="ATU" <?php if( $value1["origem"]=='ATU' ){ ?>selected<?php } ?>>Atualizações de Benefícios</option>
+                                    <option value="CNIS" <?php if( $value1["origem"]=='CNIS' ){ ?>selected<?php } ?>>Acertos de Vínculos e Remunerações</option>
+                                    <option value="SABI" <?php if( $value1["origem"]=='SABI' ){ ?>selected<?php } ?>>SABI</option>
+                                    <option value="AP" <?php if( $value1["origem"]=='AP' ){ ?>selected<?php } ?>>Autorizações de Pagamento - AP</option>
+                                    <option value="ID" <?php if( $value1["origem"]=='ID' ){ ?>selected<?php } ?>>INSS Digital</option>
+                                    <option value="DIG" <?php if( $value1["origem"]=='DIG' ){ ?>selected<?php } ?>>Cópias Digitalizadas</option>
+                                    <option value="CTC" <?php if( $value1["origem"]=='CTC' ){ ?>selected<?php } ?>>Certidões de Tempo de Contribuição - CTC</option>
+                                </select>
+                            </div>                            
+                        </div>
+                        <div class="row">
+                            <div class="col-12">                                
+                                <table class="table table-hover">
+                                <thead>
+                                    <tr>                            
+                                    <th scope="col">Anexo Principal</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Opções</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>                                    
+                                    <td><?php echo htmlspecialchars( $value1["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                                    <td><input type="text" class="form-control" value="<?php echo htmlspecialchars( $value1["descricao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></td>
+                                    <td><a href="anexo/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></a>&nbsp;<a href="anexo/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/edit" class="btn btn-sm btn-info"><i class="far fa-edit"></i></a></td>
+                                    </tr>
+                                    <tr>                                    
+                                </tbody>
+                                </table>
+
+                                <table class="table table-hover">
+                                <thead>
+                                    <tr>                            
+                                    <th scope="col">Outros Anexos</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Opções</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>                                    
+                                    <td><?php echo htmlspecialchars( $value1["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                                    <td><input type="text" class="form-control" value="<?php echo htmlspecialchars( $value1["descricao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></td>
+                                    <td><a href="anexo/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i></a>&nbsp;<a href="anexo/<?php echo htmlspecialchars( $value1["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/edit" class="btn btn-sm btn-info"><i class="far fa-edit"></i></a></td>
+                                    </tr>
+                                    <tr>                                    
+                                </tbody>
+                                </table>
+                            </div>
+                        </div>                                                  
+                    </div>                    
+                </div>                
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-success" value="Cadastrar"><button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                </div>                        
+            </form>
+        </div>
+    </div>
+</div>
+<?php } ?>
 

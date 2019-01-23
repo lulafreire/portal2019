@@ -11,7 +11,7 @@
             var chartGraph = new Chart (ctx, {
                 type: 'bar',
                 data: {
-                    labels: [<?php $counter2=-1;  if( isset($ind12) && ( is_array($ind12) || $ind12 instanceof Traversable ) && sizeof($ind12) ) foreach( $ind12 as $key2 => $value2 ){ $counter2++; ?>"<?php echo reduzData(converteData($value2["data"])); ?>",<?php } ?>],
+                    labels: [<?php $counter2=-1;  if( isset($ind12) && ( is_array($ind12) || $ind12 instanceof Traversable ) && sizeof($ind12) ) foreach( $ind12 as $key2 => $value2 ){ $counter2++; ?>"<?php echo converteData($value2["data"]); ?>",<?php } ?>],
                     datasets:[{
                         label: "<?php echo htmlspecialchars( $value1["titulo"], ENT_COMPAT, 'UTF-8', FALSE ); ?> TOTAL",
                         data: [<?php $counter2=-1;  if( isset($ind12) && ( is_array($ind12) || $ind12 instanceof Traversable ) && sizeof($ind12) ) foreach( $ind12 as $key2 => $value2 ){ $counter2++; ?><?php echo htmlspecialchars( $value2["indicador"], ENT_COMPAT, 'UTF-8', FALSE ); ?>,<?php } ?>],           

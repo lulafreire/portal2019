@@ -1582,7 +1582,7 @@ $app->post('/:indicador', function($indicador){
 		
 		case 'imaGdass':
 
-			Indicators::atualizaImaGdass($_POST['competencia'], $_POST['indicador'], $user['lotacao']);
+			Indicators::atualizaImaGdass($_POST['competencia'], $_POST['indice'], $user['lotacao']);
 			header('Location: imaGdass');
 			exit;
 

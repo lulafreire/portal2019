@@ -11,7 +11,7 @@
             var chartGraph = new Chart (ctx, {
                 type: 'bar',
                 data: {
-                    labels: [{loop="$ind12"}"{function="reduzData(converteData($value.data))"}",{/loop}],
+                    labels: [{loop="$ind12"}"{function="converteData($value.data)"}",{/loop}],
                     datasets:[{
                         label: "{$value.titulo} TOTAL",
                         data: [{loop="$ind12"}{$value.indicador},{/loop}],           

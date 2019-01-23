@@ -16,14 +16,30 @@ class Indicators {
 
         $registros = $sql->select("SELECT FOUND_ROWS() AS total");
 
-        if($registros[0]['total']==0)
+        if($registros[0]['total']<=1)
         {
-            return [
-                "imaGdass12"=>array(),
-                "imaGdassAtual"=>0,
-                "imaGdassAnt"=>0,
-                "iconeImaGdass"=>"far fa-pause-circle"
-            ];
+            if($registros[0]['total']==0)
+            {
+                return [
+                    "imaGdass12"=>array(),
+                    "imaGdassAtual"=>0,
+                    "imaGdassAnt"=>0,
+                    "iconeImaGdass"=>"far fa-pause-circle"
+                ];
+            }
+            else
+            {
+                $imaGdassAtual = $sql->select("SELECT * from tb_imagdass WHERE unidade = :lotacao ORDER BY competencia DESC limit 1", array(
+                    ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
+                ));
+                
+                return [
+                    "imaGdass12"=>array_reverse($imaGdass12, true),
+                    "imaGdassAtual"=>$imaGdassAtual,
+                    "imaGdassAnt"=>0,
+                    "iconeImaGdass"=>"far fa-pause-circle"
+                ];
+            }
         }
         else
         {
@@ -69,15 +85,31 @@ class Indicators {
 
         $registros = $sql->select("SELECT FOUND_ROWS() AS total");
 
-        if($registros[0]['total']==0)
+        if($registros[0]['total']<=1)
         {
-            return [
-                "iib12"=>array(),
-                "iibAtual"=>0,
-                "iibAnt"=>0,
-                "iconeiib"=>"far fa-pause-circle"
-            ];
-        }
+            if($registros[0]['total']==0)
+            {
+                return [
+                    "iib12"=>array(),
+                    "iibAtual"=>0,
+                    "iibAnt"=>0,
+                    "iconeiib"=>"far fa-pause-circle"
+                ];
+            }
+            else
+            {
+                $iibAtual = $sql->select("SELECT * from tb_iib WHERE unidade = :lotacao ORDER BY competencia DESC limit 1", array(
+                    ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
+                ));
+                
+                return [
+                    "iib12"=>array_reverse($iib12, true),
+                    "iibAtual"=>$iibAtual,
+                    "iibAnt"=>0,
+                    "iconeiib"=>"far fa-pause-circle"
+                ];
+            }
+        }        
         else
         {
 
@@ -123,15 +155,32 @@ class Indicators {
 
         $registros = $sql->select("SELECT FOUND_ROWS() AS total");
 
-        if($registros[0]['total']==0)
+        if($registros[0]['total']<=1)
         {
-            return [
-                "tarefas12"=>array(),
-                "tarefasAtual"=>0,
-                "tarefasAnt"=>0,
-                "iconetarefasconcluidas"=>"far fa-pause-circle",
-                "iconetarefaspendentes"=>"far fa-pause-circle"
-            ];
+            if($registros[0]['total']==0)
+            {
+                return [
+                    "tarefas12"=>array(),
+                    "tarefasAtual"=>0,
+                    "tarefasAnt"=>0,
+                    "iconetarefasconcluidas"=>"far fa-pause-circle",
+                    "iconetarefaspendentes"=>"far fa-pause-circle"
+                ];
+            }
+            else
+            {
+                $tarefasAtual = $sql->select("SELECT * from tb_tarefas WHERE unidade = :lotacao ORDER BY competencia DESC limit 1", array(
+                    ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
+                ));
+                
+                return [
+                    "tarefas12"=>array_reverse($tarefas12, true),
+                    "tarefasAtual"=>$tarefasAtual,
+                    "tarefasAnt"=>0,
+                    "iconetarefasconcluidas"=>"far fa-pause-circle",
+                    "iconetarefaspendentes"=>"far fa-pause-circle"
+                ];
+            }
         }
         else
         {
@@ -192,7 +241,33 @@ class Indicators {
 
         $registros = $sql->select("SELECT FOUND_ROWS() AS total");
 
-        if($registros[0]['total']==0)
+        if($registros[0]['total']<=1)
+        {
+            if($registros[0]['total']==0)
+            {
+                return [
+                    "represados12"=>array(),
+                    "represadosAtual"=>0,
+                    "represadosAnt"=>0,
+                    "iconerepresados"=>"far fa-pause-circle"
+                ];
+            }
+            else
+            {
+                $represadosAtual = $sql->select("SELECT * from tb_represados WHERE unidade = :lotacao ORDER BY data DESC limit 1", array(
+                    ":lotacao"=>$_SESSION[User::SESSION]['lotacao']
+                ));
+                
+                return [
+                    "represados12"=>array_reverse($represados12, true),
+                    "represadosAtual"=>$represadosAtual,
+                    "represadosAnt"=>0,
+                    "iconerepresados"=>"far fa-pause-circle"
+                ];
+            }
+        }
+        
+        /*if($registros[0]['total']==0)
         {
             return [
                 "represados12"=>array(),
@@ -200,7 +275,7 @@ class Indicators {
                 "represadosAnt"=>0,
                 "iconerepresados"=>"far fa-pause-circle"
             ];
-        }
+        }*/
         else
         {
             $represadosAtual = $sql->select("SELECT * from tb_represados WHERE unidade = :lotacao ORDER BY data DESC limit 1", array(
@@ -357,6 +432,49 @@ class Indicators {
             {
 
                 $sql->query("UPDATE tb_iib set indicador = :indice WHERE competencia = :competencia AND unidade = :lotacao", array(
+                    ":competencia"=>reverteComp($competencia),
+                    ":indice"=>$indice,
+                    ":lotacao"=>$lotacao
+                ));
+            }
+            
+        }
+    }
+
+    public static function atualizaImaGdass($competencia, $indice, $lotacao)
+    {
+        $sql = new Sql();
+
+        // Verifica se a competência já existe no banco de dados
+        $results = $sql->select("SELECT competencia from tb_imagdass WHERE unidade = :lotacao and competencia = :competencia", array(
+            ":lotacao"=>$lotacao,
+            ":competencia"=>reverteComp($competencia)
+        ));
+
+        if(!$results)
+        {
+            $mes = mesComp($competencia);
+
+            $sql->query("INSERT into tb_imagdass (competencia, mes, indicador, unidade) VALUES (:competencia, :mes, :indice, :lotacao)", array(
+                ":competencia"=>reverteComp($competencia),
+                ":mes"=>$mes,
+                ":indice"=>$indice,
+                ":lotacao"=>$lotacao
+            ));
+        }
+        else
+        {
+            if($indice == 0)
+            {
+                $sql->query("DELETE FROM tb_imagdass WHERE competencia = :competencia AND unidade = :lotacao", array(
+                    ":competencia"=>reverteComp($competencia),
+                    ":lotacao"=>$lotacao
+                ));
+            }
+            else
+            {
+
+                $sql->query("UPDATE tb_imagdass set indicador = :indice WHERE competencia = :competencia AND unidade = :lotacao", array(
                     ":competencia"=>reverteComp($competencia),
                     ":indice"=>$indice,
                     ":lotacao"=>$lotacao
